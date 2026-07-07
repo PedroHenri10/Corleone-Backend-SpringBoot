@@ -8,12 +8,12 @@ CREATE TABLE cargo(
     car_dt_atualizacao DATETIME DEFAULT CURRENT_TIMESTAMP
 );
 
-CREATE TABLE endereco(
-    end_id INT PRIMARY KEY AUTO_INCREMENT,
-    end_logradouro VARCHAR(150),
-    end_numero INT NOT NULL,
-    end_complemento VARCHAR(100),
-    end_bairro VARCHAR(50) NOT NULL,
-    end_cidade VARCHAR(50) NOT NULL,
-    end_estado VARCHAR(2) NOT NULL
+create table endereco (
+	end_id int primary key auto_increment,
+    end_logradouro varchar(150),
+    end_numero int not null,
+    end_complemento varchar(100),
+    end_bairro varchar(50) not null,
+    end_cidade varchar(50) not null,
+    end_estado varchar(2) not null
 );
