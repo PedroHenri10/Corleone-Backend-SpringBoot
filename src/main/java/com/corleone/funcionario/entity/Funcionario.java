@@ -53,7 +53,7 @@ public class Funcionario {
     private LocalDate funDataDemissao;
 
     @Column(name = "fun_ativo")
-    private Boolean funAtivo = true; 
+    private Boolean funAtivo = true;
 
     @Column(name = "fun_dt_criacao", updatable = false)
     private LocalDateTime funDtCriacao = LocalDateTime.now();
