@@ -23,5 +23,5 @@ public class Pagamento {
     private Boolean requerTroco;
 
     @Column(name = "fpg_ativo")
-    private Boolean ativo;
+    private Boolean ativo = true;
 }
