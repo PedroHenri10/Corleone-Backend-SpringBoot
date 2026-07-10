@@ -2,6 +2,7 @@ package com.corleone.produto.entity;
 
 import com.corleone.categoria.entity.Categoria;
 import com.corleone.fornecedor.entity.Fornecedor;
+import com.corleone.promocao.entity.Promocao;
 import jakarta.persistence.*;
 import lombok.*;
 
