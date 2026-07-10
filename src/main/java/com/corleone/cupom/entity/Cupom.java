@@ -1,6 +1,6 @@
 package com.corleone.cupom.entity;
 
-import com.corleone.cupom.enums.Tipo;
+import com.corleone.shared.enums.TipoCupom;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -29,7 +29,7 @@ public class Cupom {
 
     @Enumerated(EnumType.STRING)
     @Column(name = "cup_tipo", nullable = false)
-    private Tipo tipo;
+    private TipoCupom tipo;
 
     @Column(name = "cup_valor", nullable = false, precision = 10, scale = 2)
     private BigDecimal valor;

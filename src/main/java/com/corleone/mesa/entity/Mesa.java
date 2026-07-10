@@ -1,6 +1,6 @@
 package com.corleone.mesa.entity;
 
-import com.corleone.mesa.enums.Status;
+import com.corleone.shared.enums.StatusMesa;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -29,7 +29,7 @@ public class Mesa {
     @Enumerated(EnumType.STRING)
     @Column(name = "mes_status")
     @Builder.Default
-    private Status status = Status.LIVRE;
+    private StatusMesa status = StatusMesa.LIVRE;
 
     @Column(name = "mes_ativo")
     private Boolean ativo = true;
