@@ -1,7 +1,7 @@
 package com.corleone.estoque.entity;
 
 import com.corleone.funcionario.entity.Funcionario;
-import com.corleone.produto.entity.Produto;
+import com.corleone.ingrediente.entity.Ingrediente;
 import com.corleone.shared.enums.TipoMovimentacao;
 import jakarta.persistence.*;
 import lombok.*;
@@ -15,38 +15,38 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 @AllArgsConstructor
 @Entity
-@Table(name = "estoque")
-public class Estoque {
+@Table(name = "movimento_ingrediente")
+public class MovimentoIngrediente {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "est_id")
+    @Column(name = "mgi_id")
     private Long id;
 
     @ManyToOne
-    @JoinColumn(name = "pro_id")
-    private Produto produto;
+    @JoinColumn(name = "ing_id")
+    private Ingrediente ingrediente;
 
     @ManyToOne
     @JoinColumn(name = "fun_id")
     private Funcionario funcionario;
 
     @Enumerated(EnumType.STRING)
-    @Column(name = "est_tipo")
+    @Column(name = "mgi_tipo")
     private TipoMovimentacao tipo;
 
-    @Column(name = "est_quantidade", precision = 10, scale = 3)
+    @Column(name = "mgi_quantidade", precision = 10, scale = 3)
     private BigDecimal quantidade;
 
-    @Column(name = "est_valor_unitario", precision = 10, scale = 2)
+    @Column(name = "mgi_valor_unitario", precision = 10, scale = 2)
     private BigDecimal valorUnitario;
 
-    @Column(name = "est_documento")
+    @Column(name = "mgi_documento")
     private String documento;
 
-    @Column(name = "est_observacao")
+    @Column(name = "mgi_observacao")
     private String observacao;
 
-    @Column(name = "est_dt_movimentacao")
+    @Column(name = "mgi_dt_movimentacao")
     private LocalDateTime dataMovimentacao;
 }
