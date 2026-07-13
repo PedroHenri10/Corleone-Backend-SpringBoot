@@ -1,4 +1,7 @@
 package com.corleone.auditoria.repository;
 
-public interface LoginHistoricoRepository {
+import com.corleone.auditoria.entity.LoginHistorico;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface LoginHistoricoRepository extends JpaRepository<LoginHistorico, Long> {
 }
