@@ -19,7 +19,7 @@ public class EstoqueIngrediente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "eti_id")
-    private Long id;
+    private Integer id;
 
     @OneToOne
     @JoinColumn(name = "ing_id")

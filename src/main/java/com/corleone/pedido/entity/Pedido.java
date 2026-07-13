@@ -26,7 +26,7 @@ public class Pedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ped_id")
-    private Long id;
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "cli_id")

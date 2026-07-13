@@ -21,7 +21,7 @@ public class Caixa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cai_id")
-    private Long id;
+    private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "fun_id", nullable = false)

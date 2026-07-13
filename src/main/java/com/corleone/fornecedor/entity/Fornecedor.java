@@ -19,7 +19,7 @@ public class Fornecedor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "for_id")
-    private Long id;
+    private Integer id;
 
     @Column(name = "for_nome", length = 150, nullable = false)
     private String forNome;

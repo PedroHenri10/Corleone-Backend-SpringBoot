@@ -19,7 +19,7 @@ public class NotificacaoEnvio {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "noe_id")
-    private Long id;
+    private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "not_id", nullable = false)

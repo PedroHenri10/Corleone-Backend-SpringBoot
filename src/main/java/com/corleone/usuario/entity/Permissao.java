@@ -24,7 +24,7 @@ public class Permissao {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "per_id")
-    private Long id;
+    private Integer id;
 
     @Column(name = "per_nome", nullable = false, unique = true, length = 100)
     private String nome;

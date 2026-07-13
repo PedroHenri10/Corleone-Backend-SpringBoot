@@ -21,7 +21,7 @@ public class HistoricoPedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "hpd_id")
-    private Long id;
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "ped_id", nullable = false)

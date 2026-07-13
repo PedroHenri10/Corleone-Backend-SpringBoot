@@ -19,7 +19,7 @@ public class ProdutoSabor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "prs_id")
-    private Long id;
+    private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "pro_id", nullable = false)

@@ -17,7 +17,7 @@ public class Tamanho {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "tam_id")
-    private Long id;
+    private Integer id;
 
     @Column(name = "tam_nome", length = 50)
     private String nome;

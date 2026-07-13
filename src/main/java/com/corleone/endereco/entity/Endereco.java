@@ -17,7 +17,7 @@ public class Endereco {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "end_id")
-    private Long id;
+    private Integer id;
 
     @Column(name = "end_logradouro", length = 150)
     private String endLogradouro;

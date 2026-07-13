@@ -22,7 +22,7 @@ public class LancamentoCaixa {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "lca_id")
-    private Long id;
+    private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "cai_id", nullable = false)

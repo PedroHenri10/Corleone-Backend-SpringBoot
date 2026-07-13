@@ -15,7 +15,7 @@ public class Sabor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "sab_id")
-    private Long id;
+    private Integer id;
 
     @Column(name = "sab_nome", length = 100)
     private String nome;

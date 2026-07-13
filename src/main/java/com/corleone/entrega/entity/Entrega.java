@@ -22,7 +22,7 @@ public class Entrega {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ent_id")
-    private Long id;
+    private Integer id;
 
     @OneToOne
     @JoinColumn(name = "ped_id", nullable = false)

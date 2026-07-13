@@ -19,7 +19,7 @@ public class Promocao {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "prm_id")
-    private Long id;
+    private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "pro_id", nullable = false)

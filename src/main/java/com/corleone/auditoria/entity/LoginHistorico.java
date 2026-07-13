@@ -19,7 +19,7 @@ public class LoginHistorico {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "lgh_id")
-    private Long id;
+    private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "usu_id", nullable = false)

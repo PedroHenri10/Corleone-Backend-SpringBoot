@@ -21,7 +21,7 @@ public class Estoque {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "est_id")
-    private Long id;
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "pro_id")

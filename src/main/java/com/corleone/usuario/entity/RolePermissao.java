@@ -20,7 +20,7 @@ public class RolePermissao {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "rpe_id")
-    private Long id;
+    private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "rol_id", nullable = false)

@@ -21,7 +21,7 @@ public class MovimentoIngrediente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "mgi_id")
-    private Long id;
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "ing_id")

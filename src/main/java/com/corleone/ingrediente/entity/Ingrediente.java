@@ -20,7 +20,7 @@ public class Ingrediente {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ing_id")
-    private Long id;
+    private Integer id;
 
     @Column(name = "ing_nome", nullable = false, length = 120)
     private String nome;

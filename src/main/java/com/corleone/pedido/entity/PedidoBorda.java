@@ -16,7 +16,7 @@ public class PedidoBorda {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "pdb_id")
-    private Long id;
+    private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "ipd_id", nullable = false)

@@ -17,7 +17,7 @@ public class Borda {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "bor_id")
-    private Long id;
+    private Integer id;
 
     @Column(name = "bor_nome", length = 80)
     private String nome;

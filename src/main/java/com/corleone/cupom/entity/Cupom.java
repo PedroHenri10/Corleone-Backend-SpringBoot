@@ -19,7 +19,7 @@ public class Cupom {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cup_id")
-    private Long id;
+    private Integer id;
 
     @Column(name = "cup_codigo", nullable = false, unique = true, length = 30)
     private String codigo;

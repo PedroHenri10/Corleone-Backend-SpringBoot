@@ -18,7 +18,7 @@ public class Configuracao {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "cfg_id")
-    private Long id;
+    private Integer id;
 
     @Column(name = "cfg_chave", nullable = false, unique = true, length = 80)
     private String chave;

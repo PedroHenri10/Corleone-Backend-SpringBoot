@@ -19,7 +19,7 @@ public class LogSistema {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "log_id")
-    private Long id;
+    private Integer id;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "usu_id")
@@ -33,7 +33,7 @@ public class LogSistema {
     private AcaoLog acao;
 
     @Column(name = "log_registro_id")
-    private Long registroId;
+    private Integer registroId;
 
     @Column(name = "log_descricao", columnDefinition = "TEXT")
     private String descricao;

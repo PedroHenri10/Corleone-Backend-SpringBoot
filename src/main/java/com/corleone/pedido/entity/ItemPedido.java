@@ -18,7 +18,7 @@ public class ItemPedido {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "ipd_id")
-    private Long id;
+    private Integer id;
 
     @ManyToOne
     @JoinColumn(name = "ped_id", nullable = false)
