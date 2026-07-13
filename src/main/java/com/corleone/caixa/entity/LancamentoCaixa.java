@@ -51,5 +51,5 @@ public class LancamentoCaixa {
     private String descricao;
 
     @Column(name = "lca_data")
-    private LocalDateTime data = LocalDateTime.now();
+    private LocalDateTime data;
 }
