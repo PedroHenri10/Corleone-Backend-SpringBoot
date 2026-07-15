@@ -1,10 +1,9 @@
 package com.corleone.auth;
 
 import com.corleone.auth.docs.AuthApi;
-import com.corleone.auth.dto.LoginRequest;
-import com.corleone.auth.dto.LoginResponse;
-import com.corleone.auth.dto.MeResponse;
+import com.corleone.auth.dto.*;
 import com.corleone.security.AuthenticationService;
+import com.corleone.security.JwtService;
 import com.corleone.shared.dto.ApiResponse;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.Authentication;
@@ -16,9 +15,11 @@ import org.springframework.web.bind.annotation.*;
 public class AuthController implements AuthApi {
 
     private final AuthenticationService authenticationService;
+    private final JwtService jwtService;
 
-    public AuthController(AuthenticationService authenticationService){
+    public AuthController(AuthenticationService authenticationService, JwtService jwtService){
         this.authenticationService = authenticationService;
+        this.jwtService = jwtService;
     }
 
     @Override
@@ -35,11 +36,31 @@ public class AuthController implements AuthApi {
         );
     }
 
+    @Override
     @GetMapping("/me")
     public ResponseEntity<MeResponse> me(Authentication authentication) {
         UserDetails user = (UserDetails) authentication.getPrincipal();
 
         return ResponseEntity.ok(MeResponse.builder().login(user.getUsername()).build()
+        );
+    }
+
+    @Override
+    @PostMapping("/refresh")
+    public ResponseEntity<ApiResponse<RefreshTokenResponse>> refresh(@RequestBody RefreshTokenRequest request) {
+
+        String username = jwtService.extractUsername(request.getToken());
+
+        String novoToken = jwtService.generateToken(username);
+
+        return ResponseEntity.ok(ApiResponse.<RefreshTokenResponse>builder()
+                        .success(true)
+                        .message("Token renovado com sucesso")
+                        .data(RefreshTokenResponse
+                                        .builder()
+                                        .token(novoToken)
+                                        .build())
+                        .build()
         );
     }
 }
