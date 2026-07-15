@@ -1,20 +1,56 @@
 package com.corleone.security;
-/*
+
+import com.auth0.jwt.JWT;
+import com.auth0.jwt.algorithms.Algorithm;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
-import io.jsonwebtoken.security.Keys;
 
-import java.security.Key;
+import java.util.Date;
 
 @Service
 public class JwtService {
-    private final Key chave;
-    private final long jwtExpiration;
 
-    public JwtService(@Value("${jwt.secret}") String jwtSecret,
-                      @Value("${jwt.expiration}") long jwtExpiration){
-        this.chave = Keys.hmacShaKeyFor(jwtSecret.getBytes());
-        this.jwtExpiration = jwtExpiration;
+    private final String secret;
+    private final Long expiration;
+
+    public JwtService(@Value("${jwt.secret}") String secret, @Value("${jwt.expiration}") Long expiration
+    ) {
+        this.secret = secret;
+        this.expiration = expiration;
+    }
+
+    public String generateToken(String username) {
+        Algorithm algorithm = Algorithm.HMAC256(secret);
+
+        return JWT.create()
+                .withSubject(username)
+                .withIssuedAt(new Date())
+                .withExpiresAt(
+                        new Date(
+                                System.currentTimeMillis()
+                                        + expiration
+                        )
+                )
+                .sign(algorithm);
+    }
+
+    public String extractUsername(String token) {
+        Algorithm algorithm = Algorithm.HMAC256(secret);
+
+        return JWT.require(algorithm)
+                .build()
+                .verify(token)
+                .getSubject();
+    }
+
+    public boolean isTokenValid(String token) {
+        try {Algorithm algorithm = Algorithm.HMAC256(secret);
+            JWT.require(algorithm)
+                    .build()
+                    .verify(token);
+            return true;
+        } catch (Exception e) {
+            return false;
+        }
     }
 }
-*/

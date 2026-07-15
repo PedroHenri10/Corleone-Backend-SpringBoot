@@ -1,5 +1,7 @@
 package com.corleone.security;
 
+import com.corleone.exception.ResourceNotFoundException;
+import com.corleone.exceptionhandler.ErrorEnum;
 import com.corleone.usuario.entity.RolePermissao;
 import com.corleone.usuario.entity.Usuario;
 import com.corleone.usuario.entity.UsuarioRole;
@@ -23,7 +25,9 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Usuario usuario = usuarioRepository.findByLoginAndAtivoTrue(username).
-                orElseThrow(() -> new UsernameNotFoundException("Usuário não encontrado"));
+                orElseThrow( () -> new ResourceNotFoundException(
+                        ErrorEnum.USUARIO_NAO_ENCONTRADO)
+                );
 
         Set<GrantedAuthority> authorities = new HashSet<>();
 

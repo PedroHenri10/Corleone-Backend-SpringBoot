@@ -40,6 +40,11 @@ public enum ErrorEnum {
             HttpStatus.NOT_FOUND,
             2002,
             "Cargo não encontrado"
+    ),
+    CREDENCIAIS_INVALIDAS(
+            HttpStatus.UNAUTHORIZED,
+            2003,
+            "Credenciais inválidas"
     );
 
     private final HttpStatus httpStatus;
