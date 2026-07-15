@@ -47,5 +47,5 @@ public class AuthenticationService {
                 .token(token)
                 .build();
     }
-    
+
 }
