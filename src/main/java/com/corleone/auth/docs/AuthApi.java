@@ -22,12 +22,13 @@ public interface AuthApi {
             @io.swagger.v3.oas.annotations.responses.ApiResponse(
                     responseCode = "200",
                     description = "Login realizado com sucesso",
-                    content = @Content(schema = @Schema(implementation = ApiResponse.class))
-            ),
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(
-                    responseCode = "401",
-                    description = "Credenciais inválidas ou não autorizadas",
-                    content = @Content(schema = @Schema(implementation = ApiResponse.class))
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(
+                                    implementation = ApiResponse.class,
+                                    subTypes = {LoginResponse.class}
+                            )
+                    )
             )
     })
     ResponseEntity<ApiResponse<LoginResponse>> login(@RequestBody LoginRequest request);
