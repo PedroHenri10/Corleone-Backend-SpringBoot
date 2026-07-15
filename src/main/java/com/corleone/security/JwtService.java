@@ -2,10 +2,11 @@ package com.corleone.security;
 
 import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
+import com.auth0.jwt.exceptions.JWTVerificationException;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
+import java.time.Instant;
 
 @Service
 public class JwtService {
@@ -20,18 +21,14 @@ public class JwtService {
     }
 
     public String generateToken(String username) {
+
         Algorithm algorithm = Algorithm.HMAC256(secret);
 
-        return JWT.create()
-                .withSubject(username)
-                .withIssuedAt(new Date())
-                .withExpiresAt(
-                        new Date(
-                                System.currentTimeMillis()
-                                        + expiration
-                        )
-                )
-                .sign(algorithm);
+        Instant now = Instant.now();
+
+        Instant expiresAt = now.plusMillis(expiration);
+
+        return JWT.create().withSubject(username).withIssuedAt(now).withExpiresAt(expiresAt).sign(algorithm);
     }
 
     public String extractUsername(String token) {
@@ -44,12 +41,14 @@ public class JwtService {
     }
 
     public boolean isTokenValid(String token) {
-        try {Algorithm algorithm = Algorithm.HMAC256(secret);
+
+        try {
+            Algorithm algorithm = Algorithm.HMAC256(secret);
             JWT.require(algorithm)
                     .build()
                     .verify(token);
             return true;
-        } catch (Exception e) {
+        }catch(JWTVerificationException e) {
             return false;
         }
     }
