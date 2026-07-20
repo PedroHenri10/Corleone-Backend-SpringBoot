@@ -37,11 +37,6 @@ public class FuncionarioValidator {
 
     public void validarEmailCadastro(String email) {
 
-        EmailValidator validator = new EmailValidator();
-        if (email == null || !validator.isValid(email, null)) {
-            throw new EmailInvalidoException(ErrorEnum.EMAIL_INVALIDO);
-        }
-
         if (funcionarioRepository.existsByFunEmail(email)) {
             throw new EmailJaCadastradoException(ErrorEnum.EMAIL_JA_CADASTRADO);
         }
@@ -50,29 +45,24 @@ public class FuncionarioValidator {
     public void validarCpfAtualizacao(Integer funcionarioId, String cpf) {
         String cpfLimpo = cpf.replaceAll("\\D", "");
 
+        if (cpfLimpo.length() != 11) {
+            throw new CpfInvalidoException(ErrorEnum.CPF_INVALIDO);
+        }
+
         funcionarioRepository.findByFunCpf(cpfLimpo)
                 .ifPresent(funcionario -> {
                     if (!funcionario.getFunId().equals(funcionarioId)) {
                         throw new CpfJaCadastradoException(ErrorEnum.CPF_JA_CADASTRADO);
-                    }
-
-                    if (cpfLimpo.length() != 11) {
-                        throw new CpfInvalidoException(ErrorEnum.CPF_INVALIDO);
                     }
                 });
     }
 
     public void validarEmailAtualizacao(Integer funcionarioId, String email) {
 
-        String regexEmail = "^[^@\\s]+@[^@\\s]+\\.[^@\\s]+$";
-
         funcionarioRepository.findByFunEmail(email)
                 .ifPresent(funcionario -> {
                     if (!funcionario.getFunId().equals(funcionarioId)) {
                         throw new EmailJaCadastradoException(ErrorEnum.EMAIL_JA_CADASTRADO);
-                    }
-                    if (email == null || !email.matches(regexEmail)) {
-                        throw new EmailInvalidoException(ErrorEnum.EMAIL_INVALIDO);
                     }
                 });
     }

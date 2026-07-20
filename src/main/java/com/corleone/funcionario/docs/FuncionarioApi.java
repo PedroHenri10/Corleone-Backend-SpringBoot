@@ -54,7 +54,8 @@ public interface FuncionarioApi {
     @Operation(summary = "Desativar funcionário", description = "Realiza a exclusão lógica do funcionário.",
             responses = {
                     @ApiResponse(responseCode = "204", description = "Funcionário desativado."),
-                    @ApiResponse(responseCode = "404", description = "Funcionário não encontrado.")
+                    @ApiResponse(responseCode = "404", description = "Funcionário não encontrado."),
+                    @ApiResponse(responseCode = "422", description = "Funcionário já inativo.")
             }
     )
     ResponseEntity<Void> desativar(@Parameter(description = "ID do funcionário.", example = "1") Integer id);

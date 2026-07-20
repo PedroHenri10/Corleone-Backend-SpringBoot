@@ -6,6 +6,7 @@ import com.corleone.funcionario.dto.FuncionarioRequest;
 import com.corleone.funcionario.dto.FuncionarioResponse;
 import com.corleone.funcionario.dto.FuncionarioResumoResponse;
 import com.corleone.funcionario.service.FuncionarioService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -24,7 +25,7 @@ public class FuncionarioController implements FuncionarioApi {
     @Override
     @PostMapping
     @PreAuthorize("hasAuthority('FUNCIONARIO_CRIAR')")
-    public ResponseEntity<FuncionarioResponse> criar(@RequestBody FuncionarioRequest request) {
+    public ResponseEntity<FuncionarioResponse> criar(@Valid @RequestBody FuncionarioRequest request) {
         return ResponseEntity.status(HttpStatus.CREATED).body(funcionarioService.criar(request));
     }
 
@@ -47,7 +48,7 @@ public class FuncionarioController implements FuncionarioApi {
     @Override
     @PutMapping("/{id}")
     @PreAuthorize("hasAuthority('FUNCIONARIO_EDITAR')")
-    public ResponseEntity<FuncionarioResponse> atualizar(@PathVariable Integer id, @RequestBody FuncionarioRequest request) {
+    public ResponseEntity<FuncionarioResponse> atualizar(@Valid @PathVariable Integer id, @RequestBody FuncionarioRequest request) {
 
         return ResponseEntity.ok(funcionarioService.atualizar(id, request)
         );

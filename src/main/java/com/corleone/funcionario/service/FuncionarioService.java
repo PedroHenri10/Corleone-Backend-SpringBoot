@@ -2,6 +2,8 @@ package com.corleone.funcionario.service;
 
 import com.corleone.cargo.entity.Cargo;
 import com.corleone.endereco.entity.Endereco;
+import com.corleone.exception.FuncionarioInativoException;
+import com.corleone.exceptionhandler.ErrorEnum;
 import com.corleone.funcionario.dto.FuncionarioFiltro;
 import com.corleone.funcionario.dto.FuncionarioRequest;
 import com.corleone.funcionario.dto.FuncionarioResponse;
@@ -26,6 +28,7 @@ import java.time.ZoneId;
 @Transactional
 public class FuncionarioService {
 
+    private static final ZoneId ZONE_ID = ZoneId.of("America/Sao_Paulo");
     private final FuncionarioRepository funcionarioRepository;
     private final FuncionarioMapper mapper;
     private final FuncionarioValidator validator;
@@ -65,7 +68,7 @@ public class FuncionarioService {
 
         mapper.updateEntity(funcionario, request, cargo, endereco);
 
-        funcionario.setFunDtAtualizacao(LocalDateTime.now(ZoneId.of("America/Sao_Paulo")));
+        funcionario.setFunDtAtualizacao(LocalDateTime.now(ZONE_ID));
 
         funcionario = funcionarioRepository.save(funcionario);
         return mapper.toResponse(funcionario);
@@ -117,7 +120,7 @@ public class FuncionarioService {
         Funcionario funcionario = validator.validarFuncionario(id);
 
         if (Boolean.FALSE.equals(funcionario.getFunAtivo())) {
-            return;
+            throw new FuncionarioInativoException(ErrorEnum.FUNCIONARIO_INATIVO);
         }
 
         funcionario.setFunAtivo(false);

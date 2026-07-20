@@ -79,6 +79,10 @@ public enum ErrorEnum {
             HttpStatus.NOT_FOUND,
             2010,
             "Endereço não encontrado"
+    ), FUNCIONARIO_INATIVO(
+            HttpStatus.UNPROCESSABLE_ENTITY,
+            2011,
+            "Funcionário já inativo"
     );
 
 
