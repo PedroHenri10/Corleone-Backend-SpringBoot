@@ -31,7 +31,7 @@ public class Funcionario {
     @Column(name = "fun_cpf", length = 14, nullable = false, unique = true)
     private String funCpf;
 
-    @Column(name = "fun_rg", length = 2)
+    @Column(name = "fun_rg", length = 20)
     private String funRg;
 
     @Column(name = "fun_data_nascimento")
@@ -56,10 +56,10 @@ public class Funcionario {
     private Boolean funAtivo = true;
 
     @Column(name = "fun_dt_criacao", updatable = false)
-    private LocalDateTime funDtCriacao = LocalDateTime.now();
+    private LocalDateTime funDtCriacao;
 
     @Column(name = "fun_dt_atualizacao")
-    private LocalDateTime funDtAtualizacao = LocalDateTime.now();
+    private LocalDateTime funDtAtualizacao;
 
     @ManyToOne
     @JoinColumn(name = "car_id", nullable = false)
