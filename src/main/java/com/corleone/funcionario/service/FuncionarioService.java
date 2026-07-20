@@ -110,4 +110,18 @@ public class FuncionarioService {
                         )
                 );
     }
+
+    @Transactional
+    public void desativar(Integer id) {
+
+        Funcionario funcionario = validator.validarFuncionario(id);
+
+        if (Boolean.FALSE.equals(funcionario.getFunAtivo())) {
+            return;
+        }
+
+        funcionario.setFunAtivo(false);
+
+        funcionarioRepository.save(funcionario);
+    }
 }
