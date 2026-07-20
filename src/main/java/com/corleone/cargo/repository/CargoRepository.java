@@ -7,8 +7,8 @@ import java.util.Optional;
 
 public interface CargoRepository extends JpaRepository<Cargo, Integer> {
 
-    Optional<Cargo> findByCarNome(String nome);
+    Optional<Cargo> findByNomeIgnoreCase(String nome);
 
-    boolean existsByCarNome(String nome);
+    boolean existsByNomeIgnoreCase(String nome);
 
 }

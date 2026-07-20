@@ -21,24 +21,24 @@ public class FuncionarioValidator {
 
     public void validarCpfCadastro(String cpf) {
         if (cpf == null) {
-            throw new RegraNegocioException(ErrorEnum.REQUEST_INVALIDO);
+            throw new ResourceNotFoundException(ErrorEnum.REQUEST_INVALIDO);
         }
 
         String cpfLimpo = cpf.replaceAll("\\D", "");
 
         if (cpfLimpo.length() != 11) {
-            throw new CpfInvalidoException(ErrorEnum.CPF_INVALIDO);
+            throw new BusinessException(ErrorEnum.CPF_INVALIDO);
         }
 
         if (funcionarioRepository.existsByFunCpf(cpf)) {
-            throw new CpfJaCadastradoException(ErrorEnum.CPF_JA_CADASTRADO);
+            throw new BusinessException(ErrorEnum.CPF_JA_CADASTRADO);
         }
     }
 
     public void validarEmailCadastro(String email) {
 
         if (funcionarioRepository.existsByFunEmail(email)) {
-            throw new EmailJaCadastradoException(ErrorEnum.EMAIL_JA_CADASTRADO);
+            throw new BusinessException(ErrorEnum.EMAIL_JA_CADASTRADO);
         }
     }
 
@@ -46,13 +46,13 @@ public class FuncionarioValidator {
         String cpfLimpo = cpf.replaceAll("\\D", "");
 
         if (cpfLimpo.length() != 11) {
-            throw new CpfInvalidoException(ErrorEnum.CPF_INVALIDO);
+            throw new BusinessException(ErrorEnum.CPF_INVALIDO);
         }
 
         funcionarioRepository.findByFunCpf(cpfLimpo)
                 .ifPresent(funcionario -> {
                     if (!funcionario.getFunId().equals(funcionarioId)) {
-                        throw new CpfJaCadastradoException(ErrorEnum.CPF_JA_CADASTRADO);
+                        throw new BusinessException(ErrorEnum.CPF_JA_CADASTRADO);
                     }
                 });
     }
@@ -62,7 +62,7 @@ public class FuncionarioValidator {
         funcionarioRepository.findByFunEmail(email)
                 .ifPresent(funcionario -> {
                     if (!funcionario.getFunId().equals(funcionarioId)) {
-                        throw new EmailJaCadastradoException(ErrorEnum.EMAIL_JA_CADASTRADO);
+                        throw new BusinessException(ErrorEnum.EMAIL_JA_CADASTRADO);
                     }
                 });
     }
@@ -71,10 +71,10 @@ public class FuncionarioValidator {
 
         Cargo cargo = cargoRepository.findById(cargoId)
                 .orElseThrow(() ->
-                        new CargoNaoEncontradoException(ErrorEnum.CARGO_NAO_ENCONTRADO));
+                        new ResourceNotFoundException(ErrorEnum.CARGO_NAO_ENCONTRADO));
 
         if (Boolean.FALSE.equals(cargo.getAtivo())) {
-            throw new CargoInativoException(ErrorEnum.CARGO_INATIVO);
+            throw new BusinessException(ErrorEnum.CARGO_INATIVO);
         }
 
         return cargo;
@@ -88,13 +88,13 @@ public class FuncionarioValidator {
 
         return enderecoRepository.findById(enderecoId)
                 .orElseThrow(() ->
-                        new EnderecoNaoEncontradoException(ErrorEnum.ENDERECO_NAO_ENCONTRADO));
+                        new ResourceNotFoundException(ErrorEnum.ENDERECO_NAO_ENCONTRADO));
     }
 
     public Funcionario validarFuncionario(Integer funcionarioId) {
 
         return funcionarioRepository.findById(funcionarioId)
                 .orElseThrow(() ->
-                        new FuncionarioNaoEncontrado(ErrorEnum.FUNCIONARIO_NAO_ENCONTRADO));
+                        new ResourceNotFoundException(ErrorEnum.FUNCIONARIO_NAO_ENCONTRADO));
     }
 }

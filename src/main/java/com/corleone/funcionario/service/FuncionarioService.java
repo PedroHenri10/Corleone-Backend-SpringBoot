@@ -2,7 +2,7 @@ package com.corleone.funcionario.service;
 
 import com.corleone.cargo.entity.Cargo;
 import com.corleone.endereco.entity.Endereco;
-import com.corleone.exception.FuncionarioInativoException;
+import com.corleone.exception.BusinessException;
 import com.corleone.exceptionhandler.ErrorEnum;
 import com.corleone.funcionario.dto.FuncionarioFiltro;
 import com.corleone.funcionario.dto.FuncionarioRequest;
@@ -13,6 +13,7 @@ import com.corleone.funcionario.mapper.FuncionarioMapper;
 import com.corleone.funcionario.repository.FuncionarioRepository;
 import com.corleone.funcionario.specification.FuncionarioSpecification;
 import com.corleone.funcionario.validator.FuncionarioValidator;
+import com.corleone.shared.util.DateUtils;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
@@ -28,7 +29,6 @@ import java.time.ZoneId;
 @Transactional
 public class FuncionarioService {
 
-    private static final ZoneId ZONE_ID = ZoneId.of("America/Sao_Paulo");
     private final FuncionarioRepository funcionarioRepository;
     private final FuncionarioMapper mapper;
     private final FuncionarioValidator validator;
@@ -68,7 +68,7 @@ public class FuncionarioService {
 
         mapper.updateEntity(funcionario, request, cargo, endereco);
 
-        funcionario.setFunDtAtualizacao(LocalDateTime.now(ZONE_ID));
+        funcionario.setFunDtAtualizacao(LocalDateTime.now(DateUtils.BR_ZONE));
 
         funcionario = funcionarioRepository.save(funcionario);
         return mapper.toResponse(funcionario);
@@ -120,7 +120,7 @@ public class FuncionarioService {
         Funcionario funcionario = validator.validarFuncionario(id);
 
         if (Boolean.FALSE.equals(funcionario.getFunAtivo())) {
-            throw new FuncionarioInativoException(ErrorEnum.FUNCIONARIO_INATIVO);
+            throw new BusinessException(ErrorEnum.FUNCIONARIO_INATIVO);
         }
 
         funcionario.setFunAtivo(false);

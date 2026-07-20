@@ -83,8 +83,12 @@ public enum ErrorEnum {
             HttpStatus.UNPROCESSABLE_ENTITY,
             2011,
             "Funcionário já inativo"
+    ),
+    CARGO_JA_CADASTRADO(
+            HttpStatus.CONFLICT,
+            2012,
+            "Cargo já cadastrado no sistema"
     );
-
 
     private final HttpStatus httpStatus;
     private final Integer errorCode;
