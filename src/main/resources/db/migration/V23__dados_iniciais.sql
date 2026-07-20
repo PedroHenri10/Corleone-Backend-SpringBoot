@@ -14,6 +14,12 @@ INSERT INTO role(rol_nome, rol_descricao) VALUES
 ('ROLE_ENTREGADOR', 'Realiza entregas'),
 ('ROLE_CLIENTE', 'Cliente da pizzaria');
 
+INSERT INTO permissao (per_nome, per_descricao, per_modulo) VALUES
+('CARGO_VISUALIZAR', 'Visualizar cargos', 'CARGO'),
+('CARGO_CRIAR', 'Criar cargos', 'CARGO'),
+('CARGO_EDITAR', 'Editar cargos', 'CARGO'),
+('CARGO_EXCLUIR', 'Excluir cargos', 'CARGO');
+
 INSERT INTO permissao(per_nome, per_descricao, per_modulo) VALUES
 ('DASHBOARD_VISUALIZAR', 'Visualizar dashboard administrativo', 'DASHBOARD'),
 
