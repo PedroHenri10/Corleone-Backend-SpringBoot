@@ -45,7 +45,42 @@ public enum ErrorEnum {
             HttpStatus.UNAUTHORIZED,
             2003,
             "Credenciais inválidas"
+    ),
+    CPF_INVALIDO(
+            HttpStatus.BAD_REQUEST,
+            2006,
+            "O CPF informado é inválido"
+    ),
+    CPF_JA_CADASTRADO(HttpStatus.BAD_REQUEST,
+            2004,
+            "O CPF informado já está cadastrado"
+    ),
+    EMAIL_JA_CADASTRADO(
+            HttpStatus.BAD_REQUEST,
+            2005,
+            "O e-mail informado já está cadastrado"
+    ),
+    EMAIL_INVALIDO(
+            HttpStatus.BAD_REQUEST,
+            2007,
+            "O e-mail informado é inválido"
+    ),
+    CARGO_INATIVO(
+            HttpStatus.BAD_REQUEST,
+            2008,
+            "O cargo informado está inativo"
+    ),
+    FUNCIONARIO_NAO_ENCONTRADO(
+            HttpStatus.NOT_FOUND,
+            2009,
+            "Funcionário não encontrado"
+    ),
+    ENDERECO_NAO_ENCONTRADO(
+            HttpStatus.NOT_FOUND,
+            2010,
+            "Endereço não encontrado"
     );
+
 
     private final HttpStatus httpStatus;
     private final Integer errorCode;
