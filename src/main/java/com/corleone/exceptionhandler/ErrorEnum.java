@@ -51,12 +51,12 @@ public enum ErrorEnum {
             2006,
             "O CPF informado é inválido"
     ),
-    CPF_JA_CADASTRADO(HttpStatus.BAD_REQUEST,
+    CPF_JA_CADASTRADO(HttpStatus.CONFLICT,
             2004,
             "O CPF informado já está cadastrado"
     ),
     EMAIL_JA_CADASTRADO(
-            HttpStatus.BAD_REQUEST,
+            HttpStatus.CONFLICT,
             2005,
             "O e-mail informado já está cadastrado"
     ),
