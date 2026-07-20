@@ -2,13 +2,19 @@ package com.corleone.funcionario.service;
 
 import com.corleone.cargo.entity.Cargo;
 import com.corleone.endereco.entity.Endereco;
+import com.corleone.funcionario.dto.FuncionarioFiltro;
 import com.corleone.funcionario.dto.FuncionarioRequest;
 import com.corleone.funcionario.dto.FuncionarioResponse;
+import com.corleone.funcionario.dto.FuncionarioResumoResponse;
 import com.corleone.funcionario.entity.Funcionario;
 import com.corleone.funcionario.mapper.FuncionarioMapper;
 import com.corleone.funcionario.repository.FuncionarioRepository;
+import com.corleone.funcionario.specification.FuncionarioSpecification;
 import com.corleone.funcionario.validator.FuncionarioValidator;
-import jakarta.transaction.Transactional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.jpa.domain.Specification;
+import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -65,5 +71,43 @@ public class FuncionarioService {
         return mapper.toResponse(funcionario);
     }
 
+    @Transactional(readOnly = true)
+    public FuncionarioResponse buscarPorId(Integer id) {
 
+        Funcionario funcionario = validator.validarFuncionario(id);
+
+        return mapper.toResponse(funcionario);
+    }
+
+    @Transactional(readOnly = true)
+    public Page<FuncionarioResumoResponse> listar(
+            FuncionarioFiltro filtro,
+            Pageable pageable) {
+
+        Specification<Funcionario> specification = montarSpecification(filtro);
+
+        return funcionarioRepository
+                .findAll(specification, pageable)
+                .map(mapper::toResumoResponse);
+    }
+
+    private Specification<Funcionario> montarSpecification(FuncionarioFiltro filtro) {
+
+        return Specification
+                .where(
+                        filtro.getAtivo() == null
+                                ? FuncionarioSpecification.somenteAtivos()
+                                : FuncionarioSpecification.ativo(filtro.getAtivo())
+                )
+                .and(FuncionarioSpecification.nome(filtro.getNome()))
+                .and(FuncionarioSpecification.cpf(filtro.getCpf()))
+                .and(FuncionarioSpecification.cargo(filtro.getCargoId()))
+                .and(FuncionarioSpecification.cidade(filtro.getCidade()))
+                .and(
+                        FuncionarioSpecification.dataAdmissao(
+                                filtro.getDataAdmissaoInicio(),
+                                filtro.getDataAdmissaoFim()
+                        )
+                );
+    }
 }

@@ -80,4 +80,8 @@ public class FuncionarioSpecification {
         };
     }
 
+    public static Specification<Funcionario> somenteAtivos() {
+        return (root, query, cb) -> cb.isTrue(root.get("funAtivo"));
+    }
+
 }
