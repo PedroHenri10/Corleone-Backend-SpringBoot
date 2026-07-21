@@ -103,6 +103,20 @@ public enum ErrorEnum {
             HttpStatus.UNPROCESSABLE_ENTITY,
             2015,
             "Usuário já inativo"
+    ),
+    FORNECEDOR_NAO_ENCONTRADO(
+            HttpStatus.NOT_FOUND,
+            2016,
+            "Fornecedor não encontrado"
+    ),
+    CNPJ_JA_CADASTRADO(HttpStatus.CONFLICT,
+            2017,
+            "O CNPJ informado já está cadastrado"
+    ),
+    FORNECEDOR_INATIVO(
+            HttpStatus.UNPROCESSABLE_ENTITY,
+            2018,
+            "Fornecedor já inativo"
     );
 
     private final HttpStatus httpStatus;
