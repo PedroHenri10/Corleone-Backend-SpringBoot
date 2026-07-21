@@ -1,5 +1,7 @@
 package com.corleone.usuario.service;
 
+import com.corleone.exception.BusinessException;
+import com.corleone.exceptionhandler.ErrorEnum;
 import com.corleone.funcionario.entity.Funcionario;
 import com.corleone.shared.util.DateUtils;
 import com.corleone.usuario.dto.*;
@@ -95,6 +97,10 @@ public class UsuarioService {
     public void desativar(Integer id) {
 
         Usuario usuario = validator.validarUsuario(id);
+
+        if (Boolean.FALSE.equals(usuario.getAtivo())) {
+            throw new BusinessException(ErrorEnum.USUARIO_INATIVO);
+        }
 
         usuario.setAtivo(false);
 

@@ -98,6 +98,11 @@ public enum ErrorEnum {
             HttpStatus.NOT_FOUND,
             2014,
             "Uma ou mais Roles não foram encontradas no sistema"
+    ),
+    USUARIO_INATIVO(
+            HttpStatus.UNPROCESSABLE_ENTITY,
+            2015,
+            "Usuário já inativo"
     );
 
     private final HttpStatus httpStatus;
