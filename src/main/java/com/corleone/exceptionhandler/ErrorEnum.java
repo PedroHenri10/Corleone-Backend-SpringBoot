@@ -88,6 +88,16 @@ public enum ErrorEnum {
             HttpStatus.CONFLICT,
             2012,
             "Cargo já cadastrado no sistema"
+    ),
+    LOGIN_JA_CADASTRADO(
+            HttpStatus.CONFLICT,
+            2013,
+            "login já cadastrado no sistema"
+    ),
+    ROLE_NAO_ENCONTRADA(
+            HttpStatus.NOT_FOUND,
+            2014,
+            "Uma ou mais Roles não foram encontradas no sistema"
     );
 
     private final HttpStatus httpStatus;

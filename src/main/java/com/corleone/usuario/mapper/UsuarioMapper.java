@@ -3,6 +3,7 @@ package com.corleone.usuario.mapper;
 import com.corleone.funcionario.entity.Funcionario;
 import com.corleone.usuario.dto.UsuarioRequest;
 import com.corleone.usuario.dto.UsuarioResponse;
+import com.corleone.usuario.dto.UsuarioResumoResponse;
 import com.corleone.usuario.entity.Usuario;
 import com.corleone.usuario.entity.UsuarioRole;
 import org.mapstruct.*;
@@ -25,6 +26,12 @@ public interface UsuarioMapper {
     @Mapping(target = "funcionarioNome", source = "funcionario.funNome")
     @Mapping(target = "roles", expression = "java(mapRoles(usuario.getRoles()))")
     UsuarioResponse toResponse(Usuario usuario);
+
+    @Mapping(target = "id", source = "id")
+    @Mapping(target = "login", source = "login")
+    @Mapping(target = "funcionario", source = "funcionario.funNome")
+    @Mapping(target = "ativo", source = "ativo")
+    UsuarioResumoResponse toResumoResponse(Usuario usuario);
 
     @Mapping(target = "id", ignore = true)
     @Mapping(target = "ultimoAcesso", ignore = true)
