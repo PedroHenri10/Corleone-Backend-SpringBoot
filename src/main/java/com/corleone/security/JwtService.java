@@ -32,12 +32,15 @@ public class JwtService {
     }
 
     public String extractUsername(String token) {
-        Algorithm algorithm = Algorithm.HMAC256(secret);
-
-        return JWT.require(algorithm)
-                .build()
-                .verify(token)
-                .getSubject();
+        try {
+            Algorithm algorithm = Algorithm.HMAC256(secret);
+            return JWT.require(algorithm)
+                    .build()
+                    .verify(token)
+                    .getSubject();
+        } catch (com.auth0.jwt.exceptions.TokenExpiredException e) {
+            return JWT.decode(token).getSubject();
+        }
     }
 
     public boolean isTokenValid(String token) {

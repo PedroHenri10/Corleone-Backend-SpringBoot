@@ -36,24 +36,14 @@ public interface AuthApi {
     })
     ResponseEntity<ApiResponse<LoginResponse>> login(@RequestBody LoginRequest request);
 
-    @Operation(
-            summary = "Obter dados do usuário logado",
-            description = "Recupera as informações essenciais do perfil do usuário através do token ativo."
-    )
-    @ApiResponses(value = {
-            @io.swagger.v3.oas.annotations.responses.ApiResponse(
+    @Operation(summary = "Obter dados do usuário logado", description = "Recupera as informações essenciais do perfil do usuário através do token ativo.")
+    @ApiResponses(value = {@io.swagger.v3.oas.annotations.responses.ApiResponse(
                     responseCode = "200",
                     description = "Dados do perfil retornados com sucesso",
-                    content = @Content(
-                            mediaType = "application/json",
-                            schema = @Schema(
-                                    implementation = ApiResponse.class,
-                                    subTypes = {MeResponse.class}
-                            )
-                    )
+                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = MeResponse.class))
             )
     })
-    ResponseEntity<MeResponse> me(org.springframework.security.core.Authentication authentication);
+    ResponseEntity<MeResponse> me(@org.springframework.security.core.annotation.AuthenticationPrincipal org.springframework.security.core.userdetails.UserDetails user);
 
     @Operation(
             summary = "Renovar token de acesso (Refresh)",

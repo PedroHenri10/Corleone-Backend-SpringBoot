@@ -5,8 +5,9 @@ import com.corleone.auth.dto.*;
 import com.corleone.security.AuthenticationService;
 import com.corleone.security.JwtService;
 import com.corleone.shared.dto.ApiResponse;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.core.Authentication;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.*;
 
@@ -38,11 +39,11 @@ public class AuthController implements AuthApi {
 
     @Override
     @GetMapping("/me")
-    public ResponseEntity<MeResponse> me(Authentication authentication) {
-        UserDetails user = (UserDetails) authentication.getPrincipal();
-
-        return ResponseEntity.ok(MeResponse.builder().login(user.getUsername()).build()
-        );
+    public ResponseEntity<MeResponse> me(@AuthenticationPrincipal UserDetails user) {
+        if (user == null) {
+            return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
+        }
+        return ResponseEntity.ok(MeResponse.builder().login(user.getUsername()).build());
     }
 
     @Override
