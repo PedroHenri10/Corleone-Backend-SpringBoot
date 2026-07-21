@@ -30,8 +30,8 @@ public class Categoria {
     private Boolean catAtivo = true;
 
     @Column(name = "cat_dt_criacao", updatable = false)
-    private LocalDateTime catDtCriacao = LocalDateTime.now();
+    private LocalDateTime catDtCriacao;
 
     @Column(name = "cat_dt_atualizacao")
-    private LocalDateTime catDtAtualizacao = LocalDateTime.now();
+    private LocalDateTime catDtAtualizacao;
 }

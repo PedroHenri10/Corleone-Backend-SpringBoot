@@ -117,6 +117,22 @@ public enum ErrorEnum {
             HttpStatus.UNPROCESSABLE_ENTITY,
             2018,
             "Fornecedor já inativo"
+    ),
+    CATEGORIA_NAO_ENCONTRADA(
+            HttpStatus.NOT_FOUND,
+            2019,
+            "Categoria não encontrada"
+    ),
+
+    CATEGORIA_JA_CADASTRADA(
+            HttpStatus.BAD_REQUEST,
+            2020,
+            "Já existe uma categoria com esse nome"
+    ),
+    CATEGORIA_INATIVO(
+            HttpStatus.BAD_REQUEST,
+            2021,
+            "A categoria informado já está inativa"
     );
 
     private final HttpStatus httpStatus;
