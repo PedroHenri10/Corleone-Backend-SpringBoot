@@ -133,6 +133,16 @@ public enum ErrorEnum {
             HttpStatus.BAD_REQUEST,
             2021,
             "A categoria informado já está inativa"
+    ),
+    CLIENTE_NAO_ENCONTRADO(
+            HttpStatus.NOT_FOUND,
+            2022,
+            "Cliente não encontrado"
+    ),
+    CLIENTE_INATIVO(
+            HttpStatus.BAD_REQUEST,
+            2023,
+            "O cliente informado já está inativo"
     );
 
     private final HttpStatus httpStatus;
