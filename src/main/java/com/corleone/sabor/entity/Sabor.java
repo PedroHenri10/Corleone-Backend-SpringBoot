@@ -17,7 +17,7 @@ public class Sabor {
     @Column(name = "sab_id")
     private Integer id;
 
-    @Column(name = "sab_nome", length = 100)
+    @Column(name = "sab_nome",nullable = false, unique = true, length = 100)
     private String nome;
 
     @Column(name = "sab_descricao", length = 255)
