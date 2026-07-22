@@ -22,7 +22,7 @@ public class CargoController implements CargoApi {
 
     @Override
     @PostMapping
-    @PreAuthorize("hasAuthority('CARGO_CRIAR')")
+    @PreAuthorize("hasAuthority('CATEGORIA_CRIAR')")
     public ResponseEntity<CargoResponse> criar(@Valid @RequestBody CargoRequest request) {
 
         CargoResponse response = service.criar(request);

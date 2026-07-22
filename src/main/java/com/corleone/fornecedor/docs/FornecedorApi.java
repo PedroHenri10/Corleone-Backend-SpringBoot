@@ -1,9 +1,12 @@
 package com.corleone.fornecedor.docs;
 
+import com.corleone.categoria.dto.CategoriaResponse;
+import com.corleone.categoria.dto.CategoriaResumoResponse;
 import com.corleone.exceptionhandler.ErrorResponse;
 import com.corleone.fornecedor.dto.*;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.ArraySchema;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -18,18 +21,22 @@ import org.springframework.web.bind.annotation.*;
 public interface FornecedorApi {
 
     @Operation(summary = "Cadastrar fornecedor", description = "Realiza o cadastro de um novo fornecedor.")
-    @ApiResponse(responseCode = "201", description = "Fornecedor cadastrado.")
+    @ApiResponse(responseCode = "201", description = "Fornecedor cadastrado.", content = @Content(
+            schema = @Schema(implementation = FornecedorResponse.class)))
     @ApiResponse(responseCode = "400", description = "Dados inválidos.", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
     @PostMapping ResponseEntity<FornecedorResponse> criar(@Valid @RequestBody FornecedorRequest request);
 
     @Operation(summary = "Buscar fornecedor por id")
-    @ApiResponse(responseCode = "200", description = "Fornecedor encontrado.")
+    @ApiResponse(responseCode = "200", description = "Fornecedor encontrado.", content = @Content(
+            schema = @Schema(implementation = FornecedorResponse.class)))
     @ApiResponse(responseCode = "404", description = "Fornecedor não encontrado.")
     @GetMapping("/{id}")
     ResponseEntity<FornecedorResponse> buscarPorId(@Parameter(description = "Id do fornecedor") @PathVariable Integer id);
 
     @Operation(summary = "Listar fornecedores")
-    @ApiResponse(responseCode = "200", description = "Lista retornada com sucesso.")
+    @ApiResponse(responseCode = "200", description = "Lista retornada com sucesso.", content = @Content(
+            array = @ArraySchema(
+                    schema = @Schema(implementation = FornecedorResumoResponse.class))))
     @GetMapping
     ResponseEntity<Page<FornecedorResumoResponse>> listar(FornecedorFiltro filtro, Pageable pageable);
 
