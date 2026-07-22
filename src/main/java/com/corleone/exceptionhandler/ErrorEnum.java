@@ -177,6 +177,23 @@ public enum ErrorEnum {
             HttpStatus.BAD_REQUEST,
             2029,
             "O tamanho informado já está inativo"
+    ),
+    BORDA_NAO_ENCONTRADA(
+            HttpStatus.NOT_FOUND,
+            2030,
+            "Borda não encontrada"
+    ),
+
+    BORDA_JA_CADASTRADA(
+            HttpStatus.CONFLICT,
+            2031,
+            "Já existe uma borda cadastrada com esse nome"
+    ),
+
+    BORDA_INATIVA(
+            HttpStatus.BAD_REQUEST,
+            2032,
+            "A borda informada já está inativa"
     );
 
     private final HttpStatus httpStatus;

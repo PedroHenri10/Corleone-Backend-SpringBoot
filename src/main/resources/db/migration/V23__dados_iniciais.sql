@@ -65,6 +65,11 @@ INSERT INTO permissao(per_nome, per_descricao, per_modulo) VALUES
 ('TAMANHO_EDITAR', 'Editar tamanhos', 'TAMANHO'),
 ('TAMANHO_EXCLUIR', 'Excluir tamanhos', 'TAMANHO'),
 
+('BORDA_VISUALIZAR', 'Visualizar bordas', 'BORDA'),
+('BORDA_CRIAR', 'Criar bordas', 'BORDA'),
+('BORDA_EDITAR', 'Editar bordas', 'BORDA'),
+('BORDA_EXCLUIR', 'Excluir bordas', 'BORDA'),
+
 ('INGREDIENTE_VISUALIZAR', 'Visualizar ingredientes', 'INGREDIENTE'),
 ('INGREDIENTE_CRIAR', 'Criar ingredientes', 'INGREDIENTE'),
 ('INGREDIENTE_EDITAR', 'Editar ingredientes', 'INGREDIENTE'),
