@@ -24,4 +24,7 @@ public class Tamanho {
 
     @Column(name = "tam_fator_preco", precision = 5, scale = 2)
     private BigDecimal fatorPreco;
+
+    @Column(name = "tam_ativo")
+    private Boolean ativo;
 }

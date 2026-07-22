@@ -69,9 +69,7 @@ public class FuncionarioValidator {
 
     public Cargo validarCargo(Integer cargoId) {
 
-        Cargo cargo = cargoRepository.findById(cargoId)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException(ErrorEnum.CARGO_NAO_ENCONTRADO));
+        Cargo cargo = cargoRepository.findById(cargoId).orElseThrow(() -> new ResourceNotFoundException(ErrorEnum.CARGO_NAO_ENCONTRADO));
 
         if (Boolean.FALSE.equals(cargo.getAtivo())) {
             throw new BusinessException(ErrorEnum.CARGO_INATIVO);
@@ -86,15 +84,11 @@ public class FuncionarioValidator {
             return null;
         }
 
-        return enderecoRepository.findById(enderecoId)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException(ErrorEnum.ENDERECO_NAO_ENCONTRADO));
+        return enderecoRepository.findById(enderecoId).orElseThrow(() -> new ResourceNotFoundException(ErrorEnum.ENDERECO_NAO_ENCONTRADO));
     }
 
     public Funcionario validarFuncionario(Integer funcionarioId) {
 
-        return funcionarioRepository.findById(funcionarioId)
-                .orElseThrow(() ->
-                        new ResourceNotFoundException(ErrorEnum.FUNCIONARIO_NAO_ENCONTRADO));
+        return funcionarioRepository.findById(funcionarioId).orElseThrow(() -> new ResourceNotFoundException(ErrorEnum.FUNCIONARIO_NAO_ENCONTRADO));
     }
 }

@@ -55,6 +55,16 @@ INSERT INTO permissao(per_nome, per_descricao, per_modulo) VALUES
 ('CATEGORIA_EDITAR', 'Editar categorias', 'CATEGORIA'),
 ('CATEGORIA_EXCLUIR', 'Excluir categorias', 'CATEGORIA'),
 
+('SABOR_VISUALIZAR', 'Visualizar sabores', 'SABOR'),
+('SABOR_CRIAR', 'Criar sabores', 'SABOR'),
+('SABOR_EDITAR', 'Editar sabores', 'SABOR'),
+('SABOR_EXCLUIR', 'Excluir sabores', 'SABOR'),
+
+('TAMANHO_VISUALIZAR', 'Visualizar tamanhos', 'TAMANHO'),
+('TAMANHO_CRIAR', 'Criar tamanhos', 'TAMANHO'),
+('TAMANHO_EDITAR', 'Editar tamanhos', 'TAMANHO'),
+('TAMANHO_EXCLUIR', 'Excluir tamanhos', 'TAMANHO'),
+
 ('INGREDIENTE_VISUALIZAR', 'Visualizar ingredientes', 'INGREDIENTE'),
 ('INGREDIENTE_CRIAR', 'Criar ingredientes', 'INGREDIENTE'),
 ('INGREDIENTE_EDITAR', 'Editar ingredientes', 'INGREDIENTE'),

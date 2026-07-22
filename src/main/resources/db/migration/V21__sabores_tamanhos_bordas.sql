@@ -8,7 +8,8 @@ CREATE TABLE sabor(
 CREATE TABLE tamanho(
     tam_id INT PRIMARY KEY AUTO_INCREMENT,
     tam_nome VARCHAR(50),
-    tam_fator_preco DECIMAL(5,2)
+    tam_fator_preco DECIMAL(5,2),
+    tam_ativo TINYINT(1) DEFAULT 1,
 );
 
 CREATE TABLE produto_sabor(

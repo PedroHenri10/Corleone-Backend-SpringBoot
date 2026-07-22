@@ -143,6 +143,40 @@ public enum ErrorEnum {
             HttpStatus.BAD_REQUEST,
             2023,
             "O cliente informado já está inativo"
+    ),
+    SABOR_NAO_ENCONTRADO(
+            HttpStatus.NOT_FOUND,
+            2024,
+            "Sabor não encontrado"
+    ),
+
+    SABOR_JA_CADASTRADO(
+            HttpStatus.BAD_REQUEST,
+            2025,
+            "Já existe um sabor com esse nome"
+    ),
+
+    SABOR_INATIVO(
+            HttpStatus.BAD_REQUEST,
+            2026,
+            "O sabor informado já está inativo"
+    ),
+    TAMANHO_NAO_ENCONTRADO(
+            HttpStatus.NOT_FOUND,
+            2027,
+            "Tamanho não encontrado"
+    ),
+
+    TAMANHO_JA_CADASTRADO(
+            HttpStatus.CONFLICT,
+            2028,
+            "Já existe um tamanho cadastrado com esse nome"
+    ),
+
+    TAMANHO_INATIVO(
+            HttpStatus.BAD_REQUEST,
+            2029,
+            "O tamanho informado já está inativo"
     );
 
     private final HttpStatus httpStatus;
