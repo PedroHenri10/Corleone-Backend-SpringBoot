@@ -5,10 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
-@Table(
-        name = "produto_sabor",
-        uniqueConstraints = @UniqueConstraint(columnNames = {"pro_id", "sab_id"})
-)
+@Table(name = "produto_sabor", uniqueConstraints = @UniqueConstraint(columnNames = {"pro_id", "sab_id"}))
 @Getter
 @Setter
 @Builder
