@@ -194,6 +194,32 @@ public enum ErrorEnum {
             HttpStatus.BAD_REQUEST,
             2032,
             "A borda informada já está inativa"
+    ),
+    PRODUTO_NAO_ENCONTRADO(
+            HttpStatus.NOT_FOUND,
+            2033,
+            "Produto não encontrado"
+    ),
+
+    PRODUTO_JA_CADASTRADO(
+            HttpStatus.CONFLICT,
+            2034,
+            "Já existe um produto cadastrado com esse código"
+    ),
+    PRODUTO_INATIVO(
+            HttpStatus.BAD_REQUEST,
+            2035,
+            "O produto informado já está inativo"
+    ),
+    INGREDIENTE_NAO_ENCONTRADO(
+            HttpStatus.NOT_FOUND,
+            2036,
+            "Ingrediente não encontrado"
+    ),
+    INGREDIENTE_INATIVO(
+            HttpStatus.BAD_REQUEST,
+            2036,
+            "Ingrediente informado Inativo"
     );
 
     private final HttpStatus httpStatus;

@@ -10,7 +10,7 @@ public interface ProdutoRepository extends JpaRepository<Produto, Integer>, JpaS
 
     Optional<Produto> findByCodigo(String codigo);
 
-    boolean existsByCodigo(String codigo);
+    boolean existsByCodigoIgnoreCase(String codigo);
 
-    boolean existsByCodigoAndIdNot(String codigo, Integer id);
+    boolean existsByCodigoIgnoreCaseAndIdNot(String codigo, Integer id);
 }
