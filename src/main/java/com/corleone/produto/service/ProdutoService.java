@@ -57,25 +57,88 @@ public class ProdutoService {
     private final ProdutoTamanhoRepository produtoTamanhoRepository;
 
     public ProdutoResponse criar(ProdutoRequest request) {
+        validator.validarCodigoCadastro(request.getCodigo());
 
+        Fornecedor fornecedor = fornecedorRepository.findById(request.getFornecedorId())
+                .orElseThrow(() -> new ResourceNotFoundException(ErrorEnum.FORNECEDOR_NAO_ENCONTRADO));
+
+        validator.validarFornecedorAtivo(fornecedor);
+
+        Categoria categoria = categoriaRepository.findById(request.getCategoriaId())
+                .orElseThrow(() -> new ResourceNotFoundException(ErrorEnum.CATEGORIA_NAO_ENCONTRADA));
+
+        validator.validarCategoriaAtiva(categoria);
+
+        Produto produto = mapper.toEntity(request, fornecedor, categoria);
+
+        produto.setAtivo(true);
+        produto.setDataCriacao(LocalDateTime.now(DateUtils.BR_ZONE));
+
+        produto = repository.save(produto);
+
+        produto.setSabores(montarSabores(produto, request));
+        produto.setIngredientes(montarIngredientes(produto, request));
+        produto.setTamanhos(montarTamanhos(produto, request));
+
+        produtoSaborRepository.saveAll(produto.getSabores());
+        produtoIngredienteRepository.saveAll(produto.getIngredientes());
+        produtoTamanhoRepository.saveAll(produto.getTamanhos());
+
+        return mapper.toResponse(produto);
     }
 
     public ProdutoResponse atualizar(Integer id, ProdutoRequest request) {
+        Produto produto = validator.validarProduto(id);
 
+        validator.validarCodigoAtualizacao(id, request.getCodigo());
+
+        Fornecedor fornecedor = fornecedorRepository.findById(request.getFornecedorId())
+                .orElseThrow(() -> new ResourceNotFoundException(ErrorEnum.FORNECEDOR_NAO_ENCONTRADO));
+
+        validator.validarFornecedorAtivo(fornecedor);
+
+        Categoria categoria = categoriaRepository.findById(request.getCategoriaId())
+                .orElseThrow(() -> new ResourceNotFoundException(ErrorEnum.CATEGORIA_NAO_ENCONTRADA));
+
+        validator.validarCategoriaAtiva(categoria);
+
+        mapper.updateEntity(produto, request, fornecedor, categoria);
+
+        produto.setDataAtualizacao(LocalDateTime.now(DateUtils.BR_ZONE));
+
+        atualizarRelacionamentos(produto, request);
+
+        produto = repository.save(produto);
+
+        return mapper.toResponse(produto);
     }
 
     @Transactional(readOnly = true)
     public ProdutoResponse buscarPorId(Integer id) {
+        Produto produto = validator.validarProduto(id);
 
+        return mapper.toResponse(produto);
     }
 
     @Transactional(readOnly = true)
     public Page<ProdutoResumoResponse> listar(ProdutoFilter filtro, Pageable pageable) {
+        Specification<Produto> specification = ProdutoSpecification.filtrar(filtro);
 
+        return repository.findAll(specification, pageable).map(mapper::toResumoResponse);
     }
 
     public void desativar(Integer id) {
 
+        Produto produto = validator.validarProduto(id);
+
+        if (Boolean.FALSE.equals(produto.getAtivo())) {
+            throw new BusinessException(ErrorEnum.PRODUTO_INATIVO);
+        }
+
+        produto.setAtivo(false);
+        produto.setDataAtualizacao(LocalDateTime.now(DateUtils.BR_ZONE));
+
+        repository.save(produto);
     }
 
     private List<ProdutoSabor> montarSabores(Produto produto, ProdutoRequest request) {
