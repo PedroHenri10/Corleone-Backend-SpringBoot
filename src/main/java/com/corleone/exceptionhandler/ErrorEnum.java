@@ -207,7 +207,7 @@ public enum ErrorEnum {
             "Já existe um produto cadastrado com esse código"
     ),
     PRODUTO_INATIVO(
-            HttpStatus.BAD_REQUEST,
+            HttpStatus.UNPROCESSABLE_ENTITY,
             2035,
             "O produto informado já está inativo"
     ),
@@ -218,7 +218,7 @@ public enum ErrorEnum {
     ),
     INGREDIENTE_INATIVO(
             HttpStatus.BAD_REQUEST,
-            2036,
+            2037,
             "Ingrediente informado Inativo"
     );
 
