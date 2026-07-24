@@ -64,4 +64,10 @@ public class Produto {
 
     @OneToMany(mappedBy = "produto")
     private List<ProdutoIngrediente> ingredientes;
+
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ProdutoSabor> sabores;
+
+    @OneToMany(mappedBy = "produto", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<ProdutoTamanho> tamanhos;
 }

@@ -141,7 +141,17 @@ public class ProdutoService {
     }
 
     private void atualizarRelacionamentos(Produto produto, ProdutoRequest request) {
+        produtoSaborRepository.deleteAll(produto.getSabores());
 
+        produtoIngredienteRepository.deleteAll(produto.getIngredientes());
+
+        produtoTamanhoRepository.deleteAll(produto.getTamanhos());
+
+        produto.setSabores(montarSabores(produto, request));
+
+        produto.setIngredientes(montarIngredientes(produto, request));
+
+        produto.setTamanhos(montarTamanhos(produto, request));
     }
 
 }
