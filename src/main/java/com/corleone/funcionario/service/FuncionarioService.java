@@ -124,6 +124,7 @@ public class FuncionarioService {
         }
 
         funcionario.setFunAtivo(false);
+        funcionario.setFunDtAtualizacao(LocalDateTime.now(DateUtils.BR_ZONE));
 
         funcionarioRepository.save(funcionario);
     }

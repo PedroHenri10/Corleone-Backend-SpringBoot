@@ -73,6 +73,7 @@ public class CategoriaService {
         }
 
         categoria.setCatAtivo(false);
+        categoria.setCatDtAtualizacao(LocalDateTime.now(DateUtils.BR_ZONE));
 
         repository.save(categoria);
     }

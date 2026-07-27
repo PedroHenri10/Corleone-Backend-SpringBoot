@@ -102,6 +102,8 @@ public class FornecedorService {
 
         fornecedor.setForAtivo(false);
 
+        fornecedor.setForDtAtualizacao(LocalDateTime.now(DateUtils.BR_ZONE));
+
         repository.save(fornecedor);
     }
 

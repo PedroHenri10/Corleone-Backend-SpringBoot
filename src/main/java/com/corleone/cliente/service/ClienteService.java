@@ -84,6 +84,7 @@ public class ClienteService {
         }
 
         cliente.setAtivo(false);
+        cliente.setDataAtualizacao(LocalDateTime.now(DateUtils.BR_ZONE));
 
         repository.save(cliente);
     }

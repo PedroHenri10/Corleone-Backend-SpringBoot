@@ -82,6 +82,7 @@ public class CargoService {
         }
 
         cargo.setAtivo(false);
+        cargo.setDataAtualizacao(LocalDateTime.now(DateUtils.BR_ZONE));
     }
 
 }

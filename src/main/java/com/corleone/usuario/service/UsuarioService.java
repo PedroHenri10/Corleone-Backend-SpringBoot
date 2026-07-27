@@ -104,6 +104,8 @@ public class UsuarioService {
 
         usuario.setAtivo(false);
 
+        usuario.setDataAtualizacao(LocalDateTime.now(DateUtils.BR_ZONE));
+
         usuarioRepository.save(usuario);
     }
 
