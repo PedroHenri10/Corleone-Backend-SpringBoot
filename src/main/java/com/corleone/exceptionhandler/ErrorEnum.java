@@ -220,6 +220,11 @@ public enum ErrorEnum {
             HttpStatus.UNPROCESSABLE_CONTENT,
             2037,
             "Ingrediente informado Inativo"
+    ),
+    INGREDIENTE_JA_CADASTRADO(
+            HttpStatus.CONFLICT,
+            2038,
+            "Já existe um ingrediente cadastrado com esse nome"
     );
 
     private final HttpStatus httpStatus;
