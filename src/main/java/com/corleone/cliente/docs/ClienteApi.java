@@ -61,7 +61,7 @@ public interface ClienteApi {
 
     @Operation(summary = "Desativar cliente")
     @ApiResponse(responseCode = "204", description = "Cliente desativado com sucesso.")
-    @ApiResponse(responseCode = "400", description = "Cliente já está inativo.",
+    @ApiResponse(responseCode = "422", description = "Cliente já está inativo.",
             content = @Content(schema = @Schema()))
     @ApiResponse(responseCode = "404", description = "Cliente não encontrado.",
             content = @Content(schema = @Schema()))

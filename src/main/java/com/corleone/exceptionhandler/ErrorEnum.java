@@ -66,7 +66,7 @@ public enum ErrorEnum {
             "O e-mail informado é inválido"
     ),
     CARGO_INATIVO(
-            HttpStatus.BAD_REQUEST,
+            HttpStatus.UNPROCESSABLE_CONTENT,
             2008,
             "O cargo informado está inativo"
     ),
@@ -80,7 +80,7 @@ public enum ErrorEnum {
             2010,
             "Endereço não encontrado"
     ), FUNCIONARIO_INATIVO(
-            HttpStatus.UNPROCESSABLE_ENTITY,
+            HttpStatus.UNPROCESSABLE_CONTENT,
             2011,
             "Funcionário já inativo"
     ),
@@ -100,7 +100,7 @@ public enum ErrorEnum {
             "Uma ou mais Roles não foram encontradas no sistema"
     ),
     USUARIO_INATIVO(
-            HttpStatus.UNPROCESSABLE_ENTITY,
+            HttpStatus.UNPROCESSABLE_CONTENT,
             2015,
             "Usuário já inativo"
     ),
@@ -114,7 +114,7 @@ public enum ErrorEnum {
             "O CNPJ informado já está cadastrado"
     ),
     FORNECEDOR_INATIVO(
-            HttpStatus.UNPROCESSABLE_ENTITY,
+            HttpStatus.UNPROCESSABLE_CONTENT,
             2018,
             "Fornecedor já inativo"
     ),
@@ -130,7 +130,7 @@ public enum ErrorEnum {
             "Já existe uma categoria com esse nome"
     ),
     CATEGORIA_INATIVO(
-            HttpStatus.BAD_REQUEST,
+            HttpStatus.UNPROCESSABLE_CONTENT,
             2021,
             "A categoria informado já está inativa"
     ),
@@ -140,7 +140,7 @@ public enum ErrorEnum {
             "Cliente não encontrado"
     ),
     CLIENTE_INATIVO(
-            HttpStatus.BAD_REQUEST,
+            HttpStatus.UNPROCESSABLE_CONTENT,
             2023,
             "O cliente informado já está inativo"
     ),
@@ -151,13 +151,13 @@ public enum ErrorEnum {
     ),
 
     SABOR_JA_CADASTRADO(
-            HttpStatus.BAD_REQUEST,
+            HttpStatus.UNPROCESSABLE_CONTENT,
             2025,
             "Já existe um sabor com esse nome"
     ),
 
     SABOR_INATIVO(
-            HttpStatus.BAD_REQUEST,
+            HttpStatus.UNPROCESSABLE_CONTENT,
             2026,
             "O sabor informado já está inativo"
     ),
@@ -174,7 +174,7 @@ public enum ErrorEnum {
     ),
 
     TAMANHO_INATIVO(
-            HttpStatus.BAD_REQUEST,
+            HttpStatus.UNPROCESSABLE_CONTENT,
             2029,
             "O tamanho informado já está inativo"
     ),
@@ -207,7 +207,7 @@ public enum ErrorEnum {
             "Já existe um produto cadastrado com esse código"
     ),
     PRODUTO_INATIVO(
-            HttpStatus.UNPROCESSABLE_ENTITY,
+            HttpStatus.UNPROCESSABLE_CONTENT,
             2035,
             "O produto informado já está inativo"
     ),
@@ -217,7 +217,7 @@ public enum ErrorEnum {
             "Ingrediente não encontrado"
     ),
     INGREDIENTE_INATIVO(
-            HttpStatus.BAD_REQUEST,
+            HttpStatus.UNPROCESSABLE_CONTENT,
             2037,
             "Ingrediente informado Inativo"
     );

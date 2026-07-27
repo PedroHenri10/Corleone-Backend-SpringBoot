@@ -40,7 +40,7 @@ public interface SaborApi {
 
     @Operation(summary = "Desativar sabor", description = "Realiza a exclusão lógica do sabor.")
     @ApiResponse(responseCode = "204", description = "Sabor desativado com sucesso.")
-    @ApiResponse(responseCode = "400", description = "O sabor informado já está inativo.", content = @Content(schema = @Schema(hidden = true)))
+    @ApiResponse(responseCode = "422", description = "O sabor informado já está inativo.", content = @Content(schema = @Schema(hidden = true)))
     @ApiResponse(responseCode = "404", description = "Sabor não encontrado.", content = @Content(schema = @Schema(hidden = true)))
     @ApiResponse(responseCode = "403", description = "Sem permissão.", content = @Content(schema = @Schema(hidden = true)))
     ResponseEntity<Void> desativar(@Parameter(description = "ID do sabor", example = "1") Integer id);
