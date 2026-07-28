@@ -225,6 +225,26 @@ public enum ErrorEnum {
             HttpStatus.CONFLICT,
             2038,
             "Já existe um ingrediente cadastrado com esse nome"
+    ),
+    ESTOQUE_INSUFICIENTE(
+            HttpStatus.BAD_REQUEST,
+            2039,
+            "Quantidade insuficiente em estoque"
+    ),
+    ESTOQUE_NAO_ENCONTRADO(
+            HttpStatus.NOT_FOUND,
+            2040,
+            "estoque não encontrado."
+    ),
+    ESTOQUE_INGREDIENTE_INSUFICIENTE(
+            HttpStatus.BAD_REQUEST,
+            2041,
+            "Quantidade ingrediente insuficiente em estoque"
+    ),
+    MOVIMENTO_INGREDIENTE_NAO_ENCONTRADO(
+            HttpStatus.NOT_FOUND,
+            2042,
+            "Movimento estoque não encontrado."
     );
 
     private final HttpStatus httpStatus;

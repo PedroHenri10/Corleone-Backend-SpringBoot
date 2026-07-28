@@ -1,7 +1,11 @@
 package com.corleone.estoque.validator;
 
 import com.corleone.estoque.entity.EstoqueIngrediente;
+import com.corleone.estoque.entity.MovimentoIngrediente;
 import com.corleone.estoque.repository.EstoqueIngredienteRepository;
+import com.corleone.estoque.repository.MovimentoIngredienteRepository;
+import com.corleone.exception.ResourceNotFoundException;
+import com.corleone.exceptionhandler.ErrorEnum;
 import com.corleone.funcionario.entity.Funcionario;
 import com.corleone.funcionario.validator.FuncionarioValidator;
 import com.corleone.ingrediente.entity.Ingrediente;
@@ -16,6 +20,7 @@ public class MovimentoIngredienteValidator {
     private final IngredienteValidator ingredienteValidator;
     private final FuncionarioValidator funcionarioValidator;
     private final EstoqueIngredienteRepository estoqueIngredienteRepository;
+    private final MovimentoIngredienteRepository movimentoIngredienteRepository;
 
     public Ingrediente validarIngrediente(Integer id) {
         return ingredienteValidator.validarIngrediente(id);
@@ -33,6 +38,13 @@ public class MovimentoIngredienteValidator {
                                 .quantidade(java.math.BigDecimal.ZERO)
                                 .build()
                 );
+    }
+
+    public MovimentoIngrediente validarMovimentacao(Integer id) {
+
+        return movimentoIngredienteRepository.findById(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(ErrorEnum.MOVIMENTO_INGREDIENTE_NAO_ENCONTRADO));
     }
 
 }
