@@ -12,6 +12,10 @@ public class MovimentoIngredienteFilter {
 
     private Integer ingredienteId;
 
+    private Integer funcionarioId;
+
+    private String documento;
+
     private TipoMovimentacao tipo;
 
     private LocalDateTime dataInicial;

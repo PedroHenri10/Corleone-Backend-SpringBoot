@@ -12,6 +12,10 @@ public class EstoqueFilter {
 
     private Integer produtoId;
 
+    private Integer funcionarioId;
+
+    private String documento;
+
     private TipoMovimentacao tipo;
 
     private LocalDateTime dataInicial;
