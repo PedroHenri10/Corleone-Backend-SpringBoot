@@ -5,6 +5,7 @@ import com.corleone.estoque.entity.Estoque;
 import com.corleone.estoque.entity.EstoqueAtual;
 import com.corleone.estoque.entity.EstoqueIngrediente;
 import com.corleone.estoque.entity.MovimentoIngrediente;
+import com.corleone.estoque.event.EstoqueBaixoEvent;
 import com.corleone.estoque.mapper.EstoqueMapper;
 import com.corleone.estoque.repository.EstoqueAtualRepository;
 import com.corleone.estoque.repository.EstoqueIngredienteRepository;
@@ -20,6 +21,7 @@ import com.corleone.funcionario.entity.Funcionario;
 import com.corleone.ingrediente.entity.Ingrediente;
 import com.corleone.produto.entity.Produto;
 import com.corleone.shared.enums.TipoMovimentacao;
+import com.corleone.shared.event.publisher.EventPublisher;
 import com.corleone.shared.util.DateUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -42,6 +44,7 @@ public class EstoqueService {
     private final MovimentoIngredienteRepository movimentoIngredienteRepository;
     private final MovimentoIngredienteValidator movimentoIngredienteValidator;
     private final EstoqueIngredienteRepository estoqueIngredienteRepository;
+    private final EventPublisher eventPublisher;
 
     public EstoqueResponse entrada(EstoqueRequest request) {
 
@@ -109,6 +112,10 @@ public class EstoqueService {
         estoqueAtual.setDataAtualizacao(LocalDateTime.now(DateUtils.BR_ZONE));
 
         estoqueAtualRepository.save(estoqueAtual);
+
+        if (produto.getEstoqueMinimo() != null && estoqueAtual.getQuantidade().compareTo(produto.getEstoqueMinimo()) <= 0) {
+            eventPublisher.publish(new EstoqueBaixoEvent(produto));
+        }
 
         return mapper.toResponse(movimentacao);
     }
