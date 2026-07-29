@@ -69,9 +69,7 @@ public class EstoqueService {
                 ? BigDecimal.ZERO
                 : estoqueAtual.getQuantidade();
 
-        estoqueAtual.setQuantidade(
-                saldoAtual.add(request.getQuantidade())
-        );
+        estoqueAtual.setQuantidade(saldoAtual.add(request.getQuantidade()));
 
         estoqueAtual.setDataAtualizacao(LocalDateTime.now(DateUtils.BR_ZONE));
 
@@ -105,9 +103,7 @@ public class EstoqueService {
 
         movimentacao = estoqueRepository.save(movimentacao);
 
-        estoqueAtual.setQuantidade(
-                saldoAtual.subtract(request.getQuantidade())
-        );
+        estoqueAtual.setQuantidade(saldoAtual.subtract(request.getQuantidade()));
 
         estoqueAtual.setDataAtualizacao(LocalDateTime.now(DateUtils.BR_ZONE));
 
@@ -155,31 +151,23 @@ public class EstoqueService {
     }
 
     @Transactional(readOnly = true)
-    public Page<EstoqueResumoResponse> listar(
-            EstoqueFilter filter,
-            Pageable pageable) {
+    public Page<EstoqueResumoResponse> listar(EstoqueFilter filter, Pageable pageable) {
 
-        return estoqueRepository.findAll(
-                        EstoqueSpecification.filtrar(filter),
-                        pageable)
+        return estoqueRepository.findAll(EstoqueSpecification.filtrar(filter), pageable)
                 .map(mapper::toResumoResponse);
     }
 
     @Transactional(readOnly = true)
     public Page<EstoqueAtualResponse> listarEstoqueAtual(Pageable pageable) {
 
-        return estoqueAtualRepository.findAll(pageable)
-                .map(mapper::toEstoqueAtualResponse);
+        return estoqueAtualRepository.findAll(pageable).map(mapper::toEstoqueAtualResponse);
     }
 
-    public MovimentoIngredienteResponse entradaIngrediente(
-            MovimentoIngredienteRequest request) {
+    public MovimentoIngredienteResponse entradaIngrediente(MovimentoIngredienteRequest request) {
 
-        Ingrediente ingrediente = movimentoIngredienteValidator
-                .validarIngrediente(request.getIngredienteId());
+        Ingrediente ingrediente = movimentoIngredienteValidator.validarIngrediente(request.getIngredienteId());
 
-        Funcionario funcionario = movimentoIngredienteValidator
-                .validarFuncionario(request.getFuncionarioId());
+        Funcionario funcionario = movimentoIngredienteValidator.validarFuncionario(request.getFuncionarioId());
 
         MovimentoIngrediente movimento = mapper.toEntity(request);
 
@@ -190,8 +178,7 @@ public class EstoqueService {
 
         movimento = movimentoIngredienteRepository.save(movimento);
 
-        EstoqueIngrediente estoque = movimentoIngredienteValidator
-                .buscarOuCriarEstoque(ingrediente);
+        EstoqueIngrediente estoque = movimentoIngredienteValidator.buscarOuCriarEstoque(ingrediente);
 
         estoque.setIngrediente(ingrediente);
 
@@ -210,17 +197,13 @@ public class EstoqueService {
         return mapper.toResponse(movimento);
     }
 
-    public MovimentoIngredienteResponse saidaIngrediente(
-            MovimentoIngredienteRequest request) {
+    public MovimentoIngredienteResponse saidaIngrediente(MovimentoIngredienteRequest request) {
 
-        Ingrediente ingrediente = movimentoIngredienteValidator
-                .validarIngrediente(request.getIngredienteId());
+        Ingrediente ingrediente = movimentoIngredienteValidator.validarIngrediente(request.getIngredienteId());
 
-        Funcionario funcionario = movimentoIngredienteValidator
-                .validarFuncionario(request.getFuncionarioId());
+        Funcionario funcionario = movimentoIngredienteValidator.validarFuncionario(request.getFuncionarioId());
 
-        EstoqueIngrediente estoque = movimentoIngredienteValidator
-                .buscarOuCriarEstoque(ingrediente);
+        EstoqueIngrediente estoque = movimentoIngredienteValidator.buscarOuCriarEstoque(ingrediente);
 
         BigDecimal saldoAtual = estoque.getQuantidade() == null
                 ? BigDecimal.ZERO
@@ -239,9 +222,7 @@ public class EstoqueService {
 
         movimento = movimentoIngredienteRepository.save(movimento);
 
-        estoque.setQuantidade(
-                saldoAtual.subtract(request.getQuantidade())
-        );
+        estoque.setQuantidade(saldoAtual.subtract(request.getQuantidade()));
 
         estoque.setDataAtualizacao(LocalDateTime.now(DateUtils.BR_ZONE));
 
@@ -250,17 +231,13 @@ public class EstoqueService {
         return mapper.toResponse(movimento);
     }
 
-    public MovimentoIngredienteResponse ajusteIngrediente(
-            MovimentoIngredienteRequest request) {
+    public MovimentoIngredienteResponse ajusteIngrediente(MovimentoIngredienteRequest request) {
 
-        Ingrediente ingrediente = movimentoIngredienteValidator
-                .validarIngrediente(request.getIngredienteId());
+        Ingrediente ingrediente = movimentoIngredienteValidator.validarIngrediente(request.getIngredienteId());
 
-        Funcionario funcionario = movimentoIngredienteValidator
-                .validarFuncionario(request.getFuncionarioId());
+        Funcionario funcionario = movimentoIngredienteValidator.validarFuncionario(request.getFuncionarioId());
 
-        EstoqueIngrediente estoque = movimentoIngredienteValidator
-                .buscarOuCriarEstoque(ingrediente);
+        EstoqueIngrediente estoque = movimentoIngredienteValidator.buscarOuCriarEstoque(ingrediente);
 
         MovimentoIngrediente movimento = mapper.toEntity(request);
 
@@ -282,26 +259,20 @@ public class EstoqueService {
     @Transactional(readOnly = true)
     public MovimentoIngredienteResponse buscarMovimentoIngrediente(Integer id) {
 
-        return mapper.toResponse(
-                movimentoIngredienteValidator.validarMovimentacao(id));
+        return mapper.toResponse(movimentoIngredienteValidator.validarMovimentacao(id));
     }
 
     @Transactional(readOnly = true)
-    public Page<MovimentoIngredienteResumoResponse> listarMovimentosIngrediente(
-            MovimentoIngredienteFilter filter,
+    public Page<MovimentoIngredienteResumoResponse> listarMovimentosIngrediente(MovimentoIngredienteFilter filter,
             Pageable pageable) {
 
-        return movimentoIngredienteRepository.findAll(
-                        MovimentoIngredienteSpecification.filtrar(filter),
-                        pageable)
+        return movimentoIngredienteRepository.findAll(MovimentoIngredienteSpecification.filtrar(filter), pageable)
                 .map(mapper::toResumoResponse);
     }
 
     @Transactional(readOnly = true)
-    public Page<EstoqueIngredienteResponse> listarEstoqueIngrediente(
-            Pageable pageable) {
+    public Page<EstoqueIngredienteResponse> listarEstoqueIngrediente(Pageable pageable) {
 
-        return estoqueIngredienteRepository.findAll(pageable)
-                .map(mapper::toEstoqueIngredienteResponse);
+        return estoqueIngredienteRepository.findAll(pageable).map(mapper::toEstoqueIngredienteResponse);
     }
 }
