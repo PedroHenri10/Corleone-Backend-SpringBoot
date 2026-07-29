@@ -82,8 +82,30 @@ public class EntregaService {
 
     }
 
-    public EntregaResponse finalizarEntrega(Integer id)
+    public EntregaResponse finalizarEntrega(Integer id) {
 
-    public EntregaResponse cancelarEntrega(Integer id)
+        Entrega entrega = validator.validarEntrega(id);
+
+        entrega.setStatus(StatusEntrega.ENTREGUE);
+
+        entrega.setDataEntrega(LocalDateTime.now(DateUtils.BR_ZONE));
+
+        entrega = repository.save(entrega);
+
+        return mapper.toResponse(entrega);
+
+    }
+
+    public EntregaResponse cancelarEntrega(Integer id) {
+
+        Entrega entrega = validator.validarEntrega(id);
+
+        entrega.setStatus(StatusEntrega.CANCELADA);
+
+        entrega = repository.save(entrega);
+
+        return mapper.toResponse(entrega);
+
+    }
 
 }
