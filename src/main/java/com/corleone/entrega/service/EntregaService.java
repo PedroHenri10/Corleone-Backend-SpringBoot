@@ -49,7 +49,33 @@ public class EntregaService {
         return mapper.toResponse(entrega);
     }
 
-    public EntregaResponse atualizarStatus(Integer id, AtualizarStatusEntregaRequest request)
+    public EntregaResponse atualizarStatus(Integer id, AtualizarStatusEntregaRequest request) {
+
+        Entrega entrega = validator.validarEntrega(id);
+
+        mapper.updateEntity(request, entrega);
+
+        switch (request.getStatus()) {
+
+            case SAIU -> {
+                if (entrega.getDataSaida() == null) {entrega.setDataSaida(LocalDateTime.now(DateUtils.BR_ZONE));
+                }
+
+            }
+
+            case ENTREGUE -> {
+                if (entrega.getDataEntrega() == null) {entrega.setDataEntrega(LocalDateTime.now(DateUtils.BR_ZONE));
+                }
+            }
+            default -> {
+            }
+        }
+
+        entrega = repository.save(entrega);
+
+        return mapper.toResponse(entrega);
+
+    }
 
     public EntregaResponse buscarPorId(Integer id) {
 
