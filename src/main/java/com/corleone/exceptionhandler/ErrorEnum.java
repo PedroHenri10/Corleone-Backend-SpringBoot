@@ -245,6 +245,22 @@ public enum ErrorEnum {
             HttpStatus.NOT_FOUND,
             2042,
             "Movimento estoque não encontrado."
+    ),
+    ENTREGA_NAO_ENCONTRADA(
+            HttpStatus.NOT_FOUND,
+            2043,
+            "Entrega não encontrada"
+    ),
+
+    PEDIDO_JA_POSSUI_ENTREGA(
+            HttpStatus.CONFLICT,
+            2044,
+            "O pedido já possui uma entrega cadastrada"
+    ),
+    PEDIDO_NAO_ENCONTRADO(
+            HttpStatus.NOT_FOUND,
+            2045,
+            "Pedido não encontrada"
     );
 
     private final HttpStatus httpStatus;

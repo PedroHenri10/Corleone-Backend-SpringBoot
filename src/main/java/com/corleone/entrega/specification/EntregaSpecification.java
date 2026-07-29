@@ -1,7 +1,5 @@
 package com.corleone.entrega.specification;
 
-package com.corleone.entrega.specification;
-
 import com.corleone.entrega.dto.EntregaFilter;
 import com.corleone.entrega.entity.Entrega;
 import org.springframework.data.jpa.domain.Specification;
