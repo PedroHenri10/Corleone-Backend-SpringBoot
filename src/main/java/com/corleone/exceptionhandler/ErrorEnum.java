@@ -260,7 +260,37 @@ public enum ErrorEnum {
     PEDIDO_NAO_ENCONTRADO(
             HttpStatus.NOT_FOUND,
             2045,
-            "Pedido não encontrada"
+            "Pedido não encontrado"
+    ),
+    MESA_NAO_ENCONTRADO(
+            HttpStatus.NOT_FOUND,
+            2046,
+            "Mesa não encontrada"
+    ),
+    MESA_JA_CADASTRADA(
+            HttpStatus.CONFLICT,
+            2047,
+            "Já existe uma mesa com esse número."
+    ),
+    MESA_INATIVA(
+            HttpStatus.UNPROCESSABLE_CONTENT,
+            2048,
+            "A operação não pode ser realizada porque a mesa está inativa."
+    ),
+    MESA_NAO_DISPONIVEL(
+            HttpStatus.UNPROCESSABLE_CONTENT,
+            2049,
+            "A mesa não está livre para a operação solicitada."
+    ),
+    MESA_NAO_OCUPADA(
+            HttpStatus.UNPROCESSABLE_CONTENT,
+            2050,
+            "Não é possível fechar uma mesa que não está ocupada."
+    ),
+    MESA_NAO_RESERVADA(
+            HttpStatus.UNPROCESSABLE_CONTENT,
+            2051,
+            "Não é possível cancelar ou utilizar uma reserva inexistente."
     );
 
     private final HttpStatus httpStatus;
