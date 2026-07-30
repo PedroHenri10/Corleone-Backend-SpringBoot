@@ -6,8 +6,7 @@ import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
 
 import java.util.Optional;
 
-public interface FuncionarioRepository extends
-        JpaRepository<Funcionario, Integer>,
+public interface FuncionarioRepository extends JpaRepository<Funcionario, Integer>,
         JpaSpecificationExecutor<Funcionario> {
 
     Optional<Funcionario> findByFunCpf(String cpf);
