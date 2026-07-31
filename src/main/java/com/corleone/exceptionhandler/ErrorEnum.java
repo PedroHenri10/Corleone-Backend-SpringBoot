@@ -262,7 +262,7 @@ public enum ErrorEnum {
             2045,
             "Pedido não encontrado"
     ),
-    MESA_NAO_ENCONTRADO(
+    MESA_NAO_ENCONTRADA(
             HttpStatus.NOT_FOUND,
             2046,
             "Mesa não encontrada"
