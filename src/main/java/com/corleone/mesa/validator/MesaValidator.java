@@ -5,6 +5,7 @@ import com.corleone.exception.ResourceNotFoundException;
 import com.corleone.exceptionhandler.ErrorEnum;
 import com.corleone.mesa.entity.Mesa;
 import com.corleone.mesa.repository.MesaRepository;
+import com.corleone.shared.enums.StatusMesa;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -34,4 +35,22 @@ public class MesaValidator {
             throw new BusinessException(ErrorEnum.MESA_INATIVA);
         }
     }
-}
+
+    public void validarMesaLivre(Mesa mesa) {
+        if (mesa.getStatus() != StatusMesa.LIVRE) {
+            throw new BusinessException(ErrorEnum.MESA_NAO_DISPONIVEL);
+        }
+    }
+
+    public void validarMesaOcupada(Mesa mesa) {
+        if (mesa.getStatus() != StatusMesa.OCUPADA) {
+            throw new BusinessException(ErrorEnum.MESA_NAO_OCUPADA);
+        }
+    }
+
+    public void validarMesaReservada(Mesa mesa) {
+        if (mesa.getStatus() != StatusMesa.RESERVADA) {
+            throw new BusinessException(ErrorEnum.MESA_NAO_RESERVADA);
+        }
+
+    }
