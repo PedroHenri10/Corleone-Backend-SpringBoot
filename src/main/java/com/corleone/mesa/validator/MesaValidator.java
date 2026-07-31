@@ -52,6 +52,5 @@ public class MesaValidator {
         if (mesa.getStatus() != StatusMesa.RESERVADA) {
             throw new BusinessException(ErrorEnum.MESA_NAO_RESERVADA);
         }
-
     }
 }

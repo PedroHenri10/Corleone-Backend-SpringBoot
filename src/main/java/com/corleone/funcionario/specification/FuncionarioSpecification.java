@@ -30,7 +30,7 @@ public class FuncionarioSpecification {
         return (root, query, cb) ->
                 cargoId == null
                         ? null
-                        : cb.equal(root.get("cargo").get("carId"), cargoId);
+                            : cb.equal(root.get("cargo").get("carId"), cargoId);
     }
 
     public static Specification<Funcionario> ativo(Boolean ativo) {
