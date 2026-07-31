@@ -22,4 +22,14 @@ public class MesaSpecification {
     public static Specification<Mesa> somenteAtivos(){
         return ((root, query, cb) -> cb.isTrue(root.get("ativo")));
     }
+
+    public static Specification<Mesa> capacidade(Integer capacidade) {
+
+        return (root, query, cb) ->
+                capacidade == null
+                        ? null
+                        : cb.equal(root.get("capacidade"), capacidade);
+    }
+
+    
 }
