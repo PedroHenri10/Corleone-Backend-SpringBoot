@@ -1,6 +1,7 @@
 package com.corleone.mesa.specification;
 
 import com.corleone.mesa.entity.Mesa;
+import com.corleone.shared.enums.StatusMesa;
 import org.springframework.data.jpa.domain.Specification;
 
 public class MesaSpecification {
@@ -31,5 +32,12 @@ public class MesaSpecification {
                         : cb.equal(root.get("capacidade"), capacidade);
     }
 
-    
+    public static Specification<Mesa> status(StatusMesa status) {
+
+        return (root, query, cb) ->
+                status == null
+                        ? null
+                        : cb.equal(root.get("status"), status);
+    }
+
 }
