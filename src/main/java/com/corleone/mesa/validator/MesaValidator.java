@@ -14,12 +14,12 @@ import org.springframework.stereotype.Component;
 public class MesaValidator {
     private final MesaRepository repository;
 
-    public Mesa validarMesa(Integer id){
+    public Mesa validarMesa(Integer id) {
         return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(ErrorEnum.MESA_NAO_ENCONTRADA));
     }
 
-    public void validarNumeroDuplicado(Integer numero){
-        if(repository.existsByNumero(numero)){
+    public void validarNumeroDuplicado(Integer numero) {
+        if (repository.existsByNumero(numero)) {
             throw new BusinessException(ErrorEnum.MESA_JA_CADASTRADA);
         }
     }
@@ -54,3 +54,4 @@ public class MesaValidator {
         }
 
     }
+}
