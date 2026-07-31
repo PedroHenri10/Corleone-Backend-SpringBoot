@@ -23,5 +23,15 @@ public class MesaValidator {
         }
     }
 
-    
+    public void validarNumeroDuplicado(Integer numero, Integer id) {
+        if (repository.existsByNumeroAndIdNot(numero, id)) {
+            throw new BusinessException(ErrorEnum.MESA_JA_CADASTRADA);
+        }
+    }
+
+    public void validarMesaAtiva(Mesa mesa) {
+        if (Boolean.FALSE.equals(mesa.getAtivo())) {
+            throw new BusinessException(ErrorEnum.MESA_INATIVA);
+        }
+    }
 }
