@@ -70,8 +70,10 @@ public class MesaController implements MesaApi {
     }
 
     @Override
-    public ResponseEntity<MesaResponse> fecharMesa(Integer id) {
-        return null;
+    @PreAuthorize("hasAuthority('MESA_FECHAR')")
+    @PatchMapping("/{id}/fechar")
+    public ResponseEntity<MesaResponse> fecharMesa(@PathVariable Integer id) {
+        return ResponseEntity.ok(mesaService.fecharMesa(id));
     }
 
     @Override
