@@ -30,6 +30,9 @@ INSERT INTO permissao(per_nome, per_descricao, per_modulo) VALUES
 ('PEDIDO_FINALIZAR', 'Finalizar pedidos', 'PEDIDO'),
 
 ('MESA_VISUALIZAR', 'Visualizar mesas', 'MESA'),
+('MESA_CRIAR', 'Criar mesas', 'MESA'),
+('MESA_EXCLUIR', 'Ecluir mesas', 'MESA'),
+('MESA_EDITAR', 'Editar mesas', 'MESA'),
 ('MESA_ABRIR', 'Abrir mesa', 'MESA'),
 ('MESA_FECHAR', 'Fechar mesa', 'MESA'),
 ('MESA_RESERVAR', 'Reservar mesa', 'MESA'),
