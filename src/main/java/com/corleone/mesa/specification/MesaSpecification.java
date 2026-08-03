@@ -1,10 +1,20 @@
 package com.corleone.mesa.specification;
 
+import com.corleone.mesa.dto.MesaFilter;
 import com.corleone.mesa.entity.Mesa;
 import com.corleone.shared.enums.StatusMesa;
 import org.springframework.data.jpa.domain.Specification;
 
 public class MesaSpecification {
+
+    public static Specification<Mesa> filtro(MesaFilter filter) {
+
+        return Specification.where(numero(filter.getNumero()))
+                .and(capacidade(filter.getCapacidade()))
+                .and(status(filter.getStatus()))
+                .and(ativo(filter.getAtivo()));
+    }
+
     public static Specification<Mesa> numero(Integer numero){
 
         return (root, query, cb) -> numero == null
