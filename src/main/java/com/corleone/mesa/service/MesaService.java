@@ -32,4 +32,20 @@ public class MesaService {
 
         return mapper.toResponse(mesa);
     }
+
+    public MesaResponse atualizar(Integer id, MesaRequest request){
+        Mesa mesa = validator.validarMesa(id);
+
+        validator.validarMesaAtiva(mesa);
+
+        validator.validarNumeroDuplicado(request.getNumero(), id);
+
+        mapper.updateEntity(mesa, request);
+
+        mesa = repository.save(mesa);
+
+        return mapper.toResponse(mesa);
+    }
+
+    
 }
