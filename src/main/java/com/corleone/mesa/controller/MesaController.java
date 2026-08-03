@@ -63,8 +63,10 @@ public class MesaController implements MesaApi {
     }
 
     @Override
-    public ResponseEntity<MesaResponse> abrirMesa(Integer id) {
-        return null;
+    @PreAuthorize("hasAuthority('MESA_ABRIR')")
+    @PatchMapping("/{id}/abrir")
+    public ResponseEntity<MesaResponse> abrirMesa(@PathVariable Integer id) {
+        return ResponseEntity.ok(mesaService.abrirMesa(id));
     }
 
     @Override

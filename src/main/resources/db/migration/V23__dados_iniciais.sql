@@ -36,6 +36,7 @@ INSERT INTO permissao(per_nome, per_descricao, per_modulo) VALUES
 ('MESA_ABRIR', 'Abrir mesa', 'MESA'),
 ('MESA_FECHAR', 'Fechar mesa', 'MESA'),
 ('MESA_RESERVAR', 'Reservar mesa', 'MESA'),
+('MESA_CANCELAR_RESERVA', 'Cancelar reserva da mesa', 'MESA'),
 
 ('DELIVERY_VISUALIZAR', 'Visualizar entregas', 'DELIVERY'),
 ('DELIVERY_ATUALIZAR', 'Atualizar entrega', 'DELIVERY'),
