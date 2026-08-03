@@ -15,6 +15,8 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/mesas")
 @RequiredArgsConstructor
@@ -31,12 +33,12 @@ public class MesaController implements MesaApi {
 
     @Override
     public ResponseEntity<MesaResponse> buscarPorId(Integer id) {
-        return null;
+        return ResponseEntity.ok(mesaService.buscarPorId(id));
     }
 
     @Override
-    public ResponseEntity<Page<MesaResumoResponse>> listar(MesaFilter filtro, Pageable pageable) {
-        return null;
+    public ResponseEntity<List<MesaResumoResponse>> listar(MesaFilter filtro) {
+        return ResponseEntity.ok(mesaService.listar(filtro));
     }
 
     @Override

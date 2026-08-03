@@ -15,6 +15,8 @@ import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 
+import java.util.List;
+
 @Tag(name = "Mesa", description = "Gerenciamento de Mesas do sistema.")
 public interface MesaApi {
     @Operation(summary = "Cadastrar mesa", description = "Realiza o cadastro de uma nova mesa..",
@@ -44,7 +46,7 @@ public interface MesaApi {
                                     schema = @Schema(implementation = MesaResumoResponse.class))))
             }
     )
-    ResponseEntity<Page<MesaResumoResponse>> listar(MesaFilter filtro, Pageable pageable);
+    ResponseEntity<List<MesaResumoResponse>> listar(MesaFilter filtro);
 
     @Operation(summary = "Atualizar mesa", description = "Atualiza os dados de uma mesa.",
             responses = {
