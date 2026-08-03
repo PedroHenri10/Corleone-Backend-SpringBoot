@@ -47,5 +47,10 @@ public class MesaService {
         return mapper.toResponse(mesa);
     }
 
+    public MesaResponse buscarPorId(Integer id){
+        Mesa mesa= validator.validarMesa(id);
+        return mapper.toResponse(mesa);
+    }
+
     
 }
