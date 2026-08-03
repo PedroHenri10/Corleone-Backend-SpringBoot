@@ -6,6 +6,7 @@ import com.corleone.mesa.dto.MesaRequest;
 import com.corleone.mesa.dto.MesaResponse;
 import com.corleone.mesa.dto.MesaResumoResponse;
 import com.corleone.mesa.service.MesaService;
+import io.micrometer.observation.transport.ResponseContext;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -32,23 +33,33 @@ public class MesaController implements MesaApi {
     }
 
     @Override
-    public ResponseEntity<MesaResponse> buscarPorId(Integer id) {
+    @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('MESA_VISUALIZAR')")
+    public ResponseEntity<MesaResponse> buscarPorId(@PathVariable Integer id) {
         return ResponseEntity.ok(mesaService.buscarPorId(id));
     }
 
     @Override
+    @GetMapping
+    @PreAuthorize("hasAuthority('MESA_VISUALIZAR')")
     public ResponseEntity<List<MesaResumoResponse>> listar(MesaFilter filtro) {
         return ResponseEntity.ok(mesaService.listar(filtro));
     }
 
     @Override
+    @PostMapping("/{id}")
+    @PreAuthorize("hasAuthority('MESA_EDITAR')")
     public ResponseEntity<MesaResponse> atualizar(@Valid @PathVariable Integer id, @RequestBody MesaRequest request) {
         return ResponseEntity.ok(mesaService.atualizar(id, request));
     }
 
     @Override
-    public ResponseEntity<Void> desativar(Integer id) {
-        return null;
+    @DeleteMapping("/{id}")
+    @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('MESA_EXCLUIR')")
+    public ResponseEntity<Void> desativar(@PathVariable Integer id) {
+        mesaService.desativar(id);
+        return ResponseEntity.noContent().build();
     }
 
     @Override

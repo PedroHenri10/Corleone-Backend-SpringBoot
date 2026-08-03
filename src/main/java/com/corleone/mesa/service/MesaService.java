@@ -72,7 +72,7 @@ public class MesaService {
                 .toList();
     }
 
-    public void inativar(Integer id) {
+    public void desativar(Integer id) {
 
         Mesa mesa = validator.validarMesa(id);
 
