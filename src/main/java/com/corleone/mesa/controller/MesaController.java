@@ -77,8 +77,10 @@ public class MesaController implements MesaApi {
     }
 
     @Override
-    public ResponseEntity<MesaResponse> reservarMesa(Integer id) {
-        return null;
+    @PreAuthorize("hasAuthority('MESA_RESERVAR')")
+    @PatchMapping("/{id}/reservar")
+    public ResponseEntity<MesaResponse> reservarMesa(@PathVariable Integer id) {
+        return ResponseEntity.ok(mesaService.reservarMesa(id));
     }
 
     @Override
