@@ -19,9 +19,9 @@ import org.springframework.http.ResponseEntity;
 public interface MesaApi {
     @Operation(summary = "Cadastrar mesa", description = "Realiza o cadastro de uma nova mesa..",
             responses = {
-                    @ApiResponse(responseCode = "200", description = "Mesa cadastrado com sucesso.", content = @Content(
+                    @ApiResponse(responseCode = "200", description = "Mesa cadastrada com sucesso.", content = @Content(
                             schema = @Schema(implementation = MesaResponse.class))),
-                    @ApiResponse(responseCode = "409", description = "Mesa já cadastrados.")
+                    @ApiResponse(responseCode = "409", description = "Mesa já cadastrada.")
             }
     )
     ResponseEntity<MesaResponse> criar(MesaRequest request);
@@ -30,7 +30,7 @@ public interface MesaApi {
             summary = "Buscar mesa por ID",
             description = "Retorna os dados completos de uma mesa.",
             responses = {
-                    @ApiResponse(responseCode = "200", description = "mesa encontrada.", content = @Content(
+                    @ApiResponse(responseCode = "200", description = "Mesa encontrada.", content = @Content(
                             schema = @Schema(implementation = MesaResponse.class))),
                     @ApiResponse(responseCode = "404", description = "Mesa não encontrada.")
             }
@@ -48,13 +48,13 @@ public interface MesaApi {
 
     @Operation(summary = "Atualizar mesa", description = "Atualiza os dados de uma mesa.",
             responses = {
-                    @ApiResponse(responseCode = "200", description = "mesa atualizada."),
-                    @ApiResponse(responseCode = "404", description = "mesa não encontrada."),
+                    @ApiResponse(responseCode = "200", description = "Mesa atualizada."),
+                    @ApiResponse(responseCode = "404", description = "Mesa não encontrada."),
                     @ApiResponse(responseCode = "409", description = "Já existe uma mesa com esse número."),
                     @ApiResponse(responseCode = "422", description = "A operação não pode ser realizada porque a mesa está inativa.")
             }
     )
-    ResponseEntity<MesaResponse> atualizar(@Parameter(description = "ID do funcionário.", example = "1") Integer id, MesaRequest request);
+    ResponseEntity<MesaResponse> atualizar(@Parameter(description = "ID da mesa.", example = "1") Integer id, MesaRequest request);
 
     @Operation(summary = "Desativar mesa", description = "Realiza a exclusão lógica da mesa.",
             responses = {
@@ -64,4 +64,45 @@ public interface MesaApi {
             }
     )
     ResponseEntity<Void> desativar(@Parameter(description = "ID da mesa.", example = "1") Integer id);
+
+    @Operation(
+            summary = "Abrir mesa",
+            description = "Altera o status da mesa para OCUPADA.",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Mesa aberta com sucesso.",
+                            content = @Content(schema = @Schema(implementation = MesaResponse.class))),
+                    @ApiResponse(responseCode = "404", description = "Mesa não encontrada."),
+                    @ApiResponse(responseCode = "422", description = "Mesa inativa ou indisponível.")
+            }
+    )
+    ResponseEntity<MesaResponse> abrirMesa(@Parameter(description = "ID da mesa.", example = "1") Integer id);
+
+    @Operation(summary = "Fechar mesa", description = "Altera o status da mesa para LIVRE.", responses = {
+                    @ApiResponse(responseCode = "200", description = "Mesa fechada com sucesso.",
+                            content = @Content(schema = @Schema(implementation = MesaResponse.class))),
+                    @ApiResponse(responseCode = "404", description = "Mesa não encontrada."),
+                    @ApiResponse(responseCode = "422", description = "Mesa não está ocupada.")
+            }
+    )
+    ResponseEntity<MesaResponse> fecharMesa(@Parameter(description = "ID da mesa.", example = "1") Integer id);
+
+    @Operation(summary = "Reservar mesa", description = "Altera o status da mesa para RESERVADA.", responses = {
+                    @ApiResponse(responseCode = "200", description = "Mesa reservada com sucesso.",
+                            content = @Content(schema = @Schema(implementation = MesaResponse.class))),
+                    @ApiResponse(responseCode = "404", description = "Mesa não encontrada."),
+                    @ApiResponse(responseCode = "422", description = "Mesa inativa ou indisponível.")
+            }
+    )
+    ResponseEntity<MesaResponse> reservarMesa(@Parameter(description = "ID da mesa.", example = "1") Integer id);
+
+    @Operation(summary = "Cancelar reserva", description = "Cancela a reserva da mesa, retornando seu status para LIVRE.",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Reserva cancelada com sucesso.",
+                            content = @Content(schema = @Schema(implementation = MesaResponse.class))),
+                    @ApiResponse(responseCode = "404", description = "Mesa não encontrada."),
+                    @ApiResponse(responseCode = "422", description = "Mesa não está reservada.")
+            }
+    )
+    ResponseEntity<MesaResponse> cancelarReserva(@Parameter(description = "ID da mesa.", example = "1") Integer id);
+
 }
