@@ -6,11 +6,8 @@ import com.corleone.mesa.dto.MesaRequest;
 import com.corleone.mesa.dto.MesaResponse;
 import com.corleone.mesa.dto.MesaResumoResponse;
 import com.corleone.mesa.service.MesaService;
-import io.micrometer.observation.transport.ResponseContext;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -84,7 +81,9 @@ public class MesaController implements MesaApi {
     }
 
     @Override
-    public ResponseEntity<MesaResponse> cancelarReserva(Integer id) {
-        return null;
+    @PreAuthorize("hasAuthority('MESA_CANCELAR_RESERVA')")
+    @PatchMapping("/{id}/cancelar-reserva")
+    public ResponseEntity<MesaResponse> cancelarReserva(@PathVariable Integer id) {
+        return ResponseEntity.ok(mesaService.cancelarReserva(id));
     }
 }
