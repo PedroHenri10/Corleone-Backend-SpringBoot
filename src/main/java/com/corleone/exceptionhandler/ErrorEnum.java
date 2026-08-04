@@ -291,6 +291,23 @@ public enum ErrorEnum {
             HttpStatus.UNPROCESSABLE_CONTENT,
             2051,
             "Não é possível cancelar ou utilizar uma reserva inexistente."
+    ),
+    AVALIACAO_NAO_ENCONTRADA(
+            HttpStatus.NOT_FOUND,
+            2052,
+            "Avaliação não encontrada."
+    ),
+
+    NOTA_INVALIDA(
+            HttpStatus.BAD_REQUEST,
+            2053,
+            "A nota da avaliação deve estar entre 1 e 5."
+    ),
+
+    PEDIDO_JA_AVALIADO(
+            HttpStatus.CONFLICT,
+            2054,
+            "Este pedido já possui uma avaliação."
     );
 
     private final HttpStatus httpStatus;
