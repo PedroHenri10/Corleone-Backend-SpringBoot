@@ -24,4 +24,7 @@ public class AvaliacaoValidator {
         return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(ErrorEnum.AVALIACAO_NAO_ENCONTRADA));
     }
 
+    public Pedido validarPedido(Integer id) {
+        return pedidoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(ErrorEnum.PEDIDO_NAO_ENCONTRADO));
+    }
 }
