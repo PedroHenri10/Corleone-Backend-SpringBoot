@@ -39,4 +39,12 @@ public class AvaliacaoValidator {
         }
 
     }
+
+    public void validarPedidoJaAvaliado(Integer pedidoId) {
+
+        if (repository.existsByPedidoId(pedidoId)) {
+            throw new BusinessException(ErrorEnum.PEDIDO_JA_AVALIADO);
+        }
+
+    }
 }
