@@ -39,6 +39,17 @@ public class AvaliacaoSpecification {
                         root.get("dataCriacao"),
                         dataInicial.atStartOfDay());
     }
+
+    public static Specification<Avaliacao> dataFinal(java.time.LocalDate dataFinal) {
+
+        return (root, query, cb) ->
+                dataFinal == null
+                        ? null
+                        : cb.lessThanOrEqualTo(
+                        root.get("dataCriacao"),
+                        dataFinal.atTime(23, 59, 59));
+    }
+
     
 
 }
