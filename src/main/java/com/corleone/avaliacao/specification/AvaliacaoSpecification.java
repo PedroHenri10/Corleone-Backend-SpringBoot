@@ -6,6 +6,9 @@ import org.springframework.data.jpa.domain.Specification;
 
 public class AvaliacaoSpecification {
 
+    private AvaliacaoSpecification() {
+    }
+
     public static Specification<Avaliacao> cliente(Integer clienteId) {
 
         return (root, query, cb) ->
@@ -50,6 +53,13 @@ public class AvaliacaoSpecification {
                         dataFinal.atTime(23, 59, 59));
     }
 
-    
+    public static Specification<Avaliacao> filtro(AvaliacaoFilter filter) {
+
+        return Specification.where(cliente(filter.getClienteId()))
+                .and(pedido(filter.getPedidoId()))
+                .and(nota(filter.getNota()))
+                .and(dataInicial(filter.getDataInicial()))
+                .and(dataFinal(filter.getDataFinal()));
+    }
 
 }
