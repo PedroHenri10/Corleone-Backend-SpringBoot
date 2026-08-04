@@ -30,4 +30,15 @@ public class AvaliacaoSpecification {
                         : cb.equal(root.get("nota"), nota);
     }
 
+    public static Specification<Avaliacao> dataInicial(java.time.LocalDate dataInicial) {
+
+        return (root, query, cb) ->
+                dataInicial == null
+                        ? null
+                        : cb.greaterThanOrEqualTo(
+                        root.get("dataCriacao"),
+                        dataInicial.atStartOfDay());
+    }
+    
+
 }
