@@ -1,4 +1,27 @@
 package com.corleone.avaliacao.validator;
 
+import com.corleone.avaliacao.entity.Avaliacao;
+import com.corleone.avaliacao.repository.AvaliacaoRepository;
+import com.corleone.cliente.entity.Cliente;
+import com.corleone.cliente.repository.ClienteRepository;
+import com.corleone.exception.BusinessException;
+import com.corleone.exception.ResourceNotFoundException;
+import com.corleone.exceptionhandler.ErrorEnum;
+import com.corleone.pedido.entity.Pedido;
+import com.corleone.pedido.repository.PedidoRepository;
+import lombok.RequiredArgsConstructor;
+import org.springframework.stereotype.Component;
+
+@Component
+@RequiredArgsConstructor
 public class AvaliacaoValidator {
+
+    private final AvaliacaoRepository repository;
+    private final PedidoRepository pedidoRepository;
+    private final ClienteRepository clienteRepository;
+
+    public Avaliacao validarAvaliacao(Integer id) {
+        return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(ErrorEnum.AVALIACAO_NAO_ENCONTRADA));
+    }
+
 }
