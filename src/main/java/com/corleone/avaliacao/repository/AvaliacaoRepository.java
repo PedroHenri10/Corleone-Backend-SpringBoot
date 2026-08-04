@@ -11,5 +11,6 @@ public interface AvaliacaoRepository extends JpaRepository<Avaliacao, Integer>, 
     boolean existsByPedidoId(Integer pedidoId);
 
     Optional<Avaliacao> findByPedidoId(Integer pedidoId);
+    Optional<Avaliacao> findByClienteId(Integer clienteId);
 
 }
