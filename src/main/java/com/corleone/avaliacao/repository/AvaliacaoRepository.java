@@ -1,4 +1,15 @@
 package com.corleone.avaliacao.repository;
 
-public class AvaliacaoRepository {
+import com.corleone.avaliacao.entity.Avaliacao;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+
+import java.util.Optional;
+
+public interface AvaliacaoRepository extends JpaRepository<Avaliacao, Integer>, JpaSpecificationExecutor<Avaliacao> {
+
+    boolean existsByPedidoId(Integer pedidoId);
+
+    Optional<Avaliacao> findByPedidoId(Integer pedidoId);
+
 }
