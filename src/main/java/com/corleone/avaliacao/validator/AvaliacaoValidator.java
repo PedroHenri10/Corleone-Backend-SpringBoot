@@ -31,4 +31,12 @@ public class AvaliacaoValidator {
     public Cliente validarCliente(Integer id) {
         return clienteRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(ErrorEnum.CLIENTE_NAO_ENCONTRADO));
     }
+
+    public void validarNota(Integer nota) {
+
+        if (nota == null || nota < 1 || nota > 5) {
+            throw new BusinessException(ErrorEnum.NOTA_INVALIDA);
+        }
+
+    }
 }
