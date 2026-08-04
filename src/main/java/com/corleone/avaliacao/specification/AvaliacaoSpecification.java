@@ -22,4 +22,12 @@ public class AvaliacaoSpecification {
                         : cb.equal(root.get("pedido").get("id"), pedidoId);
     }
 
+    public static Specification<Avaliacao> nota(Integer nota) {
+
+        return (root, query, cb) ->
+                nota == null
+                        ? null
+                        : cb.equal(root.get("nota"), nota);
+    }
+
 }
