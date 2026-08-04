@@ -14,6 +14,12 @@ public class AvaliacaoSpecification {
                         : cb.equal(root.get("cliente").get("id"), clienteId);
     }
 
-   
+    public static Specification<Avaliacao> pedido(Integer pedidoId) {
+
+        return (root, query, cb) ->
+                pedidoId == null
+                        ? null
+                        : cb.equal(root.get("pedido").get("id"), pedidoId);
+    }
 
 }
