@@ -54,5 +54,9 @@ public interface AvaliacaoApi {
     ) ResponseEntity<AvaliacaoResponse> atualizar(@Parameter(description = "ID da avaliação.", example = "1")
             Integer id, AvaliacaoRequest request);
 
-    
+    @Operation(summary = "Excluir avaliação", description = "Realiza a exclusão de uma avaliação.",
+            responses = {@ApiResponse(responseCode = "204", description = "Avaliação excluída com sucesso."),
+                    @ApiResponse(responseCode = "404", description = "Avaliação não encontrada.")}
+    )
+    ResponseEntity<Void> excluir(@Parameter(description = "ID da avaliação.", example = "1") Integer id);
 }
