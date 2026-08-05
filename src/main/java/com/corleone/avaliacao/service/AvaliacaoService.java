@@ -71,6 +71,13 @@ public class AvaliacaoService {
         return mapper.toResponse(avaliacao);
     }
 
+    public List<AvaliacaoResumoResponse> listar(AvaliacaoFilter filter) {
+
+        return repository.findAll(AvaliacaoSpecification.filtro(filter))
+                .stream()
+                .map(mapper::toResumoResponse)
+                .toList();
+    }
     
 
 }
