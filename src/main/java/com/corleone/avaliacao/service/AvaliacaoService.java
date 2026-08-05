@@ -47,4 +47,21 @@ public class AvaliacaoService {
         return mapper.toResponse(avaliacao);
     }
 
+    public AvaliacaoResponse atualizar(Integer id, AvaliacaoRequest request) {
+
+        Avaliacao avaliacao = validator.validarAvaliacao(id);
+
+        validator.validarNota(request.getNota());
+
+        Pedido pedido = validator.validarPedido(request.getPedidoId());
+
+        Cliente cliente = validator.validarCliente(request.getClienteId());
+
+        mapper.updateEntity(avaliacao, request, pedido, cliente);
+
+        avaliacao = repository.save(avaliacao);
+
+        return mapper.toResponse(avaliacao);
+    }
+
 }
