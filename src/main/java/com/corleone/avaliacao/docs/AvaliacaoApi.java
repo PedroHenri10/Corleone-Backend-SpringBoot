@@ -45,4 +45,14 @@ public interface AvaliacaoApi {
     )
     ResponseEntity<List<AvaliacaoResumoResponse>> listar(AvaliacaoFilter filter);
 
+    @Operation(summary = "Atualizar avaliação", description = "Atualiza uma avaliação existente.",
+            responses = {@ApiResponse(responseCode = "200", description = "Avaliação atualizada com sucesso.",
+                            content = @Content(schema = @Schema(implementation = AvaliacaoResponse.class))),
+                    @ApiResponse(responseCode = "404", description = "Avaliação, pedido ou cliente não encontrado."),
+                    @ApiResponse(responseCode = "400", description = "Nota inválida.")
+            }
+    ) ResponseEntity<AvaliacaoResponse> atualizar(@Parameter(description = "ID da avaliação.", example = "1")
+            Integer id, AvaliacaoRequest request);
+
+    
 }
