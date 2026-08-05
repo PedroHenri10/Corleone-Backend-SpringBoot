@@ -64,4 +64,13 @@ public class AvaliacaoService {
         return mapper.toResponse(avaliacao);
     }
 
+    public AvaliacaoResponse buscarPorId(Integer id) {
+
+        Avaliacao avaliacao = validator.validarAvaliacao(id);
+
+        return mapper.toResponse(avaliacao);
+    }
+
+    
+
 }
