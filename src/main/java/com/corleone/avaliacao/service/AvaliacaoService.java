@@ -78,6 +78,12 @@ public class AvaliacaoService {
                 .map(mapper::toResumoResponse)
                 .toList();
     }
-    
+
+    public void excluir(Integer id) {
+
+        Avaliacao avaliacao = validator.validarAvaliacao(id);
+
+        repository.delete(avaliacao);
+    }
 
 }
