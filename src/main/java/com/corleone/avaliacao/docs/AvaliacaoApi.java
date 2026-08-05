@@ -31,5 +31,18 @@ public interface AvaliacaoApi {
     )
     ResponseEntity<AvaliacaoResponse> criar(AvaliacaoRequest request);
 
+    @Operation(summary = "Buscar avaliação por ID", description = "Retorna os dados completos de uma avaliação.",
+            responses = {
+                    @ApiResponse(responseCode = "200", description = "Avaliação encontrada.", content = @Content(schema = @Schema(implementation = AvaliacaoResponse.class))),
+                    @ApiResponse(responseCode = "404", description = "Avaliação não encontrada.")
+            }
+    )ResponseEntity<AvaliacaoResponse> buscarPorId(@Parameter(description = "ID da avaliação.", example = "1") Integer id);
+
+    @Operation(summary = "Listar avaliações", description = "Lista avaliações utilizando filtros.",
+            responses = {
+            @ApiResponse(responseCode = "200", description = "Lista retornada com sucesso.", content = @Content(
+                                    array = @ArraySchema(schema = @Schema(implementation = AvaliacaoResumoResponse.class))))}
+    )
+    ResponseEntity<List<AvaliacaoResumoResponse>> listar(AvaliacaoFilter filter);
 
 }
