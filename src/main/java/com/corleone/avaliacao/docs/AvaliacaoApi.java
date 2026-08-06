@@ -1,7 +1,5 @@
 package com.corleone.avaliacao.docs;
 
-package com.corleone.avaliacao.docs;
-
 import com.corleone.avaliacao.dto.AvaliacaoFilter;
 import com.corleone.avaliacao.dto.AvaliacaoRequest;
 import com.corleone.avaliacao.dto.AvaliacaoResponse;
