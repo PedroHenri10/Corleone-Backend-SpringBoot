@@ -53,6 +53,8 @@ public class AvaliacaoController implements AvaliacaoApi {
 
     @Override
     public ResponseEntity<Void> excluir(Integer id) {
-        return null;
+
+        service.desativar(id);
+        return ResponseEntity.noContent().build();
     }
 }
