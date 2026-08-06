@@ -38,8 +38,10 @@ public class AvaliacaoController implements AvaliacaoApi {
     }
 
     @Override
+    @GetMapping
+    @PreAuthorize("hasAuthority('AVALIACAO_VISUALIZAR')")
     public ResponseEntity<List<AvaliacaoResumoResponse>> listar(AvaliacaoFilter filter) {
-        return null;
+        return ResponseEntity.ok(service.listar(filter));
     }
 
     @Override
