@@ -6,9 +6,14 @@ import com.corleone.avaliacao.dto.AvaliacaoRequest;
 import com.corleone.avaliacao.dto.AvaliacaoResponse;
 import com.corleone.avaliacao.dto.AvaliacaoResumoResponse;
 import com.corleone.avaliacao.service.AvaliacaoService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.HttpStatusCode;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -17,14 +22,15 @@ import java.util.List;
 @RestController
 @RequestMapping("/avaliacoes")
 @RequiredArgsConstructor
-public class AvaliacaoController extends AvaliacaoApi {
+public class AvaliacaoController implements AvaliacaoApi {
     private final AvaliacaoService service;
 
 
     @Override
     @PostMapping
-    public ResponseEntity<AvaliacaoResponse> criar(AvaliacaoRequest request) {
-        return null;
+    @PreAuthorize("hasAuthority('AVALIACAO_MODERAR')")
+    public ResponseEntity<AvaliacaoResponse> criar(@Valid @RequestBody AvaliacaoRequest request) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.criar(request));
     }
 
     @Override
