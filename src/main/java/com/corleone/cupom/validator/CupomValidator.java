@@ -20,5 +20,10 @@ public class CupomValidator {
         return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(ErrorEnum.CUPOM_NAO_ENCONTRADO));
     }
 
-    
+    public void validarCodigoDuplicado(String codigo) {
+        if (repository.existsByCodigo(codigo)) {
+            throw new BusinessException(ErrorEnum.CUPOM_JA_CADASTRADO);
+        }
+    }
+
 }
