@@ -26,4 +26,19 @@ public class CupomValidator {
         }
     }
 
+    public void validarCodigoDuplicado(String codigo, Integer id) {
+        repository.findByCodigo(codigo)
+                .filter(cupom -> !cupom.getId().equals(id))
+                .ifPresent(cupom -> {
+                    throw new BusinessException(ErrorEnum.CUPOM_JA_CADASTRADO);
+                });
+    }
+
+    public void validarPeriodo(LocalDateTime dataInicio, LocalDateTime dataFim) {
+        if (dataInicio != null && dataFim != null && dataFim.isBefore(dataInicio)) {
+            throw new BusinessException(ErrorEnum.PERIODO_CUPOM_INVALIDO);
+        }
+    }
+
+
 }
