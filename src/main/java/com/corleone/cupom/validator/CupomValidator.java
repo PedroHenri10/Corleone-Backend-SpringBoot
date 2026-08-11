@@ -40,5 +40,11 @@ public class CupomValidator {
         }
     }
 
+    public void validarValorMinimo(java.math.BigDecimal valorMinimo) {
+        if (valorMinimo != null && valorMinimo.compareTo(java.math.BigDecimal.ZERO) <= 0) {
+            throw new BusinessException(ErrorEnum.VALOR_MINIMO_CUPOM_INVALIDO);
+        }
+    }
 
+    
 }
