@@ -308,6 +308,35 @@ public enum ErrorEnum {
             HttpStatus.CONFLICT,
             2054,
             "Este pedido já possui uma avaliação."
+    ),
+    CUPOM_NAO_ENCONTRADO(
+            HttpStatus.NOT_FOUND,
+            2055,
+            "Cupom não encontrado."
+    ),
+
+    CUPOM_JA_CADASTRADO(
+            HttpStatus.CONFLICT,
+            2056,
+            "Já existe um cupom cadastrado com esse código."
+    ),
+
+    PERIODO_CUPOM_INVALIDO(
+            HttpStatus.UNPROCESSABLE_CONTENT,
+            2057,
+            "A data final do cupom não pode ser anterior à data inicial."
+    ),
+
+    VALOR_MINIMO_CUPOM_INVALIDO(
+            HttpStatus.UNPROCESSABLE_CONTENT,
+            2058,
+            "O valor mínimo do cupom deve ser maior que zero."
+    ),
+
+    CUPOM_INATIVO(
+            HttpStatus.UNPROCESSABLE_CONTENT,
+            2059,
+            "Não é possível utilizar um cupom inativo."
     );
 
     private final HttpStatus httpStatus;

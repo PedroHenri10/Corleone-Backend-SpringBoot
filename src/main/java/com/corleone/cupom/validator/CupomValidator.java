@@ -1,4 +1,4 @@
 package com.corleone.cupom.validator;
 
-public class CupomValidator {
+public class CupomValidator{
 }
