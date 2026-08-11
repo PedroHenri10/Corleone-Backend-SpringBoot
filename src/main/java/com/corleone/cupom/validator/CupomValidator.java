@@ -46,5 +46,9 @@ public class CupomValidator {
         }
     }
 
-    
+    public void validarCupomAtivo(Cupom cupom) {
+        if (!Boolean.TRUE.equals(cupom.getAtivo())) {
+            throw new BusinessException(ErrorEnum.CUPOM_INATIVO);
+        }
+    }
 }
