@@ -27,5 +27,8 @@ public class CupomSpecification {
                 dataInicio == null ? null : cb.greaterThanOrEqualTo(root.get("dataInicio"), dataInicio.atStartOfDay());
     }
 
-    
+    public static Specification<Cupom> dataFim(java.time.LocalDate dataFim){
+        return (root, query, cb) ->
+                dataFim == null ? null : cb.lessThanOrEqualTo(root.get("dataFim"), dataFim.atTime(23,59,59));
+    }
 }
