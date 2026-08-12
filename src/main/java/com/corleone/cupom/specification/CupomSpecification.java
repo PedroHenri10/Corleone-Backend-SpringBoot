@@ -13,9 +13,12 @@ public class CupomSpecification {
     }
 
     public static Specification<Cupom> tipo(TipoCupom tipo){
-        return ((root, query, cb) ->
-                tipo == null ? null : cb.equal(root.get("tipo"), tipo));
+        return (root, query, cb) ->
+                tipo == null ? null : cb.equal(root.get("tipo"), tipo);
     }
 
-    
+    public static Specification<Cupom> ativo(Boolean ativo){
+        return (root, query,cb) ->
+                ativo == null ? null : cb.equal(root.get("ativo"), ativo);
+    }
 }
