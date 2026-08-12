@@ -21,4 +21,11 @@ public class CupomSpecification {
         return (root, query,cb) ->
                 ativo == null ? null : cb.equal(root.get("ativo"), ativo);
     }
+
+    public static Specification<Cupom> dataInicio(java.time.LocalDate dataInicio){
+        return (root, query,cb) ->
+                dataInicio == null ? null : cb.greaterThanOrEqualTo(root.get("dataInicio"), dataInicio.atStartOfDay());
+    }
+
+    
 }
