@@ -1,5 +1,6 @@
 package com.corleone.cupom.specification;
 
+import com.corleone.cupom.dto.CupomFilter;
 import com.corleone.cupom.entity.Cupom;
 import com.corleone.shared.enums.TipoCupom;
 import org.springframework.data.jpa.domain.Specification;
@@ -31,4 +32,19 @@ public class CupomSpecification {
         return (root, query, cb) ->
                 dataFim == null ? null : cb.lessThanOrEqualTo(root.get("dataFim"), dataFim.atTime(23,59,59));
     }
+
+    public static Specification<Cupom> filtro(CupomFilter filter){
+
+        if(filter == null){
+            return null;
+        }
+
+        return Specification.where(codigo(filter.getCodigo()))
+                .and(tipo(filter.getTipo()))
+                .and(ativo(filter.getAtivo()))
+                .and(dataInicio(filter.getDataInicio()))
+                .and(dataFim(filter.getDataFim()));
+    }
+
+   
 }
