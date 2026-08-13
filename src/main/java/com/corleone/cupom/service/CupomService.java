@@ -1,10 +1,13 @@
 package com.corleone.cupom.service;
 
+import com.corleone.cupom.dto.CupomFilter;
 import com.corleone.cupom.dto.CupomRequest;
 import com.corleone.cupom.dto.CupomResponse;
+import com.corleone.cupom.dto.CupomResumoResponse;
 import com.corleone.cupom.entity.Cupom;
 import com.corleone.cupom.mapper.CupomMapper;
 import com.corleone.cupom.repository.CupomRepository;
+import com.corleone.cupom.specification.CupomSpecification;
 import com.corleone.cupom.validator.CupomValidator;
 import com.corleone.shared.util.DateUtils;
 import jakarta.transaction.Transactional;
@@ -12,6 +15,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -57,4 +61,12 @@ public class CupomService {
         return mapper.toResponse(cupom);
     }
 
+    @Transactional
+    public CupomResponse buscarPorId(Integer id) {
+
+        Cupom cupom = validator.validarCupom(id);
+
+        return mapper.toResponse(cupom);
+    }
+    
 }
