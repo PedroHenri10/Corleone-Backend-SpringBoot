@@ -38,4 +38,23 @@ public class CupomService {
         return mapper.toResponse(cupom);
     }
 
+    public CupomResponse CupomResponseAtualizar(Integer id, CupomRequest request) {
+
+        Cupom cupom = validator.validarCupom(id);
+
+        validator.validarCupomAtivo(cupom);
+
+        validator.validarCodigoDuplicado(request.getCodigo(), id);
+
+        validator.validarPeriodo(request.getDataInicio(), request.getDataFim());
+
+        validator.validarValorMinimo(request.getValorMinimo());
+
+        mapper.updateEntity(cupom, request);
+
+        cupom = repository.save(cupom);
+
+        return mapper.toResponse(cupom);
     }
+
+}
