@@ -68,5 +68,13 @@ public class CupomService {
 
         return mapper.toResponse(cupom);
     }
-    
+
+    @Transactional
+    public List<CupomResumoResponse> listar(CupomFilter filter) {
+
+        return repository.findAll(CupomSpecification.filtro(filter))
+                .stream()
+                .map(mapper::toResumoResponse)
+                .toList();
+    }
 }
