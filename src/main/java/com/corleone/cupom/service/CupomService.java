@@ -42,7 +42,7 @@ public class CupomService {
         return mapper.toResponse(cupom);
     }
 
-    public CupomResponse CupomResponseAtualizar(Integer id, CupomRequest request) {
+    public CupomResponse atualizar(Integer id, CupomRequest request) {
 
         Cupom cupom = validator.validarCupom(id);
 
