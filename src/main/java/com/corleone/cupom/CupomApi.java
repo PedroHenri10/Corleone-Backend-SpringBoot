@@ -56,5 +56,10 @@ public interface CupomApi {
     )
     ResponseEntity<CupomResponse> atualizar(@Parameter(description = "ID do cupom.", example = "1") Integer id, CupomRequest request);
 
+    @Operation(summary = "Desativar cupom", description = "Realiza a exclusão lógica do cupom.",
+            responses = {@ApiResponse(responseCode = "204", description = "Cupom desativado com sucesso."
+                    ), @ApiResponse(responseCode = "404", description = "Cupom não encontrado."),
+                    @ApiResponse(responseCode = "422", description = "Cupom já está inativo.")})
+    ResponseEntity<Void> desativar(@Parameter(description = "ID do cupom.", example = "1") Integer id);
     
 }
