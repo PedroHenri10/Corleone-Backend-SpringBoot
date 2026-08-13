@@ -46,5 +46,8 @@ public class CupomSpecification {
                 .and(dataFim(filter.getDataFim()));
     }
 
-   
+    public  static  Specification<Cupom> somenteAtivos(){
+        return (root, query, cb) ->
+                cb.isTrue(root.get("ativo"));
+    }
 }
