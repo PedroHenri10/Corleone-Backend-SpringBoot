@@ -46,5 +46,15 @@ public interface CupomApi {
     )
     ResponseEntity<List<CupomResumoResponse>> listar(CupomFilter filter);
 
+    @Operation(summary = "Atualizar cupom", description = "Atualiza os dados de um cupom existente.",
+            responses = {@ApiResponse(responseCode = "200", description = "Cupom atualizado com sucesso.",
+                            content = @Content(schema = @Schema(implementation = CupomResponse.class))),
+                    @ApiResponse(responseCode = "404", description = "Cupom não encontrado."),
+                    @ApiResponse(responseCode = "409", description = "Já existe um cupom com esse código."),
+                    @ApiResponse(responseCode = "422", description = "Cupom inativo ou período inválido.")
+            }
+    )
+    ResponseEntity<CupomResponse> atualizar(@Parameter(description = "ID do cupom.", example = "1") Integer id, CupomRequest request);
+
     
 }
