@@ -77,4 +77,15 @@ public class CupomService {
                 .map(mapper::toResumoResponse)
                 .toList();
     }
+
+    public void desativar(Integer id) {
+
+        Cupom cupom = validator.validarCupom(id);
+
+        validator.validarCupomAtivo(cupom);
+
+        cupom.setAtivo(false);
+
+        repository.save(cupom);
+    }
 }
