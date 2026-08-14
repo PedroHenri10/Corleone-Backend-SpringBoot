@@ -61,5 +61,5 @@ public interface CupomApi {
                     ), @ApiResponse(responseCode = "404", description = "Cupom não encontrado."),
                     @ApiResponse(responseCode = "422", description = "Cupom já está inativo.")})
     ResponseEntity<Void> desativar(@Parameter(description = "ID do cupom.", example = "1") Integer id);
-    
+
 }
