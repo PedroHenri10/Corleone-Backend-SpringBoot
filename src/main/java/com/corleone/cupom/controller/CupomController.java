@@ -46,8 +46,11 @@ public class CupomController implements CupomApi {
     }
 
     @Override
-    public ResponseEntity<CupomResponse> atualizar(Integer id, CupomRequest request) {
-        return null;
+    @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('CUPOM_EDITAR')")
+    public ResponseEntity<CupomResponse> atualizar(@PathVariable Integer id, @Valid @RequestBody CupomRequest request) {
+
+        return ResponseEntity.ok(service.atualizar(id, request));
     }
 
     @Override
