@@ -54,7 +54,12 @@ public class CupomController implements CupomApi {
     }
 
     @Override
-    public ResponseEntity<Void> desativar(Integer id) {
-        return null;
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('CUPOM_EXCLUIR')")
+    public ResponseEntity<Void> desativar(@PathVariable Integer id) {
+
+        service.desativar(id);
+
+        return ResponseEntity.noContent().build();
     }
 }
