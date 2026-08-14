@@ -24,16 +24,17 @@ public class CupomController implements CupomApi {
     @Override
     @PostMapping
     @PreAuthorize("hasAuthority('CUPOM_CRIAR')")
-    public ResponseEntity<CupomResponse> criar(
-            @Valid @RequestBody CupomRequest request) {
+    public ResponseEntity<CupomResponse> criar(@Valid @RequestBody CupomRequest request) {
 
         return ResponseEntity.ok(service.criar(request));
     }
 
-
     @Override
-    public ResponseEntity<CupomResponse> buscarPorId(Integer id) {
-        return null;
+    @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('CUPOM_VISUALIZAR')")
+    public ResponseEntity<CupomResponse> buscarPorId(@PathVariable Integer id) {
+
+        return ResponseEntity.ok(service.buscarPorId(id));
     }
 
     @Override
