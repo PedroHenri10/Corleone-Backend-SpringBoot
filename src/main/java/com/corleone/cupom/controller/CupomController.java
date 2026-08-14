@@ -38,8 +38,11 @@ public class CupomController implements CupomApi {
     }
 
     @Override
-    public ResponseEntity<List<CupomResumoResponse>> listar(CupomFilter filter) {
-        return null;
+    @GetMapping
+    @PreAuthorize("hasAuthority('CUPOM_VISUALIZAR')")
+    public ResponseEntity<List<CupomResumoResponse>> listar(@ModelAttribute CupomFilter filter) {
+
+        return ResponseEntity.ok(service.listar(filter));
     }
 
     @Override
