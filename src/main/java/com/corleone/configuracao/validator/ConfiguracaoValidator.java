@@ -19,5 +19,10 @@ public class ConfiguracaoValidator {
                         new ResourceNotFoundException(ErrorEnum.CONFIGURACAO_NAO_ENCONTRADA));
     }
 
-   
+    public Configuracao validarChave(String chave) {
+        return repository.findByChave(chave).orElseThrow(() ->
+                        new ResourceNotFoundException(ErrorEnum.CONFIGURACAO_NAO_ENCONTRADA));
+    }
+
+    
 }
