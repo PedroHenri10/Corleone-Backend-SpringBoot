@@ -68,4 +68,12 @@ public class ConfiguracaoService {
 
         return mapper.toResponse(configuracao);
     }
+
+    public List<ConfiguracaoResumoResponse> listar() {
+
+        return repository.findAll()
+                .stream()
+                .map(mapper::toResumoResponse)
+                .toList();
+    }
 }
