@@ -61,4 +61,11 @@ public class ConfiguracaoService {
 
         return mapper.toResponse(configuracao);
     }
+
+    public ConfiguracaoResponse buscarPorChave(String chave) {
+
+        Configuracao configuracao = validator.validarChave(chave);
+
+        return mapper.toResponse(configuracao);
+    }
 }
