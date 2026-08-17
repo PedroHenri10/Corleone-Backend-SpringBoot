@@ -24,5 +24,17 @@ public class ConfiguracaoValidator {
                         new ResourceNotFoundException(ErrorEnum.CONFIGURACAO_NAO_ENCONTRADA));
     }
 
-    
+    public void validarChaveDuplicada(String chave) {
+        if (repository.existsByChave(chave)) {
+            throw new BusinessException(
+                    ErrorEnum.CONFIGURACAO_JA_CADASTRADA
+            );
+        }
+    }
+
+    public void validarChaveDuplicada(String chave, Integer id) {
+        repository.findByChave(chave).filter(configuracao -> !configuracao.getId().equals(id))
+                .ifPresent(configuracao -> {throw new BusinessException(ErrorEnum.CONFIGURACAO_JA_CADASTRADA);
+                });
+    }
 }
