@@ -337,6 +337,17 @@ public enum ErrorEnum {
             HttpStatus.UNPROCESSABLE_CONTENT,
             2059,
             "Não é possível utilizar um cupom inativo."
+    ),
+    CONFIGURACAO_NAO_ENCONTRADA(
+            HttpStatus.NOT_FOUND,
+            2060,
+            "Configuração não encontrada."
+    ),
+
+    CONFIGURACAO_JA_CADASTRADA(
+            HttpStatus.CONFLICT,
+            2061,
+            "Já existe uma configuração cadastrada com essa chave."
     );
 
     private final HttpStatus httpStatus;
