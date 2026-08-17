@@ -76,4 +76,11 @@ public class ConfiguracaoService {
                 .map(mapper::toResumoResponse)
                 .toList();
     }
+
+    public void excluir(Integer id) {
+
+        Configuracao configuracao = validator.validarConfiguracao(id);
+
+        repository.delete(configuracao);
+    }
 }
