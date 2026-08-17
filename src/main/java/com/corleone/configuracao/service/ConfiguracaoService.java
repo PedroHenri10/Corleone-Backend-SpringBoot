@@ -55,5 +55,10 @@ public class ConfiguracaoService {
         return mapper.toResponse(configuracao);
     }
 
-    
+    public ConfiguracaoResponse buscarPorId(Integer id) {
+
+        Configuracao configuracao = validator.validarConfiguracao(id);
+
+        return mapper.toResponse(configuracao);
+    }
 }
