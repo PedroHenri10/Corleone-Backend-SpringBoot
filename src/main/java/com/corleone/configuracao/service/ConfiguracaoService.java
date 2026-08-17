@@ -40,5 +40,20 @@ public class ConfiguracaoService {
         return mapper.toResponse(configuracao);
     }
 
+    public ConfiguracaoResponse atualizar(Integer id, ConfiguracaoRequest request) {
+
+        Configuracao configuracao = validator.validarConfiguracao(id);
+
+        validator.validarChaveDuplicada(request.getChave(), id);
+
+        mapper.updateEntity(configuracao, request);
+
+        configuracao.setDataAtualizacao(LocalDateTime.now(DateUtils.BR_ZONE));
+
+        configuracao = repository.save(configuracao);
+
+        return mapper.toResponse(configuracao);
+    }
+
     
 }
