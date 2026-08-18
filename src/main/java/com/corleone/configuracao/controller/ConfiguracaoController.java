@@ -36,5 +36,13 @@ public class ConfiguracaoController implements ConfiguracaoApi {
         return ResponseEntity.ok(service.buscarPorId(id));
     }
 
-   
+    @Override
+    @GetMapping("/chave/{chave}")
+    @PreAuthorize("hasAuthority('CONFIGURACAO_VISUALIZAR')")
+    public ResponseEntity<ConfiguracaoResponse> buscarPorChave(@PathVariable String chave) {
+
+        return ResponseEntity.ok(service.buscarPorChave(chave));
+    }
+
+    
 }
