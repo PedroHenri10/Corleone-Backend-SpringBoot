@@ -55,12 +55,18 @@ public class ConfiguracaoController implements ConfiguracaoApi {
     @Override
     @PutMapping("/{id}")
     @PreAuthorize("hasAuthority('CONFIGURACAO_EDITAR')")
-    public ResponseEntity<ConfiguracaoResponse> atualizar(
-            @PathVariable Integer id,
-            @Valid @RequestBody ConfiguracaoRequest request) {
+    public ResponseEntity<ConfiguracaoResponse> atualizar(@PathVariable Integer id, @Valid @RequestBody ConfiguracaoRequest request) {
 
         return ResponseEntity.ok(service.atualizar(id, request));
     }
 
-    
+    @Override
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('CONFIGURACAO_EXCLUIR')")
+    public ResponseEntity<Void> excluir(@PathVariable Integer id) {
+
+        service.excluir(id);
+
+        return ResponseEntity.noContent().build();
+    }
 }
