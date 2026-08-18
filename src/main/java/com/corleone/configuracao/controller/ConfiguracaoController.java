@@ -44,5 +44,13 @@ public class ConfiguracaoController implements ConfiguracaoApi {
         return ResponseEntity.ok(service.buscarPorChave(chave));
     }
 
+    @Override
+    @GetMapping
+    @PreAuthorize("hasAuthority('CONFIGURACAO_VISUALIZAR')")
+    public ResponseEntity<List<ConfiguracaoResumoResponse>> listar() {
+
+        return ResponseEntity.ok(service.listar());
+    }
+
     
 }
