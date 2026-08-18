@@ -64,5 +64,20 @@ public interface ConfiguracaoApi {
     )
     ResponseEntity<List<ConfiguracaoResumoResponse>> listar();
 
+    @Operation(summary = "Atualizar configuração", description = "Atualiza os dados de uma configuração existente.",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Configuração atualizada com sucesso.",
+                            content = @Content(schema = @Schema(implementation = ConfiguracaoResponse.class)
+                            )
+                    ),
+                    @ApiResponse(responseCode = "404", description = "Configuração não encontrada."),
+                    @ApiResponse(responseCode = "409", description = "Já existe uma configuração com essa chave.")
+            }
+    )
+    ResponseEntity<ConfiguracaoResponse> atualizar(
+            @Parameter(description = "ID da configuração.", example = "1") Integer id, ConfiguracaoRequest request);
+
 
 }
