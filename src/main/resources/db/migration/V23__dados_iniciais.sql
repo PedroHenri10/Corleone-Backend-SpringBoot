@@ -115,6 +115,11 @@ INSERT INTO permissao(per_nome, per_descricao, per_modulo) VALUES
 ('AVALIACAO_VISUALIZAR', 'Visualizar avaliações', 'AVALIACAO'),
 ('AVALIACAO_MODERAR', 'Moderar avaliações', 'AVALIACAO'),
 
+('CONFIGURACAO_VISUALIZAR', 'Visualizar configurações', 'CONFIGURACAO'),
+('CONFIGURACAO_CRIAR', 'Criar configurações', 'CONFIGURACAO'),
+('CONFIGURACAO_EDITAR', 'Editar configurações', 'CONFIGURACAO'),
+('CONFIGURACAO_EXCLUIR', 'Excluir configurações', 'CONFIGURACAO'),
+
 ('APP_CARDAPIO', 'Acessar cardápio', 'APP_CLIENTE'),
 ('APP_CARRINHO', 'Gerenciar carrinho', 'APP_CLIENTE'),
 ('APP_CHECKOUT', 'Realizar checkout', 'APP_CLIENTE'),
