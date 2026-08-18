@@ -52,5 +52,15 @@ public class ConfiguracaoController implements ConfiguracaoApi {
         return ResponseEntity.ok(service.listar());
     }
 
+    @Override
+    @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('CONFIGURACAO_EDITAR')")
+    public ResponseEntity<ConfiguracaoResponse> atualizar(
+            @PathVariable Integer id,
+            @Valid @RequestBody ConfiguracaoRequest request) {
+
+        return ResponseEntity.ok(service.atualizar(id, request));
+    }
+
     
 }
