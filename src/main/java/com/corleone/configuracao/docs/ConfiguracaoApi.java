@@ -79,5 +79,10 @@ public interface ConfiguracaoApi {
     ResponseEntity<ConfiguracaoResponse> atualizar(
             @Parameter(description = "ID da configuração.", example = "1") Integer id, ConfiguracaoRequest request);
 
-
+    @Operation(summary = "Excluir configuração", description = "Exclui uma configuração do sistema.",
+            responses = {@ApiResponse(responseCode = "204", description = "Configuração excluída com sucesso."),
+                    @ApiResponse(responseCode = "404", description = "Configuração não encontrada.")
+            }
+    )
+    ResponseEntity<Void> excluir(@Parameter(description = "ID da configuração.", example = "1") Integer id);
 }
