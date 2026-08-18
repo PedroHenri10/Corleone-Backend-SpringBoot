@@ -41,5 +41,16 @@ public interface ConfiguracaoApi {
     )
     ResponseEntity<ConfiguracaoResponse> buscarPorId(@Parameter(description = "ID da configuração.", example = "1") Integer id);
 
+    @Operation(summary = "Buscar configuração por chave", description = "Retorna uma configuração utilizando sua chave.",
+            responses = {@ApiResponse(responseCode = "200", description = "Configuração encontrada.",
+                            content = @Content(schema = @Schema(implementation = ConfiguracaoResponse.class)
+                            )
+                    ),
+                    @ApiResponse(responseCode = "404", description = "Configuração não encontrada.")
+            }
+    )
+    ResponseEntity<ConfiguracaoResponse> buscarPorChave(@Parameter(description = "Chave da configuração.", example = "TAXA_ENTREGA")
+            String chave);
+
     
 }
