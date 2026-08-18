@@ -52,5 +52,17 @@ public interface ConfiguracaoApi {
     ResponseEntity<ConfiguracaoResponse> buscarPorChave(@Parameter(description = "Chave da configuração.", example = "TAXA_ENTREGA")
             String chave);
 
-    
+    @Operation(summary = "Listar configurações", description = "Retorna todas as configurações cadastradas.",
+            responses = {@ApiResponse(
+                            responseCode = "200",
+                            description = "Configurações retornadas com sucesso.",
+                            content = @Content(array = @ArraySchema(schema = @Schema(implementation = ConfiguracaoResumoResponse.class)
+                                    )
+                            )
+                    )
+            }
+    )
+    ResponseEntity<List<ConfiguracaoResumoResponse>> listar();
+
+
 }
