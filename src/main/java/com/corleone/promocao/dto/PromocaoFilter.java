@@ -1,4 +1,4 @@
 package com.corleone.promocao.dto;
 
-public class PromocaoFiltro {
+public class PromocaoFilter {
 }
