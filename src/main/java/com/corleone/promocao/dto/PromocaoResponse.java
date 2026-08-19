@@ -17,33 +17,27 @@ public class PromocaoResponse {
     @Schema(description = "ID da promoção.", example = "1")
     private Integer id;
 
+    @Schema(description = "ID do produto.", example = "10")
+    private Integer produtoId;
+
+    @Schema(description = "Nome do produto.", example = "Pizza Calabresa")
+    private String produto;
+
     @Schema(description = "Nome da promoção.", example = "Pizza do Dia")
     private String nome;
 
-    @Schema(description = "Descrição da promoção.", example = "Pizza grande com desconto especial.")
+    @Schema(description = "Descrição da promoção.", example = "20% de desconto na pizza selecionada.")
     private String descricao;
 
-    @Schema(description = "Tipo da promoção.", example = "DESCONTO_PERCENTUAL")
-    private TipoPromocao tipo;
+    @Schema(description = "Percentual de desconto.", example = "20.00")
+    private BigDecimal percentual;
 
-    @Schema(description = "Valor ou percentual aplicado.", example = "20.00")
-    private BigDecimal valor;
-
-    @Schema(description = "Valor mínimo para aplicação.", example = "50.00")
-    private BigDecimal valorMinimo;
-
-    @Schema(description = "Data de início.", example = "2026-08-20T18:00:00")
+    @Schema(description = "Data e hora de início.", example = "2026-08-20T18:00:00")
     private LocalDateTime dataInicio;
 
-    @Schema(description = "Data de término.", example = "2026-08-20T23:30:00")
+    @Schema(description = "Data e hora de término.", example = "2026-08-20T23:30:00")
     private LocalDateTime dataFim;
 
     @Schema(description = "Indica se a promoção está ativa.", example = "true")
-    private Boolean ativo;
-
-    @Schema(description = "Data de criação.", example = "2026-08-19T09:00:00")
-    private LocalDateTime dataCriacao;
-
-    @Schema(description = "Data da última atualização.", example = "2026-08-19T10:00:00")
-    private LocalDateTime dataAtualizacao;
+    private Boolean ativa;
 }
