@@ -1,6 +1,5 @@
 package com.corleone.promocao.dto;
 
-import com.corleone.shared.enums.TipoPromocao;
 import io.swagger.v3.oas.annotations.media.Schema;
 import lombok.*;
 
