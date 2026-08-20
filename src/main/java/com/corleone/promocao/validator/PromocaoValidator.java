@@ -1,5 +1,6 @@
 package com.corleone.promocao.validator;
 
+import com.corleone.exception.BusinessException;
 import com.corleone.exception.ResourceNotFoundException;
 import com.corleone.exceptionhandler.ErrorEnum;
 import com.corleone.produto.entity.Produto;
@@ -23,5 +24,12 @@ public class PromocaoValidator {
     public Produto validarProduto(Integer id) {
         return produtoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(ErrorEnum.PRODUTO_NAO_ENCONTRADO));
     }
-    
+
+    public void validarProdutoJaPromocionado(Integer produtoId) {
+        if (repository.existsByProdutoId(produtoId)) {
+            throw new BusinessException(ErrorEnum.PRODUTO_JA_EM_PROMOCAO);
+        }
+    }
+
+
 }
