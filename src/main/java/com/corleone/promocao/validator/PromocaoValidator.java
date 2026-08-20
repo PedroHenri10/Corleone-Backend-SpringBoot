@@ -31,5 +31,14 @@ public class PromocaoValidator {
         }
     }
 
+    public void validarProdutoJaPromocionado(Integer produtoId, Integer promocaoId) {
+
+        repository.findById(promocaoId).filter(promocao ->
+                        promocao.getProduto() != null && promocao.getProduto().getId().equals(produtoId))
+                .ifPresent(promocao -> {throw new BusinessException(ErrorEnum.PRODUTO_JA_EM_PROMOCAO);
+                });
+    }
+
+    
 
 }
