@@ -57,5 +57,10 @@ public class PromocaoValidator {
         }
     }
 
+    public void validarPromocaoAtiva(Promocao promocao) {
+        if (Boolean.FALSE.equals(promocao.getAtiva())) {
+            throw new BusinessException(ErrorEnum.PROMOCAO_INATIVA);
+        }
+    }
     
 }
