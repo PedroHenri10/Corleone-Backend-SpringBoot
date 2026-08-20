@@ -12,5 +12,5 @@ public class PromocaoValidator {
     private final PromocaoRepository repository;
     private final ProdutoRepository produtoRepository;
 
-    
+
 }

@@ -348,6 +348,32 @@ public enum ErrorEnum {
             HttpStatus.CONFLICT,
             2061,
             "Já existe uma configuração cadastrada com essa chave."
+    ),
+    PROMOCAO_NAO_ENCONTRADA(
+            HttpStatus.NOT_FOUND,
+            2062,
+            "Promoção não encontrada."
+    ),
+    PRODUTO_JA_EM_PROMOCAO(
+            HttpStatus.CONFLICT,
+            2063,
+            "O produto já possui uma promoção cadastrada."
+    ),
+
+    PERCENTUAL_PROMOCAO_INVALIDO(
+            HttpStatus.UNPROCESSABLE_CONTENT,
+            2064,
+            "O percentual da promoção deve estar entre 0 e 100."
+    ),
+    PERIODO_PROMOCAO_INVALIDO(
+            HttpStatus.UNPROCESSABLE_CONTENT,
+            2065,
+            "O período da promoção é inválido."
+    ),
+    PROMOCAO_INATIVA(
+            HttpStatus.UNPROCESSABLE_CONTENT,
+            2066,
+            "A promoção está inativa."
     );
 
     private final HttpStatus httpStatus;
