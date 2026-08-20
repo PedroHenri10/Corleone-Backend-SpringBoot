@@ -10,6 +10,8 @@ import com.corleone.promocao.repository.PromocaoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
+
 @Component
 @RequiredArgsConstructor
 public class PromocaoValidator {
@@ -39,6 +41,12 @@ public class PromocaoValidator {
                 });
     }
 
-    
+    public void validarPercentual(BigDecimal percentual) {
+        if (percentual == null || percentual.compareTo(BigDecimal.ZERO) <= 0 || percentual.compareTo(new BigDecimal("100")) > 0) {
 
+            throw new BusinessException(ErrorEnum.PERCENTUAL_PROMOCAO_INVALIDO);
+        }
+    }
+
+    
 }
