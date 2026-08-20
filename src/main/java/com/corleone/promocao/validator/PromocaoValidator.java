@@ -11,6 +11,7 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Component
 @RequiredArgsConstructor
@@ -45,6 +46,14 @@ public class PromocaoValidator {
         if (percentual == null || percentual.compareTo(BigDecimal.ZERO) <= 0 || percentual.compareTo(new BigDecimal("100")) > 0) {
 
             throw new BusinessException(ErrorEnum.PERCENTUAL_PROMOCAO_INVALIDO);
+        }
+    }
+
+    public void validarPeriodo(LocalDateTime dataInicio, LocalDateTime dataFim) {
+
+        if (dataInicio == null || dataFim == null || !dataFim.isAfter(dataInicio)) {
+
+            throw new BusinessException(ErrorEnum.PERIODO_PROMOCAO_INVALIDO);
         }
     }
 
