@@ -34,14 +34,6 @@ public class PromocaoValidator {
         }
     }
 
-    public void validarProdutoJaPromocionado(Integer produtoId, Integer promocaoId) {
-
-        repository.findById(promocaoId).filter(promocao ->
-                        promocao.getProduto() != null && promocao.getProduto().getId().equals(produtoId))
-                .ifPresent(promocao -> {throw new BusinessException(ErrorEnum.PRODUTO_JA_EM_PROMOCAO);
-                });
-    }
-
     public void validarPercentual(BigDecimal percentual) {
         if (percentual == null || percentual.compareTo(BigDecimal.ZERO) <= 0 || percentual.compareTo(new BigDecimal("100")) > 0) {
 
