@@ -79,5 +79,11 @@ public class PromocaoService {
         return repository.findAll(PromocaoSpecification.filtro(filter)).stream().map(mapper::toResumoResponse).toList();
     }
 
-    
+    public List<PromocaoResumoResponse> listarAtivas(){
+        return repository
+                .findAll(PromocaoSpecification.somenteAtivas())
+                .stream()
+                .map(mapper::toResumoResponse)
+                .toList();
+    }
 }
