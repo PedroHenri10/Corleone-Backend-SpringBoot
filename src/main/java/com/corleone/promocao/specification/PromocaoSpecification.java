@@ -15,19 +15,19 @@ public class PromocaoSpecification {
 
     public static Specification<Promocao> nome(String nome) {
         return (root, query, cb) ->
-                nome == null || nome.isBlank()
-                        ? null
-                        : cb.like(
-                        cb.lower(root.get("nome")),
-                        "%" + nome.toLowerCase() + "%"
-                );
+                nome == null || nome.isBlank() ? null : cb.like(cb.lower(root.get("nome")),
+                        "%" + nome.toLowerCase() + "%");
     }
 
     public static Specification<Promocao> ativa(Boolean ativa) {
         return (root, query, cb) ->
-                ativa == null
-                        ? null
-                        : cb.equal(root.get("ativa"), ativa);
+                ativa == null ? null : cb.equal(root.get("ativa"), ativa);
+    }
+
+    public static Specification<Promocao> dataInicio(LocalDateTime dataInicio) {
+
+        return (root, query, cb) ->
+                dataInicio == null ? null : cb.greaterThanOrEqualTo(root.get("dataInicio"), dataInicio);
     }
 
     
