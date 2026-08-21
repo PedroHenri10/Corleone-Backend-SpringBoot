@@ -30,5 +30,12 @@ public class PromocaoSpecification {
                 dataInicio == null ? null : cb.greaterThanOrEqualTo(root.get("dataInicio"), dataInicio);
     }
 
+    public static Specification<Promocao> dataFim(
+            LocalDateTime dataFim) {
+
+        return (root, query, cb) ->
+                dataFim == null ? null : cb.lessThanOrEqualTo(root.get("dataFim"), dataFim);
+    }
+
     
 }
