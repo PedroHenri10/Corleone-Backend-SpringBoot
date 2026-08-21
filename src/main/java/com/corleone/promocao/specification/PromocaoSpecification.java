@@ -23,5 +23,12 @@ public class PromocaoSpecification {
                 );
     }
 
+    public static Specification<Promocao> ativa(Boolean ativa) {
+        return (root, query, cb) ->
+                ativa == null
+                        ? null
+                        : cb.equal(root.get("ativa"), ativa);
+    }
+
     
 }
