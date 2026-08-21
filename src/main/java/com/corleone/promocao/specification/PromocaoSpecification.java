@@ -8,5 +8,10 @@ import java.time.LocalDateTime;
 
 public class PromocaoSpecification {
 
-    
+    public static Specification<Promocao> produtoId(Integer produtoId) {
+        return (root, query, cb) ->
+                produtoId == null ? null : cb.equal(root.get("produto").get("id"), produtoId);
+    }
+
+
 }
