@@ -87,7 +87,15 @@ public class PromocaoService {
                 .toList();
     }
 
-    
+    public List<PromocaoResumoResponse> listarEmVIgencia(){
+       LocalDateTime agora = LocalDateTime.now(DateUtils.BR_ZONE);
+
+        return repository
+                .findAll(PromocaoSpecification.emVigencia(agora))
+                .stream()
+                .map(mapper::toResumoResponse)
+                .toList();
+    }
 
     public PromocaoResponse ativar(Integer id) {
 
