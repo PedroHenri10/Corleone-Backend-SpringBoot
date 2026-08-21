@@ -62,5 +62,5 @@ public class PromocaoValidator {
             throw new BusinessException(ErrorEnum.PROMOCAO_INATIVA);
         }
     }
-    
+
 }
