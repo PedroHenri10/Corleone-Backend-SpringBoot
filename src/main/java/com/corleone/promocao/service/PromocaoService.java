@@ -125,5 +125,16 @@ public class PromocaoService {
        repository.delete(promocao);
     }
 
-    
+    public BigDecimal calcularPrecoComDesconto(BigDecimal precoOriginal, Integer promocaoId) {
+
+        Promocao promocao = validator.validarPromocao(promocaoId);
+
+        validator.validarPromocaoAtiva(promocao);
+
+        LocalDateTime agora = LocalDateTime.now(DateUtils.BR_ZONE);
+
+        BigDecimal desconto = precoOriginal.multiply(promocao.getPercentual()).divide(BigDecimal.valueOf(100));
+
+        return precoOriginal.subtract(desconto);
+    }
 }
