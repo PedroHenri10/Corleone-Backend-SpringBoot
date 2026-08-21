@@ -86,4 +86,18 @@ public class PromocaoService {
                 .map(mapper::toResumoResponse)
                 .toList();
     }
+
+    
+
+    public PromocaoResponse ativar(Integer id) {
+
+        Promocao promocao = validator.validarPromocao(id);
+
+        promocao.setAtiva(true);
+
+        promocao = repository.save(promocao);
+
+        return mapper.toResponse(promocao);
+    }
+
 }
