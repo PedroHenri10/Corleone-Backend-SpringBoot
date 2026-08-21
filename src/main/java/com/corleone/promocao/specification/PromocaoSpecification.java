@@ -13,5 +13,15 @@ public class PromocaoSpecification {
                 produtoId == null ? null : cb.equal(root.get("produto").get("id"), produtoId);
     }
 
+    public static Specification<Promocao> nome(String nome) {
+        return (root, query, cb) ->
+                nome == null || nome.isBlank()
+                        ? null
+                        : cb.like(
+                        cb.lower(root.get("nome")),
+                        "%" + nome.toLowerCase() + "%"
+                );
+    }
 
+    
 }
