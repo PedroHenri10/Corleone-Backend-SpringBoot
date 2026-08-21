@@ -48,5 +48,25 @@ public class PromocaoService {
        return mapper.toResponse(promocao);
    }
 
+   public PromocaoResponse atualizar(Integer id, PromocaoRequest request){
+       Promocao promocao = validator.validarPromocao(id);
+
+       validator.validarPercentual(request.getPercentual());
+
+       validator.validarPeriodo(request.getDataInicio(), request.getDataFim());
+
+       Produto produto = validator.validarProduto(request.getProdutoId());
+
+       if(!promocao.getProduto().getId().equals(request.getProdutoId())){
+           validator.validarProdutoJaPromocionado(request.getProdutoId());
+       }
+
+       mapper.updateEntity(promocao, request, produto);
+
+       promocao = repository.save(promocao);
+
+       return mapper.toResponse(promocao);
+   }
+
    
 }
