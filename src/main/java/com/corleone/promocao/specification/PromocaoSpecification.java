@@ -49,5 +49,13 @@ public class PromocaoSpecification {
                         cb.greaterThanOrEqualTo(root.get("dataFim"), agora));
     }
 
-    
+    public static Specification<Promocao> filtro(PromocaoFilter filter) {
+
+        if (filter == null) {
+            return null;
+        }
+
+        return Specification.where(produtoId(filter.getProdutoId())).and(nome(filter.getNome()))
+                .and(ativa(filter.getAtiva())).and(dataInicio(filter.getDataInicio())).and(dataFim(filter.getDataFim()));
+    }
 }
