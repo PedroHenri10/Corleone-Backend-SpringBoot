@@ -118,4 +118,12 @@ public class PromocaoService {
 
         return mapper.toResponse(promocao);
     }
+
+    public void excluir(Integer id){
+       Promocao promocao = validator.validarPromocao(id);
+
+       repository.delete(promocao);
+    }
+
+    
 }
