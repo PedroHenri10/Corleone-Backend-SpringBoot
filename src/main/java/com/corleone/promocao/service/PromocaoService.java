@@ -108,4 +108,14 @@ public class PromocaoService {
         return mapper.toResponse(promocao);
     }
 
+    public PromocaoResponse desativar(Integer id) {
+
+        Promocao promocao = validator.validarPromocao(id);
+
+        promocao.setAtiva(false);
+
+        promocao = repository.save(promocao);
+
+        return mapper.toResponse(promocao);
+    }
 }
