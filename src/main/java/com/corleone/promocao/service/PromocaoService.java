@@ -28,5 +28,25 @@ public class PromocaoService {
     private final PromocaoMapper mapper;
     private final PromocaoValidator validator;
 
+   public PromocaoResponse criar(PromocaoRequest request){
+       validator.validarProdutoJaPromocionado(request.getProdutoId());
+
+       validator.validarPercentual(request.getPercentual());
+
+       validator.validarPeriodo(request.getDataInicio(), request.getDataFim());
+
+       Produto produto = validator.validarProduto(request.getProdutoId());
+
+       Promocao promocao = mapper.toEntity(request, produto);
+
+       if (promocao.getAtiva() == null) {
+           promocao.setAtiva(true);
+       }
+
+       promocao = repository.save(promocao);
+
+       return mapper.toResponse(promocao);
+   }
+
    
 }
