@@ -37,5 +37,10 @@ public class PromocaoSpecification {
                 dataFim == null ? null : cb.lessThanOrEqualTo(root.get("dataFim"), dataFim);
     }
 
+    public static Specification<Promocao> somenteAtivas() {
+        return (root, query, cb) ->
+                cb.isTrue(root.get("ativa"));
+    }
+
     
 }
