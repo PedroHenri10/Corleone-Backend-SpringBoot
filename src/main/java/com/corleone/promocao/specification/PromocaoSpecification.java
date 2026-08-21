@@ -42,5 +42,12 @@ public class PromocaoSpecification {
                 cb.isTrue(root.get("ativa"));
     }
 
+    public static Specification<Promocao> emVigencia(LocalDateTime agora) {
+
+        return (root, query, cb) ->
+                cb.and(cb.isTrue(root.get("ativa")), cb.lessThanOrEqualTo(root.get("dataInicio"), agora),
+                        cb.greaterThanOrEqualTo(root.get("dataFim"), agora));
+    }
+
     
 }
