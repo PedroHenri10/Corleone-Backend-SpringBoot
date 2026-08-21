@@ -68,5 +68,11 @@ public class PromocaoService {
        return mapper.toResponse(promocao);
    }
 
-   
+   public PromocaoResponse buscarPorId(Integer id){
+        Promocao promocao = validator.validarPromocao(id);
+
+        return mapper.toResponse(promocao);
+   }
+
+  
 }
