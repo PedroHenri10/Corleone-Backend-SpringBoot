@@ -74,5 +74,10 @@ public class PromocaoService {
         return mapper.toResponse(promocao);
    }
 
-  
+    public List<PromocaoResumoResponse> listar(PromocaoFilter filter){
+
+        return repository.findAll(PromocaoSpecification.filtro(filter)).stream().map(mapper::toResumoResponse).toList();
+    }
+
+    
 }
