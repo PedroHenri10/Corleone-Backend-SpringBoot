@@ -61,5 +61,18 @@ public interface PromocaoApi {
     )
     ResponseEntity<PromocaoResponse> buscarPorId(@Parameter(description = "ID da promoção.", example = "1") Integer id);
 
+    @Operation(summary = "Listar promoções", description = "Lista promoções utilizando filtros.", responses = {@ApiResponse(
+                            responseCode = "200",
+                            description = "Lista retornada com sucesso.",
+                            content = @Content(
+                                    schema = @Schema(
+                                            implementation = PromocaoResumoResponse.class
+                                    )
+                            )
+                    )
+            }
+    )
+    ResponseEntity<List<PromocaoResumoResponse>> listar(PromocaoFilter filter);
+
 
 }
