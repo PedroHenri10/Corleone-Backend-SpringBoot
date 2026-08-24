@@ -127,4 +127,18 @@ public interface PromocaoApi {
     )
     ResponseEntity<PromocaoResponse> desativar(@Parameter(description = "ID da promoção.", example = "1") Integer id);
 
+    @Operation(summary = "Excluir promoção", description = "Remove uma promoção do sistema.", responses = {
+                    @ApiResponse(
+                            responseCode = "204",
+                            description = "Promoção excluída com sucesso."
+                    ),
+                    @ApiResponse(
+                            responseCode = "404",
+                            description = "Promoção não encontrada."
+                    )
+            }
+    )
+    ResponseEntity<Void> excluir(@Parameter(description = "ID da promoção.", example = "1") Integer id);
+
+   
 }
