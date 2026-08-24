@@ -150,5 +150,13 @@ public interface PromocaoApi {
     )
     ResponseEntity<List<PromocaoResumoResponse>> listarAtivas();
 
-    
+    @Operation(summary = "Listar promoções em vigência", description = "Retorna as promoções ativas dentro do período de vigência.",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Lista retornada com sucesso."
+                    )
+            }
+    )
+    ResponseEntity<List<PromocaoResumoResponse>> listarEmVigencia();
 }
