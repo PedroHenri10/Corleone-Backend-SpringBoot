@@ -1,0 +1,47 @@
+package com.corleone.promocao.docs;
+
+import com.corleone.promocao.dto.PromocaoFilter;
+import com.corleone.promocao.dto.PromocaoRequest;
+import com.corleone.promocao.dto.PromocaoResponse;
+import com.corleone.promocao.dto.PromocaoResumoResponse;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.http.ResponseEntity;
+
+import java.util.List;
+
+@Tag(name = "Promoção", description = "Gerenciamento de promoções do sistema.")
+public interface PromocaoApi {
+
+    @Operation(summary = "Cadastrar promoção", description = "Realiza o cadastro de uma nova promoção.", responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Promoção cadastrada com sucesso.",
+                            content = @Content(
+                                    schema = @Schema(
+                                            implementation = PromocaoResponse.class
+                                    )
+                            )
+                    ),
+                    @ApiResponse(
+                            responseCode = "404",
+                            description = "Produto não encontrado."
+                    ),
+                    @ApiResponse(
+                            responseCode = "409",
+                            description = "Produto já possui uma promoção."
+                    ),
+                    @ApiResponse(
+                            responseCode = "422",
+                            description = "Dados da promoção inválidos."
+                    )
+            }
+    )
+    ResponseEntity<PromocaoResponse> criar(PromocaoRequest request);
+
+
+}
