@@ -75,4 +75,31 @@ public interface PromocaoApi {
     ResponseEntity<List<PromocaoResumoResponse>> listar(PromocaoFilter filter);
 
 
+    @Operation(summary = "Atualizar promoção", description = "Atualiza os dados de uma promoção existente.", responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Promoção atualizada com sucesso.",
+                            content = @Content(
+                                    schema = @Schema(
+                                            implementation = PromocaoResponse.class
+                                    )
+                            )
+                    ),
+                    @ApiResponse(
+                            responseCode = "404",
+                            description = "Promoção ou produto não encontrado."
+                    ),
+                    @ApiResponse(
+                            responseCode = "409",
+                            description = "Produto já possui outra promoção."
+                    ),
+                    @ApiResponse(
+                            responseCode = "422",
+                            description = "Dados da promoção inválidos."
+                    )
+            }
+    )
+    ResponseEntity<PromocaoResponse> atualizar(@Parameter(description = "ID da promoção.", example = "1") Integer id, PromocaoRequest request);
+
+
 }
