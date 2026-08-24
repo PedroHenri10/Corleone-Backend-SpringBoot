@@ -140,5 +140,15 @@ public interface PromocaoApi {
     )
     ResponseEntity<Void> excluir(@Parameter(description = "ID da promoção.", example = "1") Integer id);
 
-   
+    @Operation(summary = "Listar promoções ativas", description = "Retorna todas as promoções atualmente marcadas como ativas.",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Lista retornada com sucesso."
+                    )
+            }
+    )
+    ResponseEntity<List<PromocaoResumoResponse>> listarAtivas();
+
+    
 }
