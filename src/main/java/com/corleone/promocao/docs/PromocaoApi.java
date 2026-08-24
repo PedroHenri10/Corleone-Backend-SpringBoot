@@ -43,5 +43,23 @@ public interface PromocaoApi {
     )
     ResponseEntity<PromocaoResponse> criar(PromocaoRequest request);
 
+    @Operation(summary = "Buscar promoção por ID", description = "Retorna os dados completos de uma promoção.", responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Promoção encontrada.",
+                            content = @Content(
+                                    schema = @Schema(
+                                            implementation = PromocaoResponse.class
+                                    )
+                            )
+                    ),
+                    @ApiResponse(
+                            responseCode = "404",
+                            description = "Promoção não encontrada."
+                    )
+            }
+    )
+    ResponseEntity<PromocaoResponse> buscarPorId(@Parameter(description = "ID da promoção.", example = "1") Integer id);
+
 
 }
