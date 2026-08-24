@@ -374,6 +374,11 @@ public enum ErrorEnum {
             HttpStatus.UNPROCESSABLE_CONTENT,
             2066,
             "A promoção está inativa."
+    ),
+    PROMOCAO_FORA_DA_VIGENCIA(
+            HttpStatus.UNPROCESSABLE_CONTENT,
+            2067,
+            "A promoção não está vigente."
     );
 
     private final HttpStatus httpStatus;

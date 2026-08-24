@@ -133,6 +133,8 @@ public class PromocaoService {
 
         LocalDateTime agora = LocalDateTime.now(DateUtils.BR_ZONE);
 
+        validator.validarPeriodoVigente(promocao, agora);
+
         BigDecimal desconto = precoOriginal.multiply(promocao.getPercentual()).divide(BigDecimal.valueOf(100));
 
         return precoOriginal.subtract(desconto);

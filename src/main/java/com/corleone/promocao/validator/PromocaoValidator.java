@@ -55,4 +55,13 @@ public class PromocaoValidator {
         }
     }
 
+    public void validarPeriodoVigente(Promocao promocao, LocalDateTime agora) {
+
+        if (promocao.getDataInicio() == null || promocao.getDataFim() == null || agora.isBefore(promocao.getDataInicio())
+                || agora.isAfter(promocao.getDataFim())) {
+
+            throw new BusinessException(ErrorEnum.PROMOCAO_FORA_DA_VIGENCIA);
+        }
+    }
+
 }
