@@ -101,5 +101,18 @@ public interface PromocaoApi {
     )
     ResponseEntity<PromocaoResponse> atualizar(@Parameter(description = "ID da promoção.", example = "1") Integer id, PromocaoRequest request);
 
+    @Operation(summary = "Ativar promoção", description = "Ativa uma promoção existente.", responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Promoção ativada com sucesso."
+                    ),
+                    @ApiResponse(
+                            responseCode = "404",
+                            description = "Promoção não encontrada."
+                    )
+            }
+    )
+    ResponseEntity<PromocaoResponse> ativar(@Parameter(description = "ID da promoção.", example = "1") Integer id);
+
 
 }
