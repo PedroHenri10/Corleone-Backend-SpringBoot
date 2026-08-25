@@ -87,7 +87,7 @@ public class PromocaoService {
                 .toList();
     }
 
-    public List<PromocaoResumoResponse> listarEmVIgencia(){
+    public List<PromocaoResumoResponse> listarEmVigencia(){
        LocalDateTime agora = LocalDateTime.now(DateUtils.BR_ZONE);
 
         return repository

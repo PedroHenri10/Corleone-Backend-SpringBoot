@@ -88,7 +88,10 @@ public class PromocaoController implements PromocaoApi {
     }
 
     @Override
+    @GetMapping("/vigentes")
+    @PreAuthorize("hasAuthority('PROMOCAO_VISUALIZAR')")
     public ResponseEntity<List<PromocaoResumoResponse>> listarEmVigencia() {
-        return null;
+
+        return ResponseEntity.ok(service.listarEmVigencia());
     }
 }
