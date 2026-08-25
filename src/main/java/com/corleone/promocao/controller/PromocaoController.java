@@ -38,8 +38,11 @@ public class PromocaoController implements PromocaoApi {
     }
 
     @Override
+    @GetMapping
+    @PreAuthorize("hasAuthority('PROMOCAO_VISUALIZAR')")
     public ResponseEntity<List<PromocaoResumoResponse>> listar(PromocaoFilter filter) {
-        return null;
+
+        return ResponseEntity.ok(service.listar(filter));
     }
 
     @Override
