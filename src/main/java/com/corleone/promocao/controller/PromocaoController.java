@@ -62,8 +62,11 @@ public class PromocaoController implements PromocaoApi {
     }
 
     @Override
-    public ResponseEntity<PromocaoResponse> desativar(Integer id) {
-        return null;
+    @PatchMapping("/{id}/desativar")
+    @PreAuthorize("hasAuthority('PROMOCAO_EDITAR')")
+    public ResponseEntity<PromocaoResponse> desativar(@PathVariable Integer id) {
+
+        return ResponseEntity.ok(service.desativar(id));
     }
 
     @Override
