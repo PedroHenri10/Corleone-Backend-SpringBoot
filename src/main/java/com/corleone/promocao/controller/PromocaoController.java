@@ -5,6 +5,7 @@ import com.corleone.promocao.dto.PromocaoFilter;
 import com.corleone.promocao.dto.PromocaoRequest;
 import com.corleone.promocao.dto.PromocaoResponse;
 import com.corleone.promocao.dto.PromocaoResumoResponse;
+import com.corleone.promocao.service.PromocaoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,9 @@ import java.util.List;
 @RequestMapping("/v1/api/promocoes")
 @RequiredArgsConstructor
 public class PromocaoController implements PromocaoApi {
+
+    private final PromocaoService service;
+
     @Override
     public ResponseEntity<PromocaoResponse> criar(PromocaoRequest request) {
         return null;
