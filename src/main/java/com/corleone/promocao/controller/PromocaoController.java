@@ -80,8 +80,11 @@ public class PromocaoController implements PromocaoApi {
     }
 
     @Override
+    @GetMapping("/ativas")
+    @PreAuthorize("hasAuthority('PROMOCAO_VISUALIZAR')")
     public ResponseEntity<List<PromocaoResumoResponse>> listarAtivas() {
-        return null;
+
+        return ResponseEntity.ok(service.listarAtivas());
     }
 
     @Override
