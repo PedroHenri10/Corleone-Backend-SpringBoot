@@ -9,10 +9,7 @@ import com.corleone.promocao.service.PromocaoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -33,8 +30,11 @@ public class PromocaoController implements PromocaoApi {
     }
 
     @Override
-    public ResponseEntity<PromocaoResponse> buscarPorId(Integer id) {
-        return null;
+    @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('PROMOCAO_VISUALIZAR')")
+    public ResponseEntity<PromocaoResponse> buscarPorId(@PathVariable Integer id) {
+
+        return ResponseEntity.ok(service.buscarPorId(id));
     }
 
     @Override
