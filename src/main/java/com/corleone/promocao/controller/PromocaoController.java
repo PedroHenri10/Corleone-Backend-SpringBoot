@@ -46,8 +46,11 @@ public class PromocaoController implements PromocaoApi {
     }
 
     @Override
-    public ResponseEntity<PromocaoResponse> atualizar(Integer id, PromocaoRequest request) {
-        return null;
+    @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('PROMOCAO_EDITAR')")
+    public ResponseEntity<PromocaoResponse> atualizar(@PathVariable Integer id, @RequestBody PromocaoRequest request) {
+
+        return ResponseEntity.ok(service.atualizar(id, request));
     }
 
     @Override
