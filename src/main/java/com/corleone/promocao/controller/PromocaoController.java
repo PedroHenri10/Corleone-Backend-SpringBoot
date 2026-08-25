@@ -8,6 +8,9 @@ import com.corleone.promocao.dto.PromocaoResumoResponse;
 import com.corleone.promocao.service.PromocaoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,8 +24,12 @@ public class PromocaoController implements PromocaoApi {
     private final PromocaoService service;
 
     @Override
-    public ResponseEntity<PromocaoResponse> criar(PromocaoRequest request) {
-        return null;
+    @PostMapping
+    @PreAuthorize("hasAuthority('PROMOCAO_CRIAR')")
+    public ResponseEntity<PromocaoResponse> criar(@RequestBody PromocaoRequest request) {
+
+        return ResponseEntity.ok(service.criar(request)
+        );
     }
 
     @Override
