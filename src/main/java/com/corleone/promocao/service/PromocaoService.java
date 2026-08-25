@@ -15,7 +15,6 @@ import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -123,20 +122,5 @@ public class PromocaoService {
        Promocao promocao = validator.validarPromocao(id);
 
        repository.delete(promocao);
-    }
-
-    public BigDecimal calcularPrecoComDesconto(BigDecimal precoOriginal, Integer promocaoId) {
-
-        Promocao promocao = validator.validarPromocao(promocaoId);
-
-        validator.validarPromocaoAtiva(promocao);
-
-        LocalDateTime agora = LocalDateTime.now(DateUtils.BR_ZONE);
-
-        validator.validarPeriodoVigente(promocao, agora);
-
-        BigDecimal desconto = precoOriginal.multiply(promocao.getPercentual()).divide(BigDecimal.valueOf(100));
-
-        return precoOriginal.subtract(desconto);
     }
 }
