@@ -70,8 +70,13 @@ public class PromocaoController implements PromocaoApi {
     }
 
     @Override
-    public ResponseEntity<Void> excluir(Integer id) {
-        return null;
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('PROMOCAO_EXCLUIR')")
+    public ResponseEntity<Void> excluir(@PathVariable Integer id) {
+
+        service.excluir(id);
+
+        return ResponseEntity.noContent().build();
     }
 
     @Override
