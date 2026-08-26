@@ -16,5 +16,7 @@ public interface PagamentoMapper {
     @Mapping(target = "ativo", constant = "true")
     Pagamento toEntity(PagamentoRequest request);
 
+    PagamentoResponse toResponse(Pagamento pagamento);
+
     
 }
