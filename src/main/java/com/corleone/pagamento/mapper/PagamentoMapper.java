@@ -20,5 +20,7 @@ public interface PagamentoMapper {
 
     PagamentoResumoResponse toResumoResponse(Pagamento pagamento);
 
-    
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "ativo", ignore = true)
+    void updateEntity(@MappingTarget Pagamento pagamento, PagamentoRequest request);
 }
