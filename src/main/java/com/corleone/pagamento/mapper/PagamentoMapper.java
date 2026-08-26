@@ -12,5 +12,9 @@ import org.mapstruct.NullValuePropertyMappingStrategy;
 @Mapper(componentModel = "spring", nullValuePropertyMappingStrategy = NullValuePropertyMappingStrategy.IGNORE)
 public interface PagamentoMapper {
 
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "ativo", constant = "true")
+    Pagamento toEntity(PagamentoRequest request);
 
+    
 }
