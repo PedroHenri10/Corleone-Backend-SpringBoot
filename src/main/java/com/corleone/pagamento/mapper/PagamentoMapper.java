@@ -18,5 +18,7 @@ public interface PagamentoMapper {
 
     PagamentoResponse toResponse(Pagamento pagamento);
 
+    PagamentoResumoResponse toResumoResponse(Pagamento pagamento);
+
     
 }
