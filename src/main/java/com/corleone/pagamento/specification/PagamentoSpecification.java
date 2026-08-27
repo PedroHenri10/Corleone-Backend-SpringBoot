@@ -12,5 +12,10 @@ public class PagamentoSpecification {
                 );
     }
 
-
+    public static Specification<Pagamento> ativo(Boolean ativo) {
+        return (root, query, cb) ->
+                ativo == null
+                        ? null
+                        : cb.equal(root.get("ativo"), ativo);
+    }
 }
