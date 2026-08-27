@@ -1,5 +1,6 @@
 package com.corleone.pagamento.validator;
 
+import com.corleone.exception.BusinessException;
 import com.corleone.exception.ResourceNotFoundException;
 import com.corleone.exceptionhandler.ErrorEnum;
 import com.corleone.pagamento.entity.Pagamento;
@@ -15,5 +16,11 @@ public class PagamentoValidator {
     public Pagamento validarPagamento(Integer id) {
         return repository.findById(id).orElseThrow(() ->
                 new ResourceNotFoundException(ErrorEnum.PAGAMENTO_NAO_ENCONTRADO));
+    }
+
+    public void validarNomeDuplicado(String nome) {
+        if (repository.existsByNomeIgnoreCase(nome)) {
+            throw new BusinessException(ErrorEnum.PAGAMENTO_JA_CADASTRADO);
+        }
     }
 }
