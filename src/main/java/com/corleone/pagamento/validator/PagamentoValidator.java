@@ -1,5 +1,8 @@
 package com.corleone.pagamento.validator;
 
+import com.corleone.exception.ResourceNotFoundException;
+import com.corleone.exceptionhandler.ErrorEnum;
+import com.corleone.pagamento.entity.Pagamento;
 import com.corleone.pagamento.repository.PagamentoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -9,4 +12,8 @@ import org.springframework.stereotype.Component;
 public class PagamentoValidator {
     private final PagamentoRepository repository;
 
+    public Pagamento validarPagamento(Integer id) {
+        return repository.findById(id).orElseThrow(() ->
+                new ResourceNotFoundException(ErrorEnum.PAGAMENTO_NAO_ENCONTRADO));
+    }
 }
