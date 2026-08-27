@@ -21,5 +21,5 @@ public class PagamentoSpecification {
         return (root, query, cb) -> cb.isTrue(root.get("ativo"));
     }
 
-    
+   
 }
