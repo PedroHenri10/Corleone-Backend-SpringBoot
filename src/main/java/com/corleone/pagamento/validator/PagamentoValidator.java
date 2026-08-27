@@ -23,4 +23,10 @@ public class PagamentoValidator {
             throw new BusinessException(ErrorEnum.PAGAMENTO_JA_CADASTRADO);
         }
     }
+
+    public void validarPagamentoAtivo(Pagamento pagamento) {
+        if (Boolean.FALSE.equals(pagamento.getAtivo())) {
+            throw new BusinessException(ErrorEnum.PAGAMENTO_INATIVO);
+        }
+    }
 }
