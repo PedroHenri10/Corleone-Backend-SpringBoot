@@ -379,6 +379,23 @@ public enum ErrorEnum {
             HttpStatus.UNPROCESSABLE_CONTENT,
             2067,
             "A promoção não está vigente."
+    ),
+    PAGAMENTO_NAO_ENCONTRADO(
+            HttpStatus.NOT_FOUND,
+            2068,
+            "Forma de pagamento não encontrada."
+    ),
+
+    PAGAMENTO_JA_CADASTRADO(
+            HttpStatus.CONFLICT,
+            2069,
+            "Forma de pagamento já cadastrada."
+    ),
+
+    PAGAMENTO_INATIVO(
+            HttpStatus.UNPROCESSABLE_CONTENT,
+            2070,
+            "A forma de pagamento está inativa."
     );
 
     private final HttpStatus httpStatus;
