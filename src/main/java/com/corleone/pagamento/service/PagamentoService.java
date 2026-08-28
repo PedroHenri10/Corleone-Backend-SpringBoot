@@ -65,4 +65,15 @@ public class PagamentoService {
 
         return mapper.toResponse(pagamento);
     }
+
+    public PagamentoResponse ativar(Integer id) {
+
+        Pagamento pagamento = validator.validarPagamento(id);
+
+        pagamento.setAtivo(true);
+
+        pagamento = repository.save(pagamento);
+
+        return mapper.toResponse(pagamento);
+    }
 }
