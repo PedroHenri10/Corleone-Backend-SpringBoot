@@ -29,5 +29,10 @@ public class PagamentoService {
         return mapper.toResponse(pagamento);
     }
 
-    
+    public PagamentoResponse buscarPorId(Integer id) {
+
+        Pagamento pagamento = validator.validarPagamento(id);
+
+        return mapper.toResponse(pagamento);
+    }
 }
