@@ -1,14 +1,19 @@
 package com.corleone.pagamento.service;
 
+import com.corleone.pagamento.dto.PagamentoFilter;
 import com.corleone.pagamento.dto.PagamentoRequest;
 import com.corleone.pagamento.dto.PagamentoResponse;
+import com.corleone.pagamento.dto.PagamentoResumoResponse;
 import com.corleone.pagamento.entity.Pagamento;
 import com.corleone.pagamento.mapper.PagamentoMapper;
 import com.corleone.pagamento.repository.PagamentoRepository;
+import com.corleone.pagamento.specification.PagamentoSpecification;
 import com.corleone.pagamento.validator.PagamentoValidator;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -35,4 +40,13 @@ public class PagamentoService {
 
         return mapper.toResponse(pagamento);
     }
+
+    public List<PagamentoResumoResponse> listar(PagamentoFilter filter) {
+
+        return repository.findAll(PagamentoSpecification.filtro(filter))
+                .stream()
+                .map(mapper::toResumoResponse)
+                .toList();
+    }
+    
 }
