@@ -48,5 +48,21 @@ public class PagamentoService {
                 .map(mapper::toResumoResponse)
                 .toList();
     }
-    
+
+    public PagamentoResponse atualizar(Integer id, PagamentoRequest request) {
+
+        Pagamento pagamento = validator.validarPagamento(id);
+
+        validator.validarPagamentoAtivo(pagamento);
+
+        if (!pagamento.getNome().equalsIgnoreCase(request.getNome())) {
+            validator.validarNomeDuplicado(request.getNome());
+        }
+
+        mapper.updateEntity(pagamento, request);
+
+        pagamento = repository.save(pagamento);
+
+        return mapper.toResponse(pagamento);
+    }
 }
