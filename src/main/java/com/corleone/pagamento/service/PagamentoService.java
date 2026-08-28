@@ -89,4 +89,11 @@ public class PagamentoService {
 
         return mapper.toResponse(pagamento);
     }
+
+    public void excluir(Integer id) {
+
+        Pagamento pagamento = validator.validarPagamento(id);
+
+        repository.delete(pagamento);
+    }
 }
