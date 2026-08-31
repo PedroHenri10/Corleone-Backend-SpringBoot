@@ -1,7 +1,9 @@
 package com.corleone.pagamento.docs;
 
+import com.corleone.pagamento.dto.PagamentoFilter;
 import com.corleone.pagamento.dto.PagamentoRequest;
 import com.corleone.pagamento.dto.PagamentoResponse;
+import com.corleone.pagamento.dto.PagamentoResumoResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
@@ -9,6 +11,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
+
+import java.util.List;
 
 @Tag(name = "Pagamento", description = "Gerenciamento das formas de pagamento do sistema.")
 public interface PagamentoApi {
@@ -45,4 +49,22 @@ public interface PagamentoApi {
             }
     )
     ResponseEntity<PagamentoResponse> buscarPorId(@Parameter(description = "ID da forma de pagamento.", example = "1") Integer id);
+
+    @Operation(
+            summary = "Listar formas de pagamento",
+            description = "Lista formas de pagamento utilizando filtros.",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Lista retornada com sucesso.",
+                            content = @Content(
+                                    schema = @Schema(
+                                            implementation = PagamentoResumoResponse.class
+                                    )
+                            )
+                    )
+            }
+    )
+    ResponseEntity<List<PagamentoResumoResponse>> listar(PagamentoFilter filter);
+    
 }
