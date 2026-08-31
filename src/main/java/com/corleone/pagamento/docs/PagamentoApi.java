@@ -3,6 +3,7 @@ package com.corleone.pagamento.docs;
 import com.corleone.pagamento.dto.PagamentoRequest;
 import com.corleone.pagamento.dto.PagamentoResponse;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -26,4 +27,22 @@ public interface PagamentoApi {
             }
     )
     ResponseEntity<PagamentoResponse> criar(PagamentoRequest request);
+
+    @Operation(
+            summary = "Buscar forma de pagamento por ID",
+            description = "Retorna os dados completos de uma forma de pagamento.",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Forma de pagamento encontrada.",
+                            content = @Content(
+                                    schema = @Schema(
+                                            implementation = PagamentoResponse.class
+                                    )
+                            )
+                    ),
+                    @ApiResponse(responseCode = "404", description = "Forma de pagamento não encontrada.")
+            }
+    )
+    ResponseEntity<PagamentoResponse> buscarPorId(@Parameter(description = "ID da forma de pagamento.", example = "1") Integer id);
 }
