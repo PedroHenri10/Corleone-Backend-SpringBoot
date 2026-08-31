@@ -112,4 +112,22 @@ public interface PagamentoApi {
             }
     )
     ResponseEntity<PagamentoResponse> atualizar(@Parameter(description = "ID da forma de pagamento.", example = "1") Integer id, PagamentoRequest request);
+
+    @Operation(
+            summary = "Ativar forma de pagamento",
+            description = "Ativa uma forma de pagamento previamente desativada.",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Forma de pagamento ativada com sucesso.",
+                            content = @Content(
+                                    schema = @Schema(
+                                            implementation = PagamentoResponse.class
+                                    )
+                            )
+                    ),
+                    @ApiResponse(responseCode = "404", description = "Forma de pagamento não encontrada.")
+            }
+    )
+    ResponseEntity<PagamentoResponse> ativar(@Parameter(description = "ID da forma de pagamento.", example = "1") Integer id);
 }
