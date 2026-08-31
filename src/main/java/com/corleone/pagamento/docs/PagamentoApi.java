@@ -130,4 +130,29 @@ public interface PagamentoApi {
             }
     )
     ResponseEntity<PagamentoResponse> ativar(@Parameter(description = "ID da forma de pagamento.", example = "1") Integer id);
+
+    @Operation(
+            summary = "Desativar forma de pagamento",
+            description = "Realiza a desativação lógica de uma forma de pagamento.",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Forma de pagamento desativada com sucesso.",
+                            content = @Content(
+                                    schema = @Schema(
+                                            implementation = PagamentoResponse.class
+                                    )
+                            )
+                    ),
+                    @ApiResponse(
+                            responseCode = "404",
+                            description = "Forma de pagamento não encontrada."
+                    ),
+                    @ApiResponse(
+                            responseCode = "422",
+                            description = "A forma de pagamento já está inativa."
+                    )
+            }
+    )
+    ResponseEntity<PagamentoResponse> desativar(@Parameter(description = "ID da forma de pagamento.", example = "1") Integer id);
 }
