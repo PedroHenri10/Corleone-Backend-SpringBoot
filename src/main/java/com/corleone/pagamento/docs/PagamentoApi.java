@@ -66,5 +66,21 @@ public interface PagamentoApi {
             }
     )
     ResponseEntity<List<PagamentoResumoResponse>> listar(PagamentoFilter filter);
-    
+
+    @Operation(
+            summary = "Listar formas de pagamento ativas",
+            description = "Retorna somente as formas de pagamento que estão ativas.",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Lista retornada com sucesso.",
+                            content = @Content(
+                                    schema = @Schema(
+                                            implementation = PagamentoResumoResponse.class
+                                    )
+                            )
+                    )
+            }
+    )
+    ResponseEntity<List<PagamentoResumoResponse>> listarAtivos();
 }
