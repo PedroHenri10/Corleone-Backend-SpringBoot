@@ -83,4 +83,33 @@ public interface PagamentoApi {
             }
     )
     ResponseEntity<List<PagamentoResumoResponse>> listarAtivos();
+
+    @Operation(
+            summary = "Atualizar forma de pagamento",
+            description = "Atualiza os dados de uma forma de pagamento ativa.",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Forma de pagamento atualizada com sucesso.",
+                            content = @Content(
+                                    schema = @Schema(
+                                            implementation = PagamentoResponse.class
+                                    )
+                            )
+                    ),
+                    @ApiResponse(
+                            responseCode = "404",
+                            description = "Forma de pagamento não encontrada."
+                    ),
+                    @ApiResponse(
+                            responseCode = "409",
+                            description = "Já existe uma forma de pagamento com esse nome."
+                    ),
+                    @ApiResponse(
+                            responseCode = "422",
+                            description = "A forma de pagamento está inativa."
+                    )
+            }
+    )
+    ResponseEntity<PagamentoResponse> atualizar(@Parameter(description = "ID da forma de pagamento.", example = "1") Integer id, PagamentoRequest request);
 }
