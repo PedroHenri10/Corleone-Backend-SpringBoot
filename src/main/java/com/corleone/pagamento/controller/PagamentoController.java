@@ -5,6 +5,7 @@ import com.corleone.pagamento.dto.PagamentoFilter;
 import com.corleone.pagamento.dto.PagamentoRequest;
 import com.corleone.pagamento.dto.PagamentoResponse;
 import com.corleone.pagamento.dto.PagamentoResumoResponse;
+import com.corleone.pagamento.service.PagamentoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -16,6 +17,9 @@ import java.util.List;
 @RequestMapping("/v1/api/pagamentos")
 @RequiredArgsConstructor
 public class PagamentoController implements PagamentoApi {
+
+    private final PagamentoService service;
+
     @Override
     public ResponseEntity<PagamentoResponse> criar(PagamentoRequest request) {
         return null;
