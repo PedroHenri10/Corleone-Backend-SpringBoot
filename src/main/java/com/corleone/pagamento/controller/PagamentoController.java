@@ -46,11 +46,6 @@ public class PagamentoController implements PagamentoApi {
     }
 
     @Override
-    public ResponseEntity<List<PagamentoResumoResponse>> listarAtivos() {
-        return null;
-    }
-
-    @Override
     public ResponseEntity<PagamentoResponse> atualizar(Integer id, PagamentoRequest request) {
         return null;
     }
