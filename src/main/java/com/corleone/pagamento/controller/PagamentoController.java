@@ -54,8 +54,11 @@ public class PagamentoController implements PagamentoApi {
     }
 
     @Override
-    public ResponseEntity<PagamentoResponse> ativar(Integer id) {
-        return null;
+    @PatchMapping("/{id}/ativar")
+    @PreAuthorize("hasAuthority('PAGAMENTO_EDITAR')")
+    public ResponseEntity<PagamentoResponse> ativar(@PathVariable Integer id) {
+
+        return ResponseEntity.ok(service.ativar(id));
     }
 
     @Override
