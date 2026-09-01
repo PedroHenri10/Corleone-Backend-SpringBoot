@@ -8,6 +8,9 @@ import com.corleone.pagamento.dto.PagamentoResumoResponse;
 import com.corleone.pagamento.service.PagamentoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,8 +24,11 @@ public class PagamentoController implements PagamentoApi {
     private final PagamentoService service;
 
     @Override
-    public ResponseEntity<PagamentoResponse> criar(PagamentoRequest request) {
-        return null;
+    @PostMapping
+    @PreAuthorize("hasAuthority('PAGAMENTO_CRIAR')")
+    public ResponseEntity<PagamentoResponse> criar(@RequestBody PagamentoRequest request) {
+
+        return ResponseEntity.ok(service.criar(request));
     }
 
     @Override
