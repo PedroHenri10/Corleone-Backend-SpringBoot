@@ -62,7 +62,10 @@ public class PagamentoController implements PagamentoApi {
     }
 
     @Override
-    public ResponseEntity<PagamentoResponse> desativar(Integer id) {
-        return null;
+    @PatchMapping("/{id}/desativar")
+    @PreAuthorize("hasAuthority('PAGAMENTO_EDITAR')")
+    public ResponseEntity<PagamentoResponse> desativar(@PathVariable Integer id) {
+
+        return ResponseEntity.ok(service.desativar(id));
     }
 }
