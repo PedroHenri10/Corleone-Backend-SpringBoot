@@ -46,8 +46,11 @@ public class PagamentoController implements PagamentoApi {
     }
 
     @Override
-    public ResponseEntity<PagamentoResponse> atualizar(Integer id, PagamentoRequest request) {
-        return null;
+    @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('PAGAMENTO_EDITAR')")
+    public ResponseEntity<PagamentoResponse> atualizar(@PathVariable Integer id, @RequestBody PagamentoRequest request) {
+
+        return ResponseEntity.ok(service.atualizar(id, request));
     }
 
     @Override
