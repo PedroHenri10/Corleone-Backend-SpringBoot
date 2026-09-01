@@ -38,8 +38,11 @@ public class PagamentoController implements PagamentoApi {
 
 
     @Override
+    @GetMapping
+    @PreAuthorize("hasAuthority('PAGAMENTO_VISUALIZAR')")
     public ResponseEntity<List<PagamentoResumoResponse>> listar(PagamentoFilter filter) {
-        return null;
+
+        return ResponseEntity.ok(service.listar(filter));
     }
 
     @Override
