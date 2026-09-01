@@ -9,10 +9,7 @@ import com.corleone.pagamento.service.PagamentoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -32,9 +29,13 @@ public class PagamentoController implements PagamentoApi {
     }
 
     @Override
-    public ResponseEntity<PagamentoResponse> buscarPorId(Integer id) {
-        return null;
+    @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('PAGAMENTO_VISUALIZAR')")
+    public ResponseEntity<PagamentoResponse> buscarPorId(@PathVariable Integer id) {
+
+        return ResponseEntity.ok(service.buscarPorId(id));
     }
+
 
     @Override
     public ResponseEntity<List<PagamentoResumoResponse>> listar(PagamentoFilter filter) {
