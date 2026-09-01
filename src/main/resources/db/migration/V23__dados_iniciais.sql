@@ -115,6 +115,10 @@ INSERT INTO permissao(per_nome, per_descricao, per_modulo) VALUES
 ('AVALIACAO_VISUALIZAR', 'Visualizar avaliações', 'AVALIACAO'),
 ('AVALIACAO_MODERAR', 'Moderar avaliações', 'AVALIACAO'),
 
+('PAGAMENTO_VISUALIZAR', 'Visualizar formas de pagamento', 'PAGAMENTO'),
+('PAGAMENTO_CRIAR', 'Criar formas de pagamento', 'PAGAMENTO'),
+('PAGAMENTO_EDITAR', 'Editar formas de pagamento', 'PAGAMENTO'),
+
 ('CONFIGURACAO_VISUALIZAR', 'Visualizar configurações', 'CONFIGURACAO'),
 ('CONFIGURACAO_CRIAR', 'Criar configurações', 'CONFIGURACAO'),
 ('CONFIGURACAO_EDITAR', 'Editar configurações', 'CONFIGURACAO'),
