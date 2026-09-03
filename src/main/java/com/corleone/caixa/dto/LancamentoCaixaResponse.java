@@ -9,6 +9,6 @@ import lombok.*;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "DTO de retorno completo de um lançamento de caixa.")
+@Schema(description = "DTO resumido utilizado na listagem de lançamentos de caixa.")
 public class LancamentoCaixaResponse {
 }
