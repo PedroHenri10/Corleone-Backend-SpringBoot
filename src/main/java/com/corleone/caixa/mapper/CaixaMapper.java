@@ -1,9 +1,6 @@
 package com.corleone.caixa.mapper;
 
-import com.corleone.caixa.dto.CaixaRequest;
-import com.corleone.caixa.dto.CaixaResponse;
-import com.corleone.caixa.dto.CaixaResumoResponse;
-import com.corleone.caixa.dto.LancamentoCaixaRequest;
+import com.corleone.caixa.dto.*;
 import com.corleone.caixa.entity.Caixa;
 import com.corleone.caixa.entity.LancamentoCaixa;
 import com.corleone.funcionario.entity.Funcionario;
@@ -53,4 +50,12 @@ public interface CaixaMapper {
     @Mapping(target = "pagamento", source = "pagamento")
     @Mapping(target = "data", ignore = true)
     LancamentoCaixa toEntity(LancamentoCaixaRequest request, Caixa caixa, Funcionario funcionario, Pedido pedido, Pagamento pagamento);
+
+    @Mapping(target = "caixaId", source = "caixa.id")
+    @Mapping(target = "funcionarioId", source = "funcionario.id")
+    @Mapping(target = "funcionario", source = "funcionario.nome")
+    @Mapping(target = "pedidoId", source = "pedido.id")
+    @Mapping(target = "pagamentoId", source = "pagamento.id")
+    @Mapping(target = "pagamento", source = "pagamento.nome")
+    LancamentoCaixaResponse toResponse(LancamentoCaixa lancamento);
 }
