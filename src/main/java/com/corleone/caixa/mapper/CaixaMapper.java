@@ -58,4 +58,8 @@ public interface CaixaMapper {
     @Mapping(target = "pagamentoId", source = "pagamento.id")
     @Mapping(target = "pagamento", source = "pagamento.nome")
     LancamentoCaixaResponse toResponse(LancamentoCaixa lancamento);
+
+    @Mapping(target = "caixaId", source = "caixa.id")
+    @Mapping(target = "funcionario", source = "funcionario.nome")
+    LancamentoCaixaResumoResponse toResumoResponse(LancamentoCaixa lancamento);
 }
