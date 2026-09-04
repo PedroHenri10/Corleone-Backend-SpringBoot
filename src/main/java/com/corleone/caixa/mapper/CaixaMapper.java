@@ -29,4 +29,6 @@ public interface CaixaMapper {
 
     @Mapping(target = "funcionario", source = "funcionario.nome")
     CaixaResumoResponse toResumoResponse(Caixa caixa);
+
+    
 }
