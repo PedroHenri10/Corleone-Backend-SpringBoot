@@ -1,4 +1,15 @@
 package com.corleone.caixa.repository;
 
-public interface CaixaRepository {
+import com.corleone.caixa.entity.Caixa;
+import com.corleone.shared.enums.StatusCaixa;
+import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.JpaSpecificationExecutor;
+
+import java.util.Optional;
+
+public interface CaixaRepository extends JpaRepository<Caixa, Integer>, JpaSpecificationExecutor<Caixa> {
+
+    Optional<Caixa> findFirstByStatusOrderByDataAberturaDesc(StatusCaixa status);
+
+
 }
