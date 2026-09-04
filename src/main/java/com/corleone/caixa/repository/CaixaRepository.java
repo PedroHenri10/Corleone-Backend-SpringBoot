@@ -13,4 +13,5 @@ public interface CaixaRepository extends JpaRepository<Caixa, Integer>, JpaSpeci
 
     Optional<Caixa> findFirstByFuncionarioIdAndStatusOrderByDataAberturaDesc(Integer funcionarioId, StatusCaixa status);
 
+    boolean existsByFuncionarioIdAndStatus(Integer funcionarioId, StatusCaixa status);
 }
