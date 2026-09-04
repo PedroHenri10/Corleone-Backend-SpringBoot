@@ -2,6 +2,7 @@ package com.corleone.caixa.mapper;
 
 import com.corleone.caixa.dto.CaixaRequest;
 import com.corleone.caixa.dto.CaixaResponse;
+import com.corleone.caixa.dto.CaixaResumoResponse;
 import com.corleone.caixa.entity.Caixa;
 import com.corleone.funcionario.entity.Funcionario;
 import org.mapstruct.Mapper;
@@ -25,4 +26,7 @@ public interface CaixaMapper {
     @Mapping(target = "funcionarioId", source = "funcionario.id")
     @Mapping(target = "funcionario", source = "funcionario.nome")
     CaixaResponse toResponse(Caixa caixa);
+
+    @Mapping(target = "funcionario", source = "funcionario.nome")
+    CaixaResumoResponse toResumoResponse(Caixa caixa);
 }
