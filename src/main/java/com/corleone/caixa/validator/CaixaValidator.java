@@ -1,6 +1,7 @@
 package com.corleone.caixa.validator;
 
 import com.corleone.caixa.entity.Caixa;
+import com.corleone.caixa.entity.LancamentoCaixa;
 import com.corleone.caixa.repository.CaixaRepository;
 import com.corleone.caixa.repository.LancamentoCaixaRepository;
 import com.corleone.exception.BusinessException;
@@ -63,5 +64,9 @@ public class CaixaValidator {
     public void validarLancamentoPermitido(Caixa caixa) {
         validarCaixaAberto(caixa);
     }
-    
+
+    public LancamentoCaixa validarLancamento(Integer id) {
+        return lancamentoRepository.findById(id).orElseThrow(() ->
+                        new ResourceNotFoundException(ErrorEnum.LANCAMENTO_CAIXA_NAO_ENCONTRADO));
+    }
 }
