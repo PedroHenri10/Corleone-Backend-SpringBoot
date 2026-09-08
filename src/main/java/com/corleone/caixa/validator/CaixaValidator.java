@@ -12,6 +12,8 @@ import com.corleone.shared.enums.StatusCaixa;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
+import java.math.BigDecimal;
+
 @Component
 @RequiredArgsConstructor
 public class CaixaValidator {
@@ -43,6 +45,12 @@ public class CaixaValidator {
     public void validarCaixaFechado(Caixa caixa) {
         if (StatusCaixa.FECHADO.equals(caixa.getStatus())) {
             throw new BusinessException(ErrorEnum.CAIXA_JA_FECHADO);
+        }
+    }
+
+    public void validarValorAbertura(BigDecimal valor) {
+        if (valor == null || valor.compareTo(BigDecimal.ZERO) < 0) {
+            throw new BusinessException(ErrorEnum.VALOR_ABERTURA_INVALIDO);
         }
     }
 }
