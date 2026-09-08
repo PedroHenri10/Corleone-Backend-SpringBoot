@@ -431,6 +431,23 @@ public enum ErrorEnum {
             HttpStatus.UNPROCESSABLE_CONTENT,
             2076,
             "O valor de fechamento deve ser maior ou igual a zero."
+    ),
+    LANCAMENTO_CAIXA_NAO_ENCONTRADO(
+            HttpStatus.NOT_FOUND,
+            2077,
+            "Lançamento de caixa não encontrado."
+    ),
+
+    LANCAMENTO_CAIXA_INVALIDO(
+            HttpStatus.UNPROCESSABLE_CONTENT,
+            2078,
+            "Lançamento de caixa inválido."
+    ),
+
+    CAIXA_LANCAMENTO_NAO_PERMITIDO(
+            HttpStatus.UNPROCESSABLE_CONTENT,
+            2079,
+            "Não é possível realizar lançamentos em um caixa fechado."
     );
 
     private final HttpStatus httpStatus;
