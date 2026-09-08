@@ -53,4 +53,10 @@ public class CaixaValidator {
             throw new BusinessException(ErrorEnum.VALOR_ABERTURA_INVALIDO);
         }
     }
+
+    public void validarValorFechamento(BigDecimal valor) {
+        if (valor == null || valor.compareTo(BigDecimal.ZERO) < 0) {
+            throw new BusinessException(ErrorEnum.VALOR_FECHAMENTO_INVALIDO);
+        }
+    }
 }
