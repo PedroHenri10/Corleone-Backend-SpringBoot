@@ -59,4 +59,9 @@ public class CaixaValidator {
             throw new BusinessException(ErrorEnum.VALOR_FECHAMENTO_INVALIDO);
         }
     }
+
+    public void validarLancamentoPermitido(Caixa caixa) {
+        validarCaixaAberto(caixa);
+    }
+    
 }
