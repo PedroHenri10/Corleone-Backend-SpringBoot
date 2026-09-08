@@ -421,7 +421,17 @@ public enum ErrorEnum {
             "O caixa já está fechado."
     ),
 
-    
+    VALOR_ABERTURA_INVALIDO(
+            HttpStatus.UNPROCESSABLE_CONTENT,
+            2075,
+            "O valor de abertura deve ser maior ou igual a zero."
+    ),
+
+    VALOR_FECHAMENTO_INVALIDO(
+            HttpStatus.UNPROCESSABLE_CONTENT,
+            2076,
+            "O valor de fechamento deve ser maior ou igual a zero."
+    );
 
     private final HttpStatus httpStatus;
     private final Integer errorCode;
