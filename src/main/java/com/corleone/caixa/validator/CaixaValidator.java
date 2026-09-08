@@ -1,7 +1,10 @@
 package com.corleone.caixa.validator;
 
+import com.corleone.caixa.entity.Caixa;
 import com.corleone.caixa.repository.CaixaRepository;
 import com.corleone.caixa.repository.LancamentoCaixaRepository;
+import com.corleone.exception.ResourceNotFoundException;
+import com.corleone.exceptionhandler.ErrorEnum;
 import com.corleone.funcionario.repository.FuncionarioRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -13,5 +16,7 @@ public class CaixaValidator {
     private final FuncionarioRepository funcionarioRepository;
     private final LancamentoCaixaRepository lancamentoRepository;
 
-    
+    public Caixa validarCaixa(Integer id) {
+        return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(ErrorEnum.CAIXA_NAO_ENCONTRADO));
+    }
 }
