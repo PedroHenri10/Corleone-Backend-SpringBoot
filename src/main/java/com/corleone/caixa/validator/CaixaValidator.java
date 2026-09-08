@@ -39,4 +39,10 @@ public class CaixaValidator {
             throw new BusinessException(ErrorEnum.CAIXA_NAO_ABERTO);
         }
     }
+
+    public void validarCaixaFechado(Caixa caixa) {
+        if (StatusCaixa.FECHADO.equals(caixa.getStatus())) {
+            throw new BusinessException(ErrorEnum.CAIXA_JA_FECHADO);
+        }
+    }
 }
