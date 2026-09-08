@@ -69,4 +69,12 @@ public class CaixaValidator {
         return lancamentoRepository.findById(id).orElseThrow(() ->
                         new ResourceNotFoundException(ErrorEnum.LANCAMENTO_CAIXA_NAO_ENCONTRADO));
     }
+
+    public void validarLancamentoPertenceAoCaixa(LancamentoCaixa lancamento, Integer caixaId
+    ) {
+        if (lancamento.getCaixa() == null || !lancamento.getCaixa().getId().equals(caixaId)) {
+
+            throw new BusinessException(ErrorEnum.LANCAMENTO_CAIXA_INVALIDO);
+        }
+    }
 }
