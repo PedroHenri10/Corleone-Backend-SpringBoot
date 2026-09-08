@@ -396,7 +396,32 @@ public enum ErrorEnum {
             HttpStatus.UNPROCESSABLE_CONTENT,
             2070,
             "A forma de pagamento está inativa."
-    );
+    ),
+    CAIXA_NAO_ENCONTRADO(
+            HttpStatus.NOT_FOUND,
+            2071,
+            "Caixa não encontrado."
+    ),
+
+    CAIXA_JA_ABERTO(
+            HttpStatus.CONFLICT,
+            2072,
+            "Já existe um caixa aberto."
+    ),
+
+    CAIXA_NAO_ABERTO(
+            HttpStatus.UNPROCESSABLE_CONTENT,
+            2073,
+            "O caixa não está aberto."
+    ),
+
+    CAIXA_JA_FECHADO(
+            HttpStatus.UNPROCESSABLE_CONTENT,
+            2074,
+            "O caixa já está fechado."
+    ),
+
+    
 
     private final HttpStatus httpStatus;
     private final Integer errorCode;
