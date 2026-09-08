@@ -33,4 +33,10 @@ public class CaixaValidator {
             throw new BusinessException(ErrorEnum.CAIXA_JA_ABERTO);
         }
     }
+
+    public void validarCaixaAberto(Caixa caixa) {
+        if (!StatusCaixa.ABERTO.equals(caixa.getStatus())) {
+            throw new BusinessException(ErrorEnum.CAIXA_NAO_ABERTO);
+        }
+    }
 }
