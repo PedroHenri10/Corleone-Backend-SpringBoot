@@ -1,5 +1,6 @@
 package com.corleone.caixa.specification;
 
+import com.corleone.caixa.dto.CaixaFilter;
 import com.corleone.caixa.entity.Caixa;
 import com.corleone.shared.enums.StatusCaixa;
 import org.springframework.data.jpa.domain.Specification;
@@ -43,5 +44,18 @@ public class CaixaSpecification {
                         root.get("dataAbertura"),
                         dataFinal.plusDays(1).atStartOfDay()
                 );
+    }
+
+    public static Specification<Caixa> filtro(CaixaFilter filter) {
+
+        if (filter == null) {
+            return null;
+        }
+
+        return Specification
+                .where(funcionarioId(filter.getFuncionarioId()))
+                .and(status(filter.getStatus()))
+                .and(dataInicial(filter.getDataInicial()))
+                .and(dataFinal(filter.getDataFinal()));
     }
 }
