@@ -15,4 +15,15 @@ public class LancamentoCaixaSpecification {
                 );
     }
 
+    public static Specification<LancamentoCaixa> funcionarioId(Integer funcionarioId) {
+
+        return (root, query, cb) ->
+                funcionarioId == null
+                        ? null
+                        : cb.equal(
+                        root.get("funcionario").get("id"),
+                        funcionarioId
+                );
+    }
+
 }
