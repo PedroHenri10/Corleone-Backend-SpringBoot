@@ -23,8 +23,7 @@ public class CaixaSpecification {
                         : cb.equal(root.get("status"), status);
     }
 
-    public static Specification<Caixa> dataInicial(
-            java.time.LocalDate dataInicial) {
+    public static Specification<Caixa> dataInicial(java.time.LocalDate dataInicial) {
 
         return (root, query, cb) ->
                 dataInicial == null
@@ -35,5 +34,14 @@ public class CaixaSpecification {
                 );
     }
 
-    
+    public static Specification<Caixa> dataFinal(java.time.LocalDate dataFinal) {
+
+        return (root, query, cb) ->
+                dataFinal == null
+                        ? null
+                        : cb.lessThan(
+                        root.get("dataAbertura"),
+                        dataFinal.plusDays(1).atStartOfDay()
+                );
+    }
 }
