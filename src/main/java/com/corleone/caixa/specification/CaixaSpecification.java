@@ -58,4 +58,12 @@ public class CaixaSpecification {
                 .and(dataInicial(filter.getDataInicial()))
                 .and(dataFinal(filter.getDataFinal()));
     }
+
+    public static Specification<Caixa> somenteAbertos() {
+        return (root, query, cb) ->
+                cb.equal(
+                        root.get("status"),
+                        StatusCaixa.ABERTO
+                );
+    }
 }
