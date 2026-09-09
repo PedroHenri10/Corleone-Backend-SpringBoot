@@ -1,6 +1,7 @@
 package com.corleone.caixa.specification;
 
 import com.corleone.caixa.entity.Caixa;
+import com.corleone.shared.enums.StatusCaixa;
 import org.springframework.data.jpa.domain.Specification;
 
 public class CaixaSpecification {
@@ -13,6 +14,13 @@ public class CaixaSpecification {
                         root.get("funcionario").get("id"),
                         funcionarioId
                 );
+    }
+
+    public static Specification<Caixa> status(StatusCaixa status) {
+        return (root, query, cb) ->
+                status == null
+                        ? null
+                        : cb.equal(root.get("status"), status);
     }
 
 }
