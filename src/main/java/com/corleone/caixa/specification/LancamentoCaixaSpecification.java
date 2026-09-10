@@ -43,4 +43,11 @@ public class LancamentoCaixaSpecification {
         return (root, query, cb) ->
                 dataInicial == null ? null : cb.greaterThanOrEqualTo(root.get("data"), dataInicial.atStartOfDay());
     }
+
+    public static Specification<LancamentoCaixa> dataFinal(LocalDate dataFinal) {
+
+        return (root, query, cb) ->
+                dataFinal == null ? null : cb.lessThan(root.get("data"), dataFinal.plusDays(1).atStartOfDay());
+    }
+
 }
