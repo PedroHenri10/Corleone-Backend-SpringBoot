@@ -21,4 +21,10 @@ public class LancamentoCaixaSpecification {
         return (root, query, cb) ->
                 pedidoId == null ? null : cb.equal(root.get("pedido").get("id"), pedidoId);
     }
+
+    public static Specification<LancamentoCaixa> pagamentoId(Integer pagamentoId) {
+
+        return (root, query, cb) ->
+                pagamentoId == null ? null : cb.equal(root.get("pagamento").get("id"), pagamentoId);
+    }
 }
