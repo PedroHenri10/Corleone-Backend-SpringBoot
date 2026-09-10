@@ -1,5 +1,6 @@
 package com.corleone.caixa.specification;
 
+import com.corleone.caixa.dto.LancamentoCaixaFilter;
 import com.corleone.caixa.entity.LancamentoCaixa;
 import com.corleone.shared.enums.TipoLancamentoCaixa;
 import org.springframework.data.jpa.domain.Specification;
@@ -50,4 +51,19 @@ public class LancamentoCaixaSpecification {
                 dataFinal == null ? null : cb.lessThan(root.get("data"), dataFinal.plusDays(1).atStartOfDay());
     }
 
+    public static Specification<LancamentoCaixa> filtro(LancamentoCaixaFilter filter) {
+
+        if (filter == null) {
+            return null;
+        }
+
+        return Specification
+                .where(caixaId(filter.getCaixaId()))
+                .and(funcionarioId(filter.getFuncionarioId()))
+                .and(pedidoId(filter.getPedidoId()))
+                .and(pagamentoId(filter.getPagamentoId()))
+                .and(tipo(filter.getTipo()))
+                .and(dataInicial(filter.getDataInicial()))
+                .and(dataFinal(filter.getDataFinal()));
+    }
 }
