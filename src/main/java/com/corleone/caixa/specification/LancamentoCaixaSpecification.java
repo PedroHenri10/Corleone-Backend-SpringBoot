@@ -4,6 +4,8 @@ import com.corleone.caixa.entity.LancamentoCaixa;
 import com.corleone.shared.enums.TipoLancamentoCaixa;
 import org.springframework.data.jpa.domain.Specification;
 
+import java.time.LocalDate;
+
 public class LancamentoCaixaSpecification {
     public static Specification<LancamentoCaixa> caixaId(Integer caixaId) {
 
@@ -34,5 +36,11 @@ public class LancamentoCaixaSpecification {
 
         return (root, query, cb) ->
                 tipo == null ? null : cb.equal(root.get("tipo"), tipo);
+    }
+
+    public static Specification<LancamentoCaixa> dataInicial(LocalDate dataInicial) {
+
+        return (root, query, cb) ->
+                dataInicial == null ? null : cb.greaterThanOrEqualTo(root.get("data"), dataInicial.atStartOfDay());
     }
 }
