@@ -1,6 +1,7 @@
 package com.corleone.caixa.specification;
 
 import com.corleone.caixa.entity.LancamentoCaixa;
+import com.corleone.shared.enums.TipoLancamentoCaixa;
 import org.springframework.data.jpa.domain.Specification;
 
 public class LancamentoCaixaSpecification {
@@ -26,5 +27,12 @@ public class LancamentoCaixaSpecification {
 
         return (root, query, cb) ->
                 pagamentoId == null ? null : cb.equal(root.get("pagamento").get("id"), pagamentoId);
+    }
+
+    public static Specification<LancamentoCaixa> tipo(
+            TipoLancamentoCaixa tipo) {
+
+        return (root, query, cb) ->
+                tipo == null ? null : cb.equal(root.get("tipo"), tipo);
     }
 }
