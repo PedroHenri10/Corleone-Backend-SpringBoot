@@ -84,4 +84,12 @@ public class CaixaService {
 
         return mapper.toResponse(caixa);
     }
+
+    @Transactional
+    public CaixaResponse buscarPorId(Integer id) {
+
+        Caixa caixa = validator.validarCaixa(id);
+
+        return mapper.toResponse(caixa);
+    }
 }
