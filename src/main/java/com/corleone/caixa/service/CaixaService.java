@@ -107,4 +107,14 @@ public class CaixaService {
                 .map(mapper::toResumoResponse)
                 .toList();
     }
+
+    @Transactional
+    public List<CaixaResumoResponse> listarAbertos() {
+
+        return repository
+                .findAll(CaixaSpecification.somenteAbertos())
+                .stream()
+                .map(mapper::toResumoResponse)
+                .toList();
+    }
 }
