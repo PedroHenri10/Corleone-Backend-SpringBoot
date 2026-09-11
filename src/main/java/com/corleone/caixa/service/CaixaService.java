@@ -117,4 +117,8 @@ public class CaixaService {
                 .map(mapper::toResumoResponse)
                 .toList();
     }
-}
+
+    private BigDecimal calcularValorSistema(Caixa caixa) {
+
+    }
+    }
