@@ -1,11 +1,14 @@
 package com.corleone.caixa.service;
 
+import com.corleone.caixa.dto.CaixaFilter;
 import com.corleone.caixa.dto.CaixaRequest;
 import com.corleone.caixa.dto.CaixaResponse;
+import com.corleone.caixa.dto.CaixaResumoResponse;
 import com.corleone.caixa.entity.Caixa;
 import com.corleone.caixa.entity.LancamentoCaixa;
 import com.corleone.caixa.mapper.CaixaMapper;
 import com.corleone.caixa.repository.CaixaRepository;
+import com.corleone.caixa.specification.CaixaSpecification;
 import com.corleone.caixa.validator.CaixaValidator;
 import com.corleone.shared.enums.StatusCaixa;
 import com.corleone.shared.util.DateUtils;
@@ -15,6 +18,7 @@ import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -91,5 +95,16 @@ public class CaixaService {
         Caixa caixa = validator.validarCaixa(id);
 
         return mapper.toResponse(caixa);
+    }
+
+    @Transactional
+    public List<CaixaResumoResponse> listar(CaixaFilter filter
+    ) {
+
+        return repository
+                .findAll(CaixaSpecification.filtro(filter))
+                .stream()
+                .map(mapper::toResumoResponse)
+                .toList();
     }
 }
