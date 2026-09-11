@@ -120,5 +120,24 @@ public class CaixaService {
 
     private BigDecimal calcularValorSistema(Caixa caixa) {
 
-    }
+            if (caixa.getLancamentos() == null || caixa.getLancamentos().isEmpty()) {
+
+                return caixa.getValorAbertura();
+            }
+
+            BigDecimal total = caixa.getLancamentos()
+                    .stream()
+                    .map(lancamento -> {
+
+                        return switch (lancamento.getTipo()) {
+
+                            case ENTRADA, SUPRIMENTO -> lancamento.getValor();
+
+                            case SAIDA, SANGRIA -> lancamento.getValor().negate();};
+                    })
+                    .reduce(caixa.getValorAbertura(), BigDecimal::add);
+
+            return total;
+        }
+
     }
