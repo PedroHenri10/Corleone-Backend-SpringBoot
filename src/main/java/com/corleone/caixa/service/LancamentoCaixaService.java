@@ -70,5 +70,14 @@ public class LancamentoCaixaService {
         return mapper.toResponse(lancamento);
     }
 
+    @Transactional
+    public LancamentoCaixaResponse buscarPorId(Integer id
+    ) {
+
+        LancamentoCaixa lancamento = validator.validarLancamento(id);
+
+        return mapper.toResponse(lancamento);
+    }
+
     
 }
