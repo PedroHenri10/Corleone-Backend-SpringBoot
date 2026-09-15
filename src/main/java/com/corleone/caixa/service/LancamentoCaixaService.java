@@ -4,6 +4,7 @@ import com.corleone.caixa.mapper.CaixaMapper;
 import com.corleone.caixa.repository.LancamentoCaixaRepository;
 import com.corleone.caixa.validator.CaixaValidator;
 import com.corleone.funcionario.repository.FuncionarioRepository;
+import com.corleone.pagamento.repository.PagamentoRepository;
 import com.corleone.pedido.repository.PedidoRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -19,4 +20,7 @@ public class LancamentoCaixaService {
 
     private final FuncionarioRepository funcionarioRepository;
     private final PedidoRepository pedidoRepository;
+    private final PagamentoRepository pagamentoRepository;
+
+    
 }
