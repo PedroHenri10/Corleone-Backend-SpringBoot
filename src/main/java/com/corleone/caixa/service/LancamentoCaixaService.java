@@ -1,10 +1,13 @@
 package com.corleone.caixa.service;
 
+import com.corleone.caixa.dto.LancamentoCaixaFilter;
 import com.corleone.caixa.dto.LancamentoCaixaRequest;
 import com.corleone.caixa.dto.LancamentoCaixaResponse;
+import com.corleone.caixa.dto.LancamentoCaixaResumoResponse;
 import com.corleone.caixa.entity.LancamentoCaixa;
 import com.corleone.caixa.mapper.CaixaMapper;
 import com.corleone.caixa.repository.LancamentoCaixaRepository;
+import com.corleone.caixa.specification.LancamentoCaixaSpecification;
 import com.corleone.caixa.validator.CaixaValidator;
 import com.corleone.funcionario.entity.Funcionario;
 import com.corleone.funcionario.repository.FuncionarioRepository;
@@ -18,6 +21,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -77,6 +81,17 @@ public class LancamentoCaixaService {
         LancamentoCaixa lancamento = validator.validarLancamento(id);
 
         return mapper.toResponse(lancamento);
+    }
+
+    @Transactional
+    public List<LancamentoCaixaResumoResponse> listar(LancamentoCaixaFilter filter
+    ) {
+
+        return repository.findAll(LancamentoCaixaSpecification.filtro(filter)
+                )
+                .stream()
+                .map(mapper::toResumoResponse)
+                .toList();
     }
 
     
