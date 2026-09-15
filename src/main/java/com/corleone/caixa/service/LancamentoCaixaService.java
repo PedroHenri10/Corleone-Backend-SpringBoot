@@ -94,5 +94,14 @@ public class LancamentoCaixaService {
                 .toList();
     }
 
-    
+    @Transactional
+    public List<LancamentoCaixaResumoResponse> listarPorCaixa(Integer caixaId
+    ) {
+
+        return repository
+                .findByCaixaId(caixaId)
+                .stream()
+                .map(mapper::toResumoResponse)
+                .toList();
+    }
 }
