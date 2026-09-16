@@ -2,6 +2,7 @@ package com.corleone.caixa.docs;
 
 import com.corleone.caixa.dto.CaixaRequest;
 import com.corleone.caixa.dto.CaixaResponse;
+import com.corleone.caixa.dto.CaixaResumoResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -15,6 +16,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.util.List;
 
 @Tag(name = "Caixa", description = "Operações relacionadas ao controle e movimentação dos caixas da pizzaria.")
 @RequestMapping("/v1/api/caixas")
@@ -117,12 +119,43 @@ public interface CaixaApi {
     })
     @GetMapping("/{id}")
     ResponseEntity<CaixaResponse> buscarPorId(
-            @Parameter(
-                    description = "ID do caixa.",
-                    example = "1",
-                    required = true,
-                    in = ParameterIn.PATH
-            ) @PathVariable Integer id
+            @Parameter(description = "ID do caixa.", example = "1", required = true, in = ParameterIn.PATH) @PathVariable Integer id
     );
 
+    @Operation(
+            summary = "Listar caixas",
+            description = """
+                    Lista caixas utilizando filtros opcionais.
+
+                    É possível filtrar por funcionário, status e período
+                    de abertura.
+                    """
+    )
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Lista de caixas retornada com sucesso.",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(
+                                    type = "array",
+                                    implementation = CaixaResumoResponse.class
+                            )
+                    )
+            )
+    })
+    @GetMapping
+    ResponseEntity<List<CaixaResumoResponse>> listar(
+            @Parameter(description = "ID do funcionário responsável pelo caixa.", example = "5")
+            @RequestParam(required = false) Integer funcionarioId,
+
+            @Parameter(description = "Status do caixa.", example = "ABERTO")
+            @RequestParam(required = false) String status,
+
+            @Parameter(description = "Data inicial para filtro da abertura.", example = "2026-09-01")
+            @RequestParam(required = false) String dataInicial,
+
+            @Parameter(description = "Data final para filtro da abertura.", example = "2026-09-30")
+            @RequestParam(required = false) String dataFinal
+    );
 }
