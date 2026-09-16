@@ -3,6 +3,8 @@ package com.corleone.caixa.docs;
 import com.corleone.caixa.dto.CaixaRequest;
 import com.corleone.caixa.dto.CaixaResponse;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.enums.ParameterIn;
 import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
@@ -10,9 +12,9 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
+
+import java.math.BigDecimal;
 
 @Tag(name = "Caixa", description = "Operações relacionadas ao controle e movimentação dos caixas da pizzaria.")
 @RequestMapping("/v1/api/caixas")
@@ -57,5 +59,43 @@ public interface CaixaApi {
     @PostMapping
     ResponseEntity<CaixaResponse> abrir(@Valid @RequestBody CaixaRequest request);
 
-    
+    @Operation(summary = "Fechar caixa", description = """
+                    Fecha um caixa que esteja aberto.
+
+                    O valor informado no fechamento é comparado com o valor
+                    calculado pelo sistema a partir do valor de abertura e
+                    dos lançamentos realizados no caixa.
+
+                    A diferença entre o valor informado e o valor calculado
+                    pelo sistema é registrada no caixa.
+                    """
+    )
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Caixa fechado com sucesso.",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = CaixaResponse.class)
+                    )
+            ),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "Caixa não encontrado.",
+                    content = @Content
+            ),
+            @ApiResponse(
+                    responseCode = "422",
+                    description = "Caixa não está aberto ou valor de fechamento inválido.",
+                    content = @Content
+            )
+    })
+    @PatchMapping("/{id}/fechar")
+    ResponseEntity<CaixaResponse> fechar(
+            @Parameter(description = "ID do caixa.", example = "1", required = true, in = ParameterIn.PATH)
+            @PathVariable Integer id,
+
+            @Parameter(description = "Valor físico contado no fechamento do caixa.", example = "1500.00", required = true)
+            @RequestParam BigDecimal valorFechamento
+    );
 }
