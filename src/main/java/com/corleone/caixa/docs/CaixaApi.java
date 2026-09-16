@@ -98,4 +98,31 @@ public interface CaixaApi {
             @Parameter(description = "Valor físico contado no fechamento do caixa.", example = "1500.00", required = true)
             @RequestParam BigDecimal valorFechamento
     );
+
+    @Operation(summary = "Buscar caixa por ID", description = "Consulta os dados completos de um caixa pelo seu identificador.")
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Caixa encontrado.",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(implementation = CaixaResponse.class)
+                    )
+            ),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "Caixa não encontrado.",
+                    content = @Content
+            )
+    })
+    @GetMapping("/{id}")
+    ResponseEntity<CaixaResponse> buscarPorId(
+            @Parameter(
+                    description = "ID do caixa.",
+                    example = "1",
+                    required = true,
+                    in = ParameterIn.PATH
+            ) @PathVariable Integer id
+    );
+
 }
