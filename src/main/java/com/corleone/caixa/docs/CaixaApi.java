@@ -3,6 +3,7 @@ package com.corleone.caixa.docs;
 import com.corleone.caixa.dto.CaixaRequest;
 import com.corleone.caixa.dto.CaixaResponse;
 import com.corleone.caixa.dto.CaixaResumoResponse;
+import com.corleone.shared.enums.StatusCaixa;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.enums.ParameterIn;
@@ -16,6 +17,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.math.BigDecimal;
+import java.time.LocalDate;
 import java.util.List;
 
 @Tag(name = "Caixa", description = "Operações relacionadas ao controle e movimentação dos caixas da pizzaria.")
@@ -150,13 +152,13 @@ public interface CaixaApi {
             @RequestParam(required = false) Integer funcionarioId,
 
             @Parameter(description = "Status do caixa.", example = "ABERTO")
-            @RequestParam(required = false) String status,
+            @RequestParam(required = false) StatusCaixa status,
 
             @Parameter(description = "Data inicial para filtro da abertura.", example = "2026-09-01")
-            @RequestParam(required = false) String dataInicial,
+            @RequestParam(required = false) LocalDate dataInicial,
 
             @Parameter(description = "Data final para filtro da abertura.", example = "2026-09-30")
-            @RequestParam(required = false) String dataFinal
+            @RequestParam(required = false) LocalDate dataFinal
     );
 
     @Operation(
