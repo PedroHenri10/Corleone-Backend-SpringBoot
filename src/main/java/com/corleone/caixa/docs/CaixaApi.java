@@ -158,4 +158,24 @@ public interface CaixaApi {
             @Parameter(description = "Data final para filtro da abertura.", example = "2026-09-30")
             @RequestParam(required = false) String dataFinal
     );
+
+    @Operation(
+            summary = "Listar caixas abertos",
+            description = "Retorna os caixas que estão atualmente com status ABERTO."
+    )
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Caixas abertos retornados com sucesso.",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(
+                                    type = "array",
+                                    implementation = CaixaResumoResponse.class
+                            )
+                    )
+            )
+    })
+    @GetMapping("/abertos")
+    ResponseEntity<List<CaixaResumoResponse>> listarAbertos();
 }
