@@ -5,12 +5,16 @@ import com.corleone.caixa.dto.CaixaRequest;
 import com.corleone.caixa.dto.CaixaResponse;
 import com.corleone.caixa.dto.CaixaResumoResponse;
 import com.corleone.shared.enums.StatusCaixa;
+import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.util.List;
 
+@RestController
+@RequiredArgsConstructor
 public class CaixaController implements CaixaApi {
     @Override
     public ResponseEntity<CaixaResponse> abrir(CaixaRequest request) {
