@@ -1,4 +1,6 @@
 package com.corleone.caixa.controller;
 
-public class CaixaController {
+import com.corleone.caixa.docs.CaixaApi;
+
+public class CaixaController implements CaixaApi {
 }
