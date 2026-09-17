@@ -39,8 +39,10 @@ public class CaixaController implements CaixaApi {
     }
 
     @Override
-    public ResponseEntity<CaixaResponse> buscarPorId(Integer id) {
-        return null;
+    @PreAuthorize("hasAuthority('CAIXA_VISUALIZAR')")
+    public ResponseEntity<CaixaResponse> buscarPorId(Integer id
+    ) {
+        return ResponseEntity.ok(service.buscarPorId(id));
     }
 
     @Override
