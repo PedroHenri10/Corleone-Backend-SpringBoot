@@ -32,8 +32,10 @@ public class CaixaController implements CaixaApi {
     }
 
     @Override
-    public ResponseEntity<CaixaResponse> fechar(Integer id, BigDecimal valorFechamento) {
-        return null;
+    @PreAuthorize("hasAuthority('CAIXA_FECHAR')")
+    public ResponseEntity<CaixaResponse> fechar(Integer id, BigDecimal valorFechamento
+    ) {
+        return ResponseEntity.ok(service.fechar(id, valorFechamento));
     }
 
     @Override
