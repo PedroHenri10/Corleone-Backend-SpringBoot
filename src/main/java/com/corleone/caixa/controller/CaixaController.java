@@ -1,6 +1,7 @@
 package com.corleone.caixa.controller;
 
 import com.corleone.caixa.docs.CaixaApi;
+import com.corleone.caixa.dto.CaixaFilter;
 import com.corleone.caixa.dto.CaixaRequest;
 import com.corleone.caixa.dto.CaixaResponse;
 import com.corleone.caixa.dto.CaixaResumoResponse;
@@ -46,9 +47,20 @@ public class CaixaController implements CaixaApi {
     }
 
     @Override
-    public ResponseEntity<List<CaixaResumoResponse>> listar(Integer funcionarioId, StatusCaixa status, LocalDate dataInicial, LocalDate dataFinal) {
-        return null;
+    @PreAuthorize("hasAuthority('CAIXA_VISUALIZAR')")
+    public ResponseEntity<List<CaixaResumoResponse>> listar(Integer funcionarioId, StatusCaixa status, LocalDate dataInicial,
+            LocalDate dataFinal
+    ) {
+        CaixaFilter filter = CaixaFilter.builder()
+                .funcionarioId(funcionarioId)
+                .status(status)
+                .dataInicial(dataInicial)
+                .dataFinal(dataFinal)
+                .build();
+
+        return ResponseEntity.ok(service.listar(filter));
     }
+
 
     @Override
     public ResponseEntity<List<CaixaResumoResponse>> listarAbertos() {
