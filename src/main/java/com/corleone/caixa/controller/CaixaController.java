@@ -24,7 +24,7 @@ public class CaixaController implements CaixaApi {
     private final CaixaService service;
 
     @Override
-    @PreAuthorize("hasAuthority('CAIXA_CRIAR')")
+    @PreAuthorize("hasAuthority('CAIXA_ABRIR')")
     public ResponseEntity<CaixaResponse> abrir(@Valid CaixaRequest request
     ) {
         return ResponseEntity
