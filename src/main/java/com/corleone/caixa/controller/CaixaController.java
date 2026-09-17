@@ -61,9 +61,9 @@ public class CaixaController implements CaixaApi {
         return ResponseEntity.ok(service.listar(filter));
     }
 
-
     @Override
+    @PreAuthorize("hasAuthority('CAIXA_VISUALIZAR')")
     public ResponseEntity<List<CaixaResumoResponse>> listarAbertos() {
-        return null;
+        return ResponseEntity.ok(service.listarAbertos());
     }
 }
