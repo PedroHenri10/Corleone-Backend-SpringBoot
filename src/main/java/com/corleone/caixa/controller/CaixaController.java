@@ -6,8 +6,10 @@ import com.corleone.caixa.dto.CaixaResponse;
 import com.corleone.caixa.dto.CaixaResumoResponse;
 import com.corleone.caixa.service.CaixaService;
 import com.corleone.shared.enums.StatusCaixa;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.math.BigDecimal;
@@ -21,8 +23,12 @@ public class CaixaController implements CaixaApi {
     private final CaixaService service;
 
     @Override
-    public ResponseEntity<CaixaResponse> abrir(CaixaRequest request) {
-        return null;
+    @PreAuthorize("hasAuthority('CAIXA_CRIAR')")
+    public ResponseEntity<CaixaResponse> abrir(@Valid CaixaRequest request
+    ) {
+        return ResponseEntity
+                .status(201)
+                .body(service.abrir(request));
     }
 
     @Override
