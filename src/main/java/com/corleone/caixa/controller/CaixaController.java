@@ -4,6 +4,7 @@ import com.corleone.caixa.docs.CaixaApi;
 import com.corleone.caixa.dto.CaixaRequest;
 import com.corleone.caixa.dto.CaixaResponse;
 import com.corleone.caixa.dto.CaixaResumoResponse;
+import com.corleone.caixa.service.CaixaService;
 import com.corleone.shared.enums.StatusCaixa;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -16,6 +17,9 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 public class CaixaController implements CaixaApi {
+
+    private final CaixaService service;
+
     @Override
     public ResponseEntity<CaixaResponse> abrir(CaixaRequest request) {
         return null;
