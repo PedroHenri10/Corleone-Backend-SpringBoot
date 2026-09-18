@@ -129,9 +129,7 @@ public interface LancamentoCaixaApi {
             @RequestParam(required = false) LocalDate dataFinal
     );
 
-    @Operation(
-            summary = "Listar lançamentos de um caixa",
-            description = "Retorna todos os lançamentos vinculados a um caixa específico."
+    @Operation(summary = "Listar lançamentos de um caixa", description = "Retorna todos os lançamentos vinculados a um caixa específico."
     )
     @ApiResponses({
             @ApiResponse(
@@ -152,14 +150,9 @@ public interface LancamentoCaixaApi {
             )
     })
     @GetMapping("/caixa/{caixaId}")
-    ResponseEntity<List<LancamentoCaixaResumoResponse>> listarPorCaixa(
-            @Parameter(
-                    description = "ID do caixa.",
+    ResponseEntity<List<LancamentoCaixaResumoResponse>> listarPorCaixa(@Parameter(description = "ID do caixa.",
                     example = "1",
                     required = true,
-                    in = ParameterIn.PATH
-            )
-            @PathVariable Integer caixaId
-    );
-    
+                    in = ParameterIn.PATH) @PathVariable Integer caixaId);
+
 }
