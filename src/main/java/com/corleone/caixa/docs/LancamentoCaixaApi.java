@@ -128,4 +128,38 @@ public interface LancamentoCaixaApi {
             @Parameter(description = "Data final.", example = "2026-09-30")
             @RequestParam(required = false) LocalDate dataFinal
     );
+
+    @Operation(
+            summary = "Listar lançamentos de um caixa",
+            description = "Retorna todos os lançamentos vinculados a um caixa específico."
+    )
+    @ApiResponses({
+            @ApiResponse(
+                    responseCode = "200",
+                    description = "Lançamentos retornados com sucesso.",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(
+                                    type = "array",
+                                    implementation = LancamentoCaixaResumoResponse.class
+                            )
+                    )
+            ),
+            @ApiResponse(
+                    responseCode = "404",
+                    description = "Caixa não encontrado.",
+                    content = @Content
+            )
+    })
+    @GetMapping("/caixa/{caixaId}")
+    ResponseEntity<List<LancamentoCaixaResumoResponse>> listarPorCaixa(
+            @Parameter(
+                    description = "ID do caixa.",
+                    example = "1",
+                    required = true,
+                    in = ParameterIn.PATH
+            )
+            @PathVariable Integer caixaId
+    );
+    
 }
