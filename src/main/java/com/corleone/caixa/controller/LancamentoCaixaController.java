@@ -1,6 +1,7 @@
 package com.corleone.caixa.controller;
 
 import com.corleone.caixa.docs.LancamentoCaixaApi;
+import com.corleone.caixa.dto.LancamentoCaixaFilter;
 import com.corleone.caixa.dto.LancamentoCaixaRequest;
 import com.corleone.caixa.dto.LancamentoCaixaResponse;
 import com.corleone.caixa.dto.LancamentoCaixaResumoResponse;
@@ -36,8 +37,27 @@ public class LancamentoCaixaController implements LancamentoCaixaApi {
     }
 
     @Override
-    public ResponseEntity<List<LancamentoCaixaResumoResponse>> listar(Integer caixaId, Integer funcionarioId, Integer pedidoId, Integer pagamentoId, TipoLancamentoCaixa tipo, LocalDate dataInicial, LocalDate dataFinal) {
-        return null;
+    @PreAuthorize("hasAuthority('CAIXA_LANCAMENTO')")
+    public ResponseEntity<List<LancamentoCaixaResumoResponse>> listar(
+            Integer caixaId,
+            Integer funcionarioId,
+            Integer pedidoId,
+            Integer pagamentoId,
+            TipoLancamentoCaixa tipo,
+            LocalDate dataInicial,
+            LocalDate dataFinal
+    ) {
+        LancamentoCaixaFilter filter = LancamentoCaixaFilter.builder()
+                .caixaId(caixaId)
+                .funcionarioId(funcionarioId)
+                .pedidoId(pedidoId)
+                .pagamentoId(pagamentoId)
+                .tipo(tipo)
+                .dataInicial(dataInicial)
+                .dataFinal(dataFinal)
+                .build();
+
+        return ResponseEntity.ok(service.listar(filter));
     }
 
     @Override
