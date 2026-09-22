@@ -29,8 +29,10 @@ public class LancamentoCaixaController implements LancamentoCaixaApi {
     }
 
     @Override
-    public ResponseEntity<LancamentoCaixaResponse> buscarPorId(Integer id) {
-        return null;
+    @PreAuthorize("hasAuthority('CAIXA_LANCAMENTO')")
+    public ResponseEntity<LancamentoCaixaResponse> buscarPorId(Integer id
+    ) {
+        return ResponseEntity.ok(service.buscarPorId(id));
     }
 
     @Override
