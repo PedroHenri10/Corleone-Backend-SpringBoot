@@ -6,8 +6,10 @@ import com.corleone.caixa.dto.LancamentoCaixaResponse;
 import com.corleone.caixa.dto.LancamentoCaixaResumoResponse;
 import com.corleone.caixa.service.LancamentoCaixaService;
 import com.corleone.shared.enums.TipoLancamentoCaixa;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RestController;
 
 import java.time.LocalDate;
@@ -20,8 +22,10 @@ public class LancamentoCaixaController implements LancamentoCaixaApi {
     private final LancamentoCaixaService service;
 
     @Override
-    public ResponseEntity<LancamentoCaixaResponse> criar(LancamentoCaixaRequest request) {
-        return null;
+    @PreAuthorize("hasAuthority('CAIXA_LANCAMENTO')")
+    public ResponseEntity<LancamentoCaixaResponse> criar(@Valid LancamentoCaixaRequest request
+    ) {
+        return ResponseEntity.status(201).body(service.criar(request));
     }
 
     @Override
