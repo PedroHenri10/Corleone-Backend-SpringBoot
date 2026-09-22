@@ -4,6 +4,7 @@ import com.corleone.caixa.docs.LancamentoCaixaApi;
 import com.corleone.caixa.dto.LancamentoCaixaRequest;
 import com.corleone.caixa.dto.LancamentoCaixaResponse;
 import com.corleone.caixa.dto.LancamentoCaixaResumoResponse;
+import com.corleone.caixa.service.LancamentoCaixaService;
 import com.corleone.shared.enums.TipoLancamentoCaixa;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
@@ -15,6 +16,9 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 public class LancamentoCaixaController implements LancamentoCaixaApi {
+
+    private final LancamentoCaixaService service;
+
     @Override
     public ResponseEntity<LancamentoCaixaResponse> criar(LancamentoCaixaRequest request) {
         return null;
