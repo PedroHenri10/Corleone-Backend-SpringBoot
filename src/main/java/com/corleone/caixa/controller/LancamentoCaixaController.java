@@ -61,7 +61,9 @@ public class LancamentoCaixaController implements LancamentoCaixaApi {
     }
 
     @Override
-    public ResponseEntity<List<LancamentoCaixaResumoResponse>> listarPorCaixa(Integer caixaId) {
-        return null;
+    @PreAuthorize("hasAuthority('CAIXA_LANCAMENTO')")
+    public ResponseEntity<List<LancamentoCaixaResumoResponse>> listarPorCaixa(Integer caixaId
+    ) {
+        return ResponseEntity.ok(service.listarPorCaixa(caixaId));
     }
 }
