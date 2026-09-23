@@ -10,7 +10,7 @@ import lombok.Setter;
 public class RefreshTokenRequest {
 
     @Schema(
-            description = "O Refresh Token associado à sessão do usuário",
+            description = "Token JWT utilizado para renovação da sessão",
             example = "8f3b9c4d-2e1a-4b5c-8d7e-9f0a1b2c3d4e",
             requiredMode = Schema.RequiredMode.REQUIRED
     )

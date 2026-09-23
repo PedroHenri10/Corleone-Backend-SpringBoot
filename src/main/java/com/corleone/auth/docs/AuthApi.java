@@ -12,6 +12,8 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.web.bind.annotation.RequestBody;
 
 @Tag(name = "Autenticação", description = "Endpoints para gerenciamento de acesso, sessão e renovação de tokens")
@@ -36,15 +38,25 @@ public interface AuthApi {
     })
     ResponseEntity<ApiResponse<LoginResponse>> login(@RequestBody LoginRequest request);
 
-    @Operation(summary = "Obter dados do usuário logado", description = "Recupera as informações essenciais do perfil do usuário através do token ativo.")
-    @ApiResponses(value = {@io.swagger.v3.oas.annotations.responses.ApiResponse(
+    @Operation(
+            summary = "Obter dados do usuário logado",
+            description = "Recupera as informações do usuário autenticado."
+    )
+    @ApiResponses(value = {
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(
                     responseCode = "200",
-                    description = "Dados do perfil retornados com sucesso",
-                    content = @Content(mediaType = "application/json", schema = @Schema(implementation = MeResponse.class))
-            )
+                    description = "Usuário autenticado",
+                    content = @Content(
+                            mediaType = "application/json",
+                            schema = @Schema(
+                                    implementation = ApiResponse.class,
+                                    subTypes = {MeResponse.class}
+                            )
+                    )
+            ),
+            @io.swagger.v3.oas.annotations.responses.ApiResponse(responseCode = "401", description = "Usuário não autenticado")
     })
-    ResponseEntity<MeResponse> me(@org.springframework.security.core.annotation.AuthenticationPrincipal org.springframework.security.core.userdetails.UserDetails user);
-
+    ResponseEntity<ApiResponse<MeResponse>> me(@AuthenticationPrincipal UserDetails user);
     @Operation(
             summary = "Renovar token de acesso (Refresh)",
             description = "Recebe um token e gera uma nova credencial de acesso com tempo de expiração renovado."
