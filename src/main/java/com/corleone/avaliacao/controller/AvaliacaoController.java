@@ -8,6 +8,8 @@ import com.corleone.avaliacao.dto.AvaliacaoResumoResponse;
 import com.corleone.avaliacao.service.AvaliacaoService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -39,8 +41,9 @@ public class AvaliacaoController implements AvaliacaoApi {
     @Override
     @GetMapping
     @PreAuthorize("hasAuthority('AVALIACAO_VISUALIZAR')")
-    public ResponseEntity<List<AvaliacaoResumoResponse>> listar(AvaliacaoFilter filter) {
-        return ResponseEntity.ok(service.listar(filter));
+    public ResponseEntity<Page<AvaliacaoResumoResponse>> listar(AvaliacaoFilter filter, Pageable pageable) {
+
+        return ResponseEntity.ok(service.listar(filter, pageable));
     }
 
     @Override

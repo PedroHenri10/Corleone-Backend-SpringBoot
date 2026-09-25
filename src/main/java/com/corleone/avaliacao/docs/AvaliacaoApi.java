@@ -11,6 +11,8 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
@@ -41,7 +43,7 @@ public interface AvaliacaoApi {
             @ApiResponse(responseCode = "200", description = "Lista retornada com sucesso.", content = @Content(
                                     array = @ArraySchema(schema = @Schema(implementation = AvaliacaoResumoResponse.class))))}
     )
-    ResponseEntity<List<AvaliacaoResumoResponse>> listar(AvaliacaoFilter filter);
+    ResponseEntity<Page<AvaliacaoResumoResponse>> listar(AvaliacaoFilter filter, Pageable pageable);
 
     @Operation(summary = "Atualizar avaliação", description = "Atualiza uma avaliação existente.",
             responses = {@ApiResponse(responseCode = "200", description = "Avaliação atualizada com sucesso.",

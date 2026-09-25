@@ -14,6 +14,8 @@ import com.corleone.pedido.entity.Pedido;
 import com.corleone.shared.util.DateUtils;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -73,12 +75,11 @@ public class AvaliacaoService {
         return mapper.toResponse(avaliacao);
     }
 
-    public List<AvaliacaoResumoResponse> listar(AvaliacaoFilter filter) {
+    public Page<AvaliacaoResumoResponse> listar(AvaliacaoFilter filter, Pageable pageable){
 
-        return repository.findAll(AvaliacaoSpecification.filtro(filter))
-                .stream()
-                .map(mapper::toResumoResponse)
-                .toList();
+
+        return repository.findAll(AvaliacaoSpecification.filtro(filter), pageable)
+                .map(mapper::toResumoResponse);
     }
 
     public void excluir(Integer id) {
