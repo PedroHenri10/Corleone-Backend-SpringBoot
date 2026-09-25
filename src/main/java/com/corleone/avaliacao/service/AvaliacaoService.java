@@ -59,6 +59,8 @@ public class AvaliacaoService {
 
         mapper.updateEntity(avaliacao, request, pedido, cliente);
 
+        validator.validarPedidoJaAvaliadoAtualizacao(id, request.getPedidoId());
+
         avaliacao = repository.save(avaliacao);
 
         return mapper.toResponse(avaliacao);

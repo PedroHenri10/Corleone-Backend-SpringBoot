@@ -47,4 +47,15 @@ public class AvaliacaoValidator {
         }
 
     }
+    public void validarPedidoJaAvaliadoAtualizacao(Integer avaliacaoId, Integer pedidoId
+    ) {
+
+        repository.findByPedidoId(pedidoId).ifPresent(avaliacao -> {
+
+                    if (!avaliacao.getId().equals(avaliacaoId)) {
+
+                        throw new BusinessException(ErrorEnum.PEDIDO_JA_AVALIADO);
+                    }
+                });
+    }
 }
