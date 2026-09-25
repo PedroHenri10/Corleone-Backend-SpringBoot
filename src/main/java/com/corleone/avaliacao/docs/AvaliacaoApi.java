@@ -20,7 +20,7 @@ public interface AvaliacaoApi {
 
     @Operation(summary = "Cadastrar avaliação", description = "Realiza o cadastro de uma nova avaliação para um pedido.",
             responses = {
-                    @ApiResponse(responseCode = "200", description = "Avaliação cadastrada com sucesso.",
+                    @ApiResponse(responseCode = "201", description = "Avaliação cadastrada com sucesso.",
                             content = @Content(schema = @Schema(implementation = AvaliacaoResponse.class))),
                     @ApiResponse(responseCode = "404", description = "Pedido ou cliente não encontrado."),
                     @ApiResponse(responseCode = "400", description = "Nota inválida."),

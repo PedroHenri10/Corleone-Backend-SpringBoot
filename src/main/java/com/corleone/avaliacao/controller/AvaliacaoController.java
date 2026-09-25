@@ -45,7 +45,7 @@ public class AvaliacaoController implements AvaliacaoApi {
 
     @Override
     @PutMapping("/{id}")
-    @PreAuthorize("hasAuthority('AVALIACAO_VISUALIZAR')")
+    @PreAuthorize("hasAuthority('AVALIACAO_MODERAR')")
     public ResponseEntity<AvaliacaoResponse> atualizar(@Valid @PathVariable Integer id, @RequestBody AvaliacaoRequest request) {
         return ResponseEntity.ok(service.atualizar(id, request));
     }
