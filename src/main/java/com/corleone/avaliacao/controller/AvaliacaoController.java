@@ -55,7 +55,7 @@ public class AvaliacaoController implements AvaliacaoApi {
     @PreAuthorize("hasAuthority('AVALIACAO_MODERAR')")
     public ResponseEntity<Void> excluir(@PathVariable Integer id) {
 
-        service.desativar(id);
+        service.excluir(id);
         return ResponseEntity.noContent().build();
     }
 }

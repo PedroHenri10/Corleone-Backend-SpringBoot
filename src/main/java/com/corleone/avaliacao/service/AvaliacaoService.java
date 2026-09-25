@@ -81,7 +81,7 @@ public class AvaliacaoService {
                 .toList();
     }
 
-    public void desativar(Integer id) {
+    public void excluir(Integer id) {
 
         Avaliacao avaliacao = validator.validarAvaliacao(id);
 
