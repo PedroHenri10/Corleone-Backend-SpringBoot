@@ -1,4 +1,4 @@
 package com.corleone.pedido.mapper;
 
-public class PedidoMapper {
+public interface PedidoMapper {
 }
