@@ -48,5 +48,9 @@ public interface PedidoMapper {
     @Mapping(target = "itens", source = "itens")
     PedidoResponse toResponse(Pedido pedido);
 
+    @Mapping(target = "cliente", source = "cliente.nome")
+    @Mapping(target = "funcionario", source = "funcionario.nome")
+    PedidoResumoResponse toResumoResponse(Pedido pedido);
+
     
 }
