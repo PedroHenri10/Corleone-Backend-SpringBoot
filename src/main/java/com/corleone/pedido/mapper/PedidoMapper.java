@@ -86,5 +86,11 @@ public interface PedidoMapper {
     @Mapping(target = "produto", source = "produto.nome")
     ItemPedidoResumoResponse toItemResumoResponse(ItemPedido itemPedido);
 
-    
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "pedido", ignore = true)
+    @Mapping(target = "produto", source = "produto")
+    @Mapping(target = "precoUnitario", ignore = true)
+    @Mapping(target = "desconto", ignore = true)
+    @Mapping(target = "subtotal", ignore = true)
+    void updateItemEntity(@MappingTarget ItemPedido itemPedido, ItemPedidoRequest request, Produto produto);
 }
