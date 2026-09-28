@@ -59,7 +59,7 @@ public class BordaService {
     @Transactional(readOnly = true)
     public List<BordaResumoResponse> listar() {
 
-        return repository.findAll()
+        return repository.findByAtivoTrue()
                 .stream()
                 .map(mapper::toResumoResponse)
                 .toList();

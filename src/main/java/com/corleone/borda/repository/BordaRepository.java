@@ -3,6 +3,7 @@ package com.corleone.borda.repository;
 import com.corleone.borda.entity.Borda;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface BordaRepository extends JpaRepository<Borda, Integer> {
@@ -13,4 +14,5 @@ public interface BordaRepository extends JpaRepository<Borda, Integer> {
 
     boolean existsByNomeIgnoreCaseAndIdNot(String nome, Integer id);
 
+    List<Borda> findByAtivoTrue();
 }
