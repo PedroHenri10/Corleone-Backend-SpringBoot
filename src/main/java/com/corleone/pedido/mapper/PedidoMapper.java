@@ -35,4 +35,18 @@ public interface PedidoMapper {
     @Mapping(target = "historicos", ignore = true)
     Pedido toEntity(PedidoRequest request, Cliente cliente, Funcionario funcionario, Mesa mesa, Cupom cupom, Pagamento pagamento);
 
+    @Mapping(target = "clienteId", source = "cliente.id")
+    @Mapping(target = "cliente", source = "cliente.nome")
+    @Mapping(target = "funcionarioId", source = "funcionario.id")
+    @Mapping(target = "funcionario", source = "funcionario.nome")
+    @Mapping(target = "mesaId", source = "mesa.id")
+    @Mapping(target = "mesa", source = "mesa.numero")
+    @Mapping(target = "cupomId", source = "cupom.id")
+    @Mapping(target = "cupom", source = "cupom.codigo")
+    @Mapping(target = "pagamentoId", source = "pagamento.id")
+    @Mapping(target = "pagamento", source = "pagamento.nome")
+    @Mapping(target = "itens", source = "itens")
+    PedidoResponse toResponse(Pedido pedido);
+
+    
 }
