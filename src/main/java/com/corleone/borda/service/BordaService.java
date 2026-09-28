@@ -26,6 +26,8 @@ public class BordaService {
 
     public BordaResponse criar(BordaRequest request) {
 
+        request.setNome(request.getNome().trim());
+
         validator.validarNomeCadastro(request.getNome());
 
         Borda borda = mapper.toEntity(request);
@@ -40,6 +42,8 @@ public class BordaService {
     public BordaResponse atualizar(Integer id, BordaRequest request) {
 
         Borda borda = validator.validarBorda(id);
+
+        request.setNome(request.getNome().trim());
 
         validator.validarNomeAtualizacao(id, request.getNome());
 
