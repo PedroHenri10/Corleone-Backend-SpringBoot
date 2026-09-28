@@ -10,15 +10,18 @@ import java.math.BigDecimal;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-@Schema(description = "Resumo da borda.")
+@Schema(description = "Resumo das bordas cadastradas.")
 public class BordaResumoResponse {
 
+    @Schema(description = "Identificador da borda.", example = "1")
     private Integer id;
 
+    @Schema(description = "Nome da borda.", example = "Catupiry")
     private String nome;
 
+    @Schema(description = "Preço adicional da borda.", example = "8.50")
     private BigDecimal preco;
 
+    @Schema(description = "Indica se a borda está ativa.", example = "true")
     private Boolean ativo;
-
 }

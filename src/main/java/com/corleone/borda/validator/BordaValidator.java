@@ -3,6 +3,7 @@ package com.corleone.borda.validator;
 import com.corleone.borda.entity.Borda;
 import com.corleone.borda.repository.BordaRepository;
 import com.corleone.exception.BusinessException;
+import com.corleone.exception.ResourceNotFoundException;
 import com.corleone.exceptionhandler.ErrorEnum;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
@@ -15,7 +16,7 @@ public class BordaValidator {
 
     public Borda validarBorda(Integer id) {
 
-        return repository.findById(id).orElseThrow(() -> new BusinessException(ErrorEnum.BORDA_NAO_ENCONTRADA));
+        return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(ErrorEnum.BORDA_NAO_ENCONTRADA));
     }
 
     public void validarNomeCadastro(String nome) {
