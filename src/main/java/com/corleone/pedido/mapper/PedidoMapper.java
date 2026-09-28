@@ -70,5 +70,13 @@ public interface PedidoMapper {
     @Mapping(target = "historicos", ignore = true)
     void updateEntity(@MappingTarget Pedido pedido, PedidoRequest request, Cliente cliente, Funcionario funcionario, Mesa mesa, Cupom cupom, Pagamento pagamento);
 
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "pedido", ignore = true)
+    @Mapping(target = "produto", source = "produto")
+    @Mapping(target = "precoUnitario", ignore = true)
+    @Mapping(target = "desconto", ignore = true)
+    @Mapping(target = "subtotal", ignore = true)
+    ItemPedido toItemEntity(ItemPedidoRequest request, Produto produto);
 
+    
 }
