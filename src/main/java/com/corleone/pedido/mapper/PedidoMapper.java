@@ -52,5 +52,23 @@ public interface PedidoMapper {
     @Mapping(target = "funcionario", source = "funcionario.nome")
     PedidoResumoResponse toResumoResponse(Pedido pedido);
 
-    
+    @Mapping(target = "id", ignore = true)
+    @Mapping(target = "cliente", source = "cliente")
+    @Mapping(target = "funcionario", source = "funcionario")
+    @Mapping(target = "mesa", source = "mesa")
+    @Mapping(target = "cupom", source = "cupom")
+    @Mapping(target = "pagamento", source = "pagamento")
+    @Mapping(target = "tipo", source = "request.tipo")
+    @Mapping(target = "subtotal", ignore = true)
+    @Mapping(target = "desconto", ignore = true)
+    @Mapping(target = "taxaEntrega", ignore = true)
+    @Mapping(target = "total", ignore = true)
+    @Mapping(target = "status", ignore = true)
+    @Mapping(target = "dataCriacao", ignore = true)
+    @Mapping(target = "dataAtualizacao", ignore = true)
+    @Mapping(target = "itens", ignore = true)
+    @Mapping(target = "historicos", ignore = true)
+    void updateEntity(@MappingTarget Pedido pedido, PedidoRequest request, Cliente cliente, Funcionario funcionario, Mesa mesa, Cupom cupom, Pagamento pagamento);
+
+
 }
