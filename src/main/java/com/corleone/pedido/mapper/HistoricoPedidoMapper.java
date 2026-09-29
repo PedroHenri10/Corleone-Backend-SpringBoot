@@ -12,4 +12,9 @@ public interface HistoricoPedidoMapper {
     @Mapping(target = "funcionario", source = "funcionario")
     @Mapping(target = "data", ignore = true)
     HistoricoPedido toEntity(HistoricoPedidoResponse response, com.corleone.pedido.entity.Pedido pedido, com.corleone.funcionario.entity.Funcionario funcionario);
+
+    @Mapping(target = "pedidoId", source = "pedido.id")
+    @Mapping(target = "funcionarioId", source = "funcionario.id")
+    @Mapping(target = "funcionario", source = "funcionario.nome")
+    HistoricoPedidoResponse toResponse(HistoricoPedido historico);
 }
