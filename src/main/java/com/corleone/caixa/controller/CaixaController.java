@@ -9,6 +9,8 @@ import com.corleone.caixa.service.CaixaService;
 import com.corleone.shared.enums.StatusCaixa;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RestController;
@@ -48,8 +50,8 @@ public class CaixaController implements CaixaApi {
 
     @Override
     @PreAuthorize("hasAuthority('CAIXA_VISUALIZAR')")
-    public ResponseEntity<List<CaixaResumoResponse>> listar(Integer funcionarioId, StatusCaixa status, LocalDate dataInicial,
-            LocalDate dataFinal
+    public ResponseEntity<Page<CaixaResumoResponse>> listar(Integer funcionarioId, StatusCaixa status, LocalDate dataInicial,
+                                                            LocalDate dataFinal, Pageable pageable
     ) {
         CaixaFilter filter = CaixaFilter.builder()
                 .funcionarioId(funcionarioId)
@@ -58,7 +60,7 @@ public class CaixaController implements CaixaApi {
                 .dataFinal(dataFinal)
                 .build();
 
-        return ResponseEntity.ok(service.listar(filter));
+        return ResponseEntity.ok(service.listar(filter, pageable));
     }
 
     @Override

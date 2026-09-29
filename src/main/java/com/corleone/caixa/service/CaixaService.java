@@ -13,6 +13,8 @@ import com.corleone.caixa.validator.CaixaValidator;
 import com.corleone.shared.enums.StatusCaixa;
 import com.corleone.shared.util.DateUtils;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -84,14 +86,10 @@ public class CaixaService {
     }
 
     @Transactional
-    public List<CaixaResumoResponse> listar(CaixaFilter filter
+    public Page<CaixaResumoResponse> listar(CaixaFilter filter, Pageable pageable
     ) {
 
-        return repository
-                .findAll(CaixaSpecification.filtro(filter))
-                .stream()
-                .map(mapper::toResumoResponse)
-                .toList();
+        return repository.findAll(CaixaSpecification.filtro(filter), pageable).map(mapper::toResumoResponse);
     }
 
     @Transactional

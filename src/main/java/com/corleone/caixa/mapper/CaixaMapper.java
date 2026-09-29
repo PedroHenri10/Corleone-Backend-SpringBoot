@@ -25,11 +25,11 @@ public interface CaixaMapper {
     @Mapping(target = "lancamentos", ignore = true)
     Caixa toEntity(CaixaRequest request, Funcionario funcionario);
 
-    @Mapping(target = "funcionarioId", source = "funcionario.id")
-    @Mapping(target = "funcionario", source = "funcionario.nome")
+    @Mapping(target = "funcionarioId", source = "funcionario.funId")
+    @Mapping(target = "funcionario", source = "funcionario.funNome")
     CaixaResponse toResponse(Caixa caixa);
 
-    @Mapping(target = "funcionario", source = "funcionario.nome")
+    @Mapping(target = "funcionario", source = "funcionario.funNome")
     CaixaResumoResponse toResumoResponse(Caixa caixa);
 
     @Mapping(target = "id", ignore = true)
@@ -52,14 +52,14 @@ public interface CaixaMapper {
     LancamentoCaixa toEntity(LancamentoCaixaRequest request, Caixa caixa, Funcionario funcionario, Pedido pedido, Pagamento pagamento);
 
     @Mapping(target = "caixaId", source = "caixa.id")
-    @Mapping(target = "funcionarioId", source = "funcionario.id")
-    @Mapping(target = "funcionario", source = "funcionario.nome")
+    @Mapping(target = "funcionarioId", source = "funcionario.funId")
+    @Mapping(target = "funcionario", source = "funcionario.funNome")
     @Mapping(target = "pedidoId", source = "pedido.id")
     @Mapping(target = "pagamentoId", source = "pagamento.id")
     @Mapping(target = "pagamento", source = "pagamento.nome")
     LancamentoCaixaResponse toResponse(LancamentoCaixa lancamento);
 
     @Mapping(target = "caixaId", source = "caixa.id")
-    @Mapping(target = "funcionario", source = "funcionario.nome")
+    @Mapping(target = "funcionario", source = "funcionario.funNome")
     LancamentoCaixaResumoResponse toResumoResponse(LancamentoCaixa lancamento);
 }

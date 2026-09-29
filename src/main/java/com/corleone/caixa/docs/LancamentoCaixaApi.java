@@ -13,6 +13,8 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -106,7 +108,7 @@ public interface LancamentoCaixaApi {
                     )
             )
     })
-    @GetMapping ResponseEntity<List<LancamentoCaixaResumoResponse>> listar(
+    @GetMapping ResponseEntity<Page<LancamentoCaixaResumoResponse>> listar(
             @Parameter(description = "ID do caixa.", example = "1")
             @RequestParam(required = false) Integer caixaId,
 
@@ -126,7 +128,10 @@ public interface LancamentoCaixaApi {
             @RequestParam(required = false) LocalDate dataInicial,
 
             @Parameter(description = "Data final.", example = "2026-09-30")
-            @RequestParam(required = false) LocalDate dataFinal
+            @RequestParam(required = false) LocalDate dataFinal,
+            @Parameter(description = "Parâmetros de paginação e ordenação dos resultados. Use 'page' para a página (base zero), 'size' para a quantidade de itens por página e 'sort' para ordenar (ex: 'id,desc').",
+                    example = "{\"page\": 0, \"size\": 20, \"sort\": [\"id,desc\"]}")
+            @RequestParam(required = false) Pageable pageable
     );
 
     @Operation(summary = "Listar lançamentos de um caixa", description = "Retorna todos os lançamentos vinculados a um caixa específico."

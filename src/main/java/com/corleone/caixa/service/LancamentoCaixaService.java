@@ -21,6 +21,8 @@ import com.corleone.shared.util.DateUtils;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -90,15 +92,10 @@ public class LancamentoCaixaService {
         return mapper.toResponse(lancamento);
     }
 
-    @Transactional
-    public List<LancamentoCaixaResumoResponse> listar(LancamentoCaixaFilter filter
+    @Transactional(readOnly = true)
+    public Page<LancamentoCaixaResumoResponse> listar(LancamentoCaixaFilter filter, Pageable pageable
     ) {
-
-        return repository.findAll(LancamentoCaixaSpecification.filtro(filter)
-                )
-                .stream()
-                .map(mapper::toResumoResponse)
-                .toList();
+        return repository.findAll(LancamentoCaixaSpecification.filtro(filter), pageable).map(mapper::toResumoResponse);
     }
 
     @Transactional

@@ -9,6 +9,8 @@ import com.corleone.caixa.service.LancamentoCaixaService;
 import com.corleone.shared.enums.TipoLancamentoCaixa;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.RestController;
@@ -38,14 +40,15 @@ public class LancamentoCaixaController implements LancamentoCaixaApi {
 
     @Override
     @PreAuthorize("hasAuthority('CAIXA_LANCAMENTO')")
-    public ResponseEntity<List<LancamentoCaixaResumoResponse>> listar(
+    public ResponseEntity<Page<LancamentoCaixaResumoResponse>> listar(
             Integer caixaId,
             Integer funcionarioId,
             Integer pedidoId,
             Integer pagamentoId,
             TipoLancamentoCaixa tipo,
             LocalDate dataInicial,
-            LocalDate dataFinal
+            LocalDate dataFinal,
+            Pageable pageable
     ) {
         LancamentoCaixaFilter filter = LancamentoCaixaFilter.builder()
                 .caixaId(caixaId)
@@ -57,7 +60,7 @@ public class LancamentoCaixaController implements LancamentoCaixaApi {
                 .dataFinal(dataFinal)
                 .build();
 
-        return ResponseEntity.ok(service.listar(filter));
+        return ResponseEntity.ok(service.listar(filter, pageable));
     }
 
     @Override
