@@ -31,13 +31,11 @@ public class CaixaService {
 
     public CaixaResponse abrir(CaixaRequest request) {
 
-        validator.validarFuncionario(request.getFuncionarioId());
-
+        var funcionario = validator.validarFuncionario(request.getFuncionarioId());
+        
         validator.validarFuncionarioSemCaixaAberto(request.getFuncionarioId());
 
         validator.validarValorAbertura(request.getValorAbertura());
-
-        var funcionario = validator.validarFuncionario(request.getFuncionarioId());
 
         Caixa caixa = mapper.toEntity(request, funcionario);
 
