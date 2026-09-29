@@ -60,19 +60,7 @@ public class CaixaService {
 
         validator.validarValorFechamento(valorFechamento);
 
-        BigDecimal valorSistema = caixa.getValorAbertura();
-
-        if (caixa.getLancamentos() != null) {
-            for (LancamentoCaixa lancamento : caixa.getLancamentos()) {
-                switch (lancamento.getTipo()) {
-                    case ENTRADA, SUPRIMENTO ->
-                            valorSistema = valorSistema.add(lancamento.getValor());
-
-                    case SAIDA, SANGRIA ->
-                            valorSistema = valorSistema.subtract(lancamento.getValor());
-                }
-            }
-        }
+        BigDecimal valorSistema = calcularValorSistema(caixa);
 
         BigDecimal diferenca = valorFechamento.subtract(valorSistema);
 
