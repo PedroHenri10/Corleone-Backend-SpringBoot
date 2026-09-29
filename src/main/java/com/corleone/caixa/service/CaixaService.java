@@ -32,7 +32,7 @@ public class CaixaService {
     public CaixaResponse abrir(CaixaRequest request) {
 
         var funcionario = validator.validarFuncionario(request.getFuncionarioId());
-        
+
         validator.validarFuncionarioSemCaixaAberto(request.getFuncionarioId());
 
         validator.validarValorAbertura(request.getValorAbertura());

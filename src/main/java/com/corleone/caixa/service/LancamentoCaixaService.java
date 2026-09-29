@@ -9,6 +9,8 @@ import com.corleone.caixa.mapper.CaixaMapper;
 import com.corleone.caixa.repository.LancamentoCaixaRepository;
 import com.corleone.caixa.specification.LancamentoCaixaSpecification;
 import com.corleone.caixa.validator.CaixaValidator;
+import com.corleone.exception.ResourceNotFoundException;
+import com.corleone.exceptionhandler.ErrorEnum;
 import com.corleone.funcionario.entity.Funcionario;
 import com.corleone.funcionario.repository.FuncionarioRepository;
 import com.corleone.pagamento.entity.Pagamento;
@@ -49,14 +51,19 @@ public class LancamentoCaixaService {
 
         if (request.getPedidoId() != null) {
 
-            pedido = pedidoRepository.findById(request.getPedidoId()).orElseThrow();
+            pedido = pedidoRepository
+                    .findById(request.getPedidoId())
+                    .orElseThrow(() -> new ResourceNotFoundException(ErrorEnum.PEDIDO_NAO_ENCONTRADO)
+                    );
         }
 
         Pagamento pagamento = null;
 
         if (request.getPagamentoId() != null) {
 
-            pagamento = pagamentoRepository.findById(request.getPagamentoId()).orElseThrow();
+            pagamento = pagamentoRepository.findById(request.getPagamentoId())
+                    .orElseThrow(() -> new ResourceNotFoundException(ErrorEnum.PAGAMENTO_NAO_ENCONTRADO)
+                    );
         }
 
         LancamentoCaixa lancamento = mapper.toEntity(
