@@ -2,6 +2,7 @@ package com.corleone.pedido.mapper;
 
 import com.corleone.borda.entity.Borda;
 import com.corleone.pedido.dto.PedidoBordaRequest;
+import com.corleone.pedido.dto.PedidoBordaResponse;
 import com.corleone.pedido.entity.ItemPedido;
 import com.corleone.pedido.entity.PedidoBorda;
 import org.mapstruct.Mapper;
@@ -13,4 +14,9 @@ public interface PedidoBordaMapper {
     @Mapping(target = "itemPedido", source = "itemPedido")
     @Mapping(target = "borda", source = "borda")
     PedidoBorda toEntity(PedidoBordaRequest request, ItemPedido itemPedido, Borda borda);
+
+    @Mapping(target = "itemPedidoId", source = "itemPedido.id")
+    @Mapping(target = "bordaId", source = "borda.id")
+    @Mapping(target = "borda", source = "borda.nome")
+    PedidoBordaResponse toResponse(PedidoBorda pedidoBorda);
 }
