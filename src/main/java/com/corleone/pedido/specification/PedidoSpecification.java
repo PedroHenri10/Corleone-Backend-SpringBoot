@@ -64,6 +64,18 @@ public class PedidoSpecification {
                 );
             }
 
+            if (filter.getDataInicial() != null) {
+                LocalDateTime dataInicial =
+                        filter.getDataInicial().atStartOfDay();
+
+                predicates.add(
+                        criteriaBuilder.greaterThanOrEqualTo(
+                                root.get("dataCriacao"),
+                                dataInicial
+                        )
+                );
+            }
+
             
 
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
