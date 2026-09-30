@@ -28,6 +28,15 @@ public class PedidoSpecification {
                 );
             }
 
+            if (filter.getFuncionarioId() != null) {
+                predicates.add(
+                        criteriaBuilder.equal(
+                                root.get("funcionario").get("id"),
+                                filter.getFuncionarioId()
+                        )
+                );
+            }
+
            
 
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
