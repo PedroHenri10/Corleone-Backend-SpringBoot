@@ -37,7 +37,16 @@ public class PedidoSpecification {
                 );
             }
 
-           
+            if (filter.getMesaId() != null) {
+                predicates.add(
+                        criteriaBuilder.equal(
+                                root.get("mesa").get("id"),
+                                filter.getMesaId()
+                        )
+                );
+            }
+
+            
 
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
         };
