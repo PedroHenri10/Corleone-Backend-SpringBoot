@@ -46,6 +46,15 @@ public class PedidoSpecification {
                 );
             }
 
+            if (filter.getTipo() != null) {
+                predicates.add(
+                        criteriaBuilder.equal(
+                                root.get("tipo"),
+                                filter.getTipo()
+                        )
+                );
+            }
+
             
 
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
