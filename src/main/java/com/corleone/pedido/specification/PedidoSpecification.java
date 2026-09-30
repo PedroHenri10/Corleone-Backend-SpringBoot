@@ -76,7 +76,17 @@ public class PedidoSpecification {
                 );
             }
 
-            
+            if (filter.getDataFinal() != null) {
+                LocalDateTime dataFinal =
+                        filter.getDataFinal().atTime(LocalTime.MAX);
+
+                predicates.add(
+                        criteriaBuilder.lessThanOrEqualTo(
+                                root.get("dataCriacao"),
+                                dataFinal
+                        )
+                );
+            }
 
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
         };
