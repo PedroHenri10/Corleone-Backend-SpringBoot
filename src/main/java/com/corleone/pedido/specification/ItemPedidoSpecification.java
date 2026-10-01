@@ -13,5 +13,11 @@ public class ItemPedidoSpecification {
     private ItemPedidoSpecification() {
     }
 
-    
+    public static Specification<ItemPedido> filtro(ItemPedidoFilter filter) {
+        return (root, query, criteriaBuilder) -> {
+            List<Predicate> predicates = new ArrayList<>();
+
+            
+        };
+    }
 }
