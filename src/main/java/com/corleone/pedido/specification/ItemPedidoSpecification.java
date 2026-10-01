@@ -17,7 +17,18 @@ public class ItemPedidoSpecification {
         return (root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
 
+            if (filter.getPedidoId() != null) {
+                predicates.add(
+                        criteriaBuilder.equal(
+                                root.get("pedido").get("id"),
+                                filter.getPedidoId()
+                        )
+                );
+            }
+
             
+
+            return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
         };
     }
 }
