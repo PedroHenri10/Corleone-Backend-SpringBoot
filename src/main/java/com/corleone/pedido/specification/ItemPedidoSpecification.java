@@ -26,7 +26,14 @@ public class ItemPedidoSpecification {
                 );
             }
 
-            
+            if (filter.getProdutoId() != null) {
+                predicates.add(
+                        criteriaBuilder.equal(
+                                root.get("produto").get("id"),
+                                filter.getProdutoId()
+                        )
+                );
+            }
 
             return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
         };
