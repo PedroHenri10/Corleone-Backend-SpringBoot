@@ -24,7 +24,12 @@ public class HistoricoPedidoSpecification {
                 );
             }
 
-            
+            if (filter.getFuncionarioId() != null) {
+                predicates.add(criteriaBuilder.equal(root.get("funcionario").get("id"), filter.getFuncionarioId())
+                );
+            }
+
+
         };
     }
 }
