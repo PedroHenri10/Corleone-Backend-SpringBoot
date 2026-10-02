@@ -19,6 +19,11 @@ public class HistoricoPedidoSpecification {
         return (root, query, criteriaBuilder) -> {
             List<Predicate> predicates = new ArrayList<>();
 
+            if (filter.getPedidoId() != null) {
+                predicates.add(criteriaBuilder.equal(root.get("pedido").get("id"), filter.getPedidoId())
+                );
+            }
+
             
         };
     }
