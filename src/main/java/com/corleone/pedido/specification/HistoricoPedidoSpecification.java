@@ -29,17 +29,17 @@ public class HistoricoPedidoSpecification {
                 );
             }
 
-            if (filter.getStatusAnterior() != null
-                    && !filter.getStatusAnterior().isBlank()) {
-                predicates.add(
-                        criteriaBuilder.equal(
-                                root.get("statusAnterior"),
-                                filter.getStatusAnterior()
-                        )
-                );
+            if (filter.getStatusAnterior() != null && !filter.getStatusAnterior().isBlank()) {
+                predicates.add(criteriaBuilder.equal(root.get("statusAnterior"),
+                                filter.getStatusAnterior()));
             }
 
-            
+            if (filter.getStatusNovo() != null && !filter.getStatusNovo().isBlank()) {
+                predicates.add(criteriaBuilder.equal(root.get("statusNovo"),
+                                filter.getStatusNovo()));
+            }
+
+
         };
     }
 }
