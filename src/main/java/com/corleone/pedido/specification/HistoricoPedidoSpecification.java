@@ -45,7 +45,14 @@ public class HistoricoPedidoSpecification {
                                 dataInicial));
             }
 
-            
+            if (filter.getDataFinal() != null) {LocalDateTime dataFinal = filter.getDataFinal().atTime(LocalTime.MAX);
+
+                predicates.add(criteriaBuilder.lessThanOrEqualTo(
+                                root.get("data"),
+                                dataFinal));
+            }
+
+            return criteriaBuilder.and(predicates.toArray(new Predicate[0]));
         };
     }
 }
