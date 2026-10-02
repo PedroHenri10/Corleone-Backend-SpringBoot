@@ -39,7 +39,13 @@ public class HistoricoPedidoSpecification {
                                 filter.getStatusNovo()));
             }
 
+            if (filter.getDataInicial() != null) {LocalDateTime dataInicial = filter.getDataInicial().atStartOfDay();
 
+                predicates.add(criteriaBuilder.greaterThanOrEqualTo(root.get("data"),
+                                dataInicial));
+            }
+
+            
         };
     }
 }
