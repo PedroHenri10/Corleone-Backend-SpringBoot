@@ -36,5 +36,11 @@ public class PedidoValidator {
                         new ResourceNotFoundException(ErrorEnum.PEDIDO_NAO_ENCONTRADO));
     }
 
+    public Cliente validarCliente(Integer id) {
+        return clienteRepository.findById(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(ErrorEnum.CLIENTE_NAO_ENCONTRADO));
+    }
+
     
 }
