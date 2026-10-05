@@ -448,6 +448,47 @@ public enum ErrorEnum {
             HttpStatus.UNPROCESSABLE_CONTENT,
             2079,
             "Não é possível realizar lançamentos em um caixa fechado."
+    ),
+    PEDIDO_NAO_EDITAVEL(
+            HttpStatus.UNPROCESSABLE_CONTENT,
+            2080,
+            "O pedido não pode mais ser editado."
+    ),
+
+    PEDIDO_NAO_CANCELAVEL(
+            HttpStatus.UNPROCESSABLE_CONTENT,
+            2081,
+            "O pedido não pode ser cancelado."
+    ),
+
+    PEDIDO_NAO_FINALIZAVEL(
+            HttpStatus.UNPROCESSABLE_CONTENT,
+            2082,
+            "O pedido não pode ser finalizado."
+    ),
+
+    ITEM_PEDIDO_NAO_ENCONTRADO(
+            HttpStatus.NOT_FOUND,
+            2083,
+            "Item do pedido não encontrado."
+    ),
+
+    ITEM_PEDIDO_INVALIDO(
+            HttpStatus.UNPROCESSABLE_CONTENT,
+            2084,
+            "Item do pedido inválido."
+    ),
+
+    QUANTIDADE_ITEM_PEDIDO_INVALIDA(
+            HttpStatus.UNPROCESSABLE_CONTENT,
+            2085,
+            "A quantidade do item do pedido deve ser maior que zero."
+    ),
+
+    PEDIDO_BORDA_NAO_ENCONTRADO(
+            HttpStatus.NOT_FOUND,
+            2086,
+            "Borda do pedido não encontrada."
     );
 
     private final HttpStatus httpStatus;
