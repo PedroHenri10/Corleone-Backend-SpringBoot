@@ -48,5 +48,11 @@ public class PedidoValidator {
                         new ResourceNotFoundException(ErrorEnum.FUNCIONARIO_NAO_ENCONTRADO));
     }
 
+    public Mesa validarMesa(Integer id) {
+        return mesaRepository.findById(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(ErrorEnum.MESA_NAO_ENCONTRADA));
+    }
+
     
 }
