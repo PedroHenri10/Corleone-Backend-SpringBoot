@@ -60,5 +60,11 @@ public class PedidoValidator {
                         new ResourceNotFoundException(ErrorEnum.CUPOM_NAO_ENCONTRADO));
     }
 
+    public Pagamento validarPagamento(Integer id) {
+        return pagamentoRepository.findById(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(ErrorEnum.PAGAMENTO_NAO_ENCONTRADO));
+    }
+
     
 }
