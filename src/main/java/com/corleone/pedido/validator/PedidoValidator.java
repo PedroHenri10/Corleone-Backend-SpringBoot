@@ -66,5 +66,13 @@ public class PedidoValidator {
                         new ResourceNotFoundException(ErrorEnum.PAGAMENTO_NAO_ENCONTRADO));
     }
 
+    public void validarPedidoEditavel(Pedido pedido) {
+        if (StatusPedido.FINALIZADO.equals(pedido.getStatus())
+                || StatusPedido.CANCELADO.equals(pedido.getStatus())) {
+
+            throw new BusinessException(ErrorEnum.PEDIDO_NAO_EDITAVEL);
+        }
+    }
+
     
 }
