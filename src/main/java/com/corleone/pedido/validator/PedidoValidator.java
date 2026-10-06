@@ -82,5 +82,11 @@ public class PedidoValidator {
         }
     }
 
-    
+    public void validarPedidoFinalizavel(Pedido pedido) {
+        if (StatusPedido.FINALIZADO.equals(pedido.getStatus())
+                || StatusPedido.CANCELADO.equals(pedido.getStatus())) {
+
+            throw new BusinessException(ErrorEnum.PEDIDO_NAO_FINALIZAVEL);
+        }
+    }
 }
