@@ -32,5 +32,10 @@ public class ItemPedidoValidator {
         }
     }
 
+    public void validarQuantidade(java.math.BigDecimal quantidade) {
+        if (quantidade == null || quantidade.signum() <= 0) {
 
+            throw new BusinessException(ErrorEnum.QUANTIDADE_ITEM_PEDIDO_INVALIDA);
+        }
+    }
 }
