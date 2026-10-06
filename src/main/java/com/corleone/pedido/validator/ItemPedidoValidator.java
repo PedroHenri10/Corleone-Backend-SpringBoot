@@ -25,5 +25,12 @@ public class ItemPedidoValidator {
         return produtoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(ErrorEnum.PRODUTO_NAO_ENCONTRADO));
     }
 
-   
+    public void validarItemPertenceAoPedido(ItemPedido itemPedido, Integer pedidoId) {
+        if (itemPedido.getPedido() == null || !itemPedido.getPedido().getId().equals(pedidoId)) {
+
+            throw new BusinessException(ErrorEnum.ITEM_PEDIDO_INVALIDO);
+        }
+    }
+
+
 }
