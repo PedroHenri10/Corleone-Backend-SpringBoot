@@ -27,5 +27,9 @@ public class PedidoBordaValidator {
         return itemPedidoValidator.validarItemPedido(id);
     }
 
+    public Borda validarBorda(Integer id) {
+        return bordaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(ErrorEnum.BORDA_NAO_ENCONTRADA));
+    }
+
     
 }
