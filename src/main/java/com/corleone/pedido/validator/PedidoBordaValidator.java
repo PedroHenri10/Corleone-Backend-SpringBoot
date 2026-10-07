@@ -31,5 +31,11 @@ public class PedidoBordaValidator {
         return bordaRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(ErrorEnum.BORDA_NAO_ENCONTRADA));
     }
 
-    
+    public void validarItemPertenceAoPedido(ItemPedido itemPedido, Integer pedidoId) {
+
+        if (itemPedido.getPedido() == null || !itemPedido.getPedido().getId().equals(pedidoId)) {
+
+            throw new BusinessException(ErrorEnum.ITEM_PEDIDO_INVALIDO);
+        }
+    }
 }
