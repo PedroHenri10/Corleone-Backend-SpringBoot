@@ -98,4 +98,12 @@ public class PedidoService {
 
         return mapper.toResponse(pedido);
     }
+
+    @Transactional(readOnly = true)
+    public PedidoResponse buscarPorId(Integer id) {
+
+        Pedido pedido = validator.validarPedido(id);
+
+        return mapper.toResponse(pedido);
+    }
 }
