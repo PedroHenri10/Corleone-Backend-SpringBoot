@@ -145,4 +145,17 @@ public class PedidoService {
 
         return mapper.toResponse(pedido);
     }
+
+    public PedidoResponse alterarStatus(Integer id, StatusPedido status) {
+
+        Pedido pedido = validator.validarPedido(id);
+        validator.validarPedidoEditavel(pedido);
+
+        pedido.setStatus(status);
+        pedido.setDataAtualizacao(LocalDateTime.now(DateUtils.BR_ZONE));
+
+        pedido = repository.save(pedido);
+
+        return mapper.toResponse(pedido);
+    }
 }
