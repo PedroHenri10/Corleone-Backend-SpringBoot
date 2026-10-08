@@ -11,9 +11,9 @@ import com.corleone.pedido.specification.PedidoSpecification;
 import com.corleone.pedido.validator.PedidoValidator;
 import com.corleone.shared.enums.StatusPedido;
 import com.corleone.shared.util.DateUtils;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -23,6 +23,7 @@ import java.util.List;
 @RequiredArgsConstructor
 @Transactional
 public class PedidoService {
+
     private final PedidoRepository repository;
     private final PedidoMapper mapper;
     private final PedidoValidator validator;
@@ -31,14 +32,21 @@ public class PedidoService {
 
         var funcionario = validator.validarFuncionario(request.getFuncionarioId());
 
-        var cliente = request.getClienteId() != null ? validator.validarCliente(request.getClienteId()) : null;
-
-        var mesa = request.getMesaId() != null ? validator.validarMesa(request.getMesaId())
+        var cliente = request.getClienteId() != null
+                ? validator.validarCliente(request.getClienteId())
                 : null;
 
-        var cupom = request.getCupomId() != null ? validator.validarCupom(request.getCupomId()) : null;
+        var mesa = request.getMesaId() != null
+                ? validator.validarMesa(request.getMesaId())
+                : null;
 
-        var pagamento = request.getPagamentoId() != null ? validator.validarPagamento(request.getPagamentoId()) : null;
+        var cupom = request.getCupomId() != null
+                ? validator.validarCupom(request.getCupomId())
+                : null;
+
+        var pagamento = request.getPagamentoId() != null
+                ? validator.validarPagamento(request.getPagamentoId())
+                : null;
 
         Pedido pedido = mapper.toEntity(
                 request,
