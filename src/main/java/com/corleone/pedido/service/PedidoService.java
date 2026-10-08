@@ -133,4 +133,16 @@ public class PedidoService {
         return mapper.toResponse(pedido);
     }
 
+    public PedidoResponse finalizar(Integer id) {
+
+        Pedido pedido = validator.validarPedido(id);
+        validator.validarPedidoFinalizavel(pedido);
+
+        pedido.setStatus(StatusPedido.FINALIZADO);
+        pedido.setDataAtualizacao(LocalDateTime.now(DateUtils.BR_ZONE));
+
+        pedido = repository.save(pedido);
+
+        return mapper.toResponse(pedido);
+    }
 }
