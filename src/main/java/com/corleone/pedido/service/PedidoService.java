@@ -1,10 +1,13 @@
 package com.corleone.pedido.service;
 
+import com.corleone.pedido.dto.PedidoFilter;
 import com.corleone.pedido.dto.PedidoRequest;
 import com.corleone.pedido.dto.PedidoResponse;
+import com.corleone.pedido.dto.PedidoResumoResponse;
 import com.corleone.pedido.entity.Pedido;
 import com.corleone.pedido.mapper.PedidoMapper;
 import com.corleone.pedido.repository.PedidoRepository;
+import com.corleone.pedido.specification.PedidoSpecification;
 import com.corleone.pedido.validator.PedidoValidator;
 import com.corleone.shared.enums.StatusPedido;
 import com.corleone.shared.util.DateUtils;
@@ -14,6 +17,7 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -105,5 +109,14 @@ public class PedidoService {
         Pedido pedido = validator.validarPedido(id);
 
         return mapper.toResponse(pedido);
+    }
+
+    @Transactional(readOnly = true)
+    public List<PedidoResumoResponse> listar(PedidoFilter filter) {
+
+        return repository.findAll(PedidoSpecification.filtro(filter))
+                .stream()
+                .map(mapper::toResumoResponse)
+                .toList();
     }
 }
