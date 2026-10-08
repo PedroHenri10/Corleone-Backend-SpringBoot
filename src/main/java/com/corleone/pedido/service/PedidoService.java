@@ -119,4 +119,18 @@ public class PedidoService {
                 .map(mapper::toResumoResponse)
                 .toList();
     }
+
+    public PedidoResponse cancelar(Integer id) {
+
+        Pedido pedido = validator.validarPedido(id);
+        validator.validarPedidoCancelavel(pedido);
+
+        pedido.setStatus(StatusPedido.CANCELADO);
+        pedido.setDataAtualizacao(LocalDateTime.now(DateUtils.BR_ZONE));
+
+        pedido = repository.save(pedido);
+
+        return mapper.toResponse(pedido);
+    }
+
 }
