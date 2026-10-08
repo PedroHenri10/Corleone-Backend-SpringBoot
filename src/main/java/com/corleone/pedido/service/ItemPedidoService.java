@@ -1,12 +1,19 @@
 package com.corleone.pedido.service;
 
+import com.corleone.pedido.dto.ItemPedidoRequest;
+import com.corleone.pedido.dto.ItemPedidoResponse;
+import com.corleone.pedido.entity.ItemPedido;
 import com.corleone.pedido.mapper.PedidoMapper;
 import com.corleone.pedido.repository.ItemPedidoRepository;
 import com.corleone.pedido.validator.ItemPedidoValidator;
 import com.corleone.pedido.validator.PedidoValidator;
+import com.corleone.shared.util.DateUtils;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
 
 @Service
 @RequiredArgsConstructor
@@ -17,5 +24,32 @@ public class ItemPedidoService {
     private final PedidoMapper mapper;
     private final ItemPedidoValidator validator;
     private final PedidoValidator pedidoValidator;
-    
+
+    public ItemPedidoResponse criar(Integer pedidoId, ItemPedidoRequest request) {
+
+        var pedido = pedidoValidator.validarPedido(pedidoId);
+        pedidoValidator.validarPedidoEditavel(pedido);
+
+        var produto = validator.validarProduto(request.getProdutoId());
+
+        validator.validarQuantidade(request.getQuantidade());
+
+        ItemPedido item = mapper.toItemEntity(request, produto);
+
+        item.setPedido(pedido);
+
+        BigDecimal precoUnitario = produto.getPrecoVenda();
+
+        BigDecimal subtotal = precoUnitario.multiply(request.getQuantidade());
+
+        item.setPrecoUnitario(precoUnitario);
+        item.setDesconto(BigDecimal.ZERO);
+        item.setSubtotal(subtotal);
+
+        item = repository.save(item);
+
+        pedido.setDataAtualizacao(LocalDateTime.now(DateUtils.BR_ZONE));
+
+        return mapper.toItemResponse(item);
+    }
 }
