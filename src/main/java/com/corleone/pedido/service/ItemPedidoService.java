@@ -104,5 +104,15 @@ public class ItemPedidoService {
                 .toList();
     }
 
-    
+    @Transactional(readOnly = true)
+    public List<ItemPedidoResumoResponse> listarPorPedido(Integer pedidoId
+    ) {
+
+        pedidoValidator.validarPedido(pedidoId);
+
+        return repository.findByPedidoId(pedidoId)
+                .stream()
+                .map(mapper::toItemResumoResponse)
+                .toList();
+    }
 }
