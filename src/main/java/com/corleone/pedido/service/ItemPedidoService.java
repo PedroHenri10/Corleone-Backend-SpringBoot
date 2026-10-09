@@ -83,4 +83,11 @@ public class ItemPedidoService {
         return mapper.toItemResponse(item);
     }
 
+    @Transactional(readOnly = true)
+    public ItemPedidoResponse buscarPorId(Integer id) {
+
+        ItemPedido item = validator.validarItemPedido(id);
+
+        return mapper.toItemResponse(item);
+    }
 }
