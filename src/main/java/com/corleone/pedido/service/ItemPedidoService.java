@@ -52,4 +52,35 @@ public class ItemPedidoService {
 
         return mapper.toItemResponse(item);
     }
+
+    public ItemPedidoResponse atualizar(Integer id, ItemPedidoRequest request) {
+
+        ItemPedido item = validator.validarItemPedido(id);
+
+        validator.validarQuantidade(request.getQuantidade());
+
+        var pedido = item.getPedido();
+
+        pedidoValidator.validarPedidoEditavel(pedido);
+
+        var produto = validator.validarProduto(request.getProdutoId());
+
+        mapper.updateItemEntity(item, request, produto);
+
+        BigDecimal precoUnitario = produto.getPrecoCusto();
+
+        BigDecimal subtotal = precoUnitario
+                .multiply(request.getQuantidade());
+
+        item.setPrecoUnitario(precoUnitario);
+        item.setDesconto(BigDecimal.ZERO);
+        item.setSubtotal(subtotal);
+
+        pedido.setDataAtualizacao(LocalDateTime.now(DateUtils.BR_ZONE));
+
+        item = repository.save(item);
+
+        return mapper.toItemResponse(item);
+    }
+
 }
