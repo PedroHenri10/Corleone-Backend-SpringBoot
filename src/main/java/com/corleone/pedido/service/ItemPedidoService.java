@@ -11,9 +11,9 @@ import com.corleone.pedido.specification.ItemPedidoSpecification;
 import com.corleone.pedido.validator.ItemPedidoValidator;
 import com.corleone.pedido.validator.PedidoValidator;
 import com.corleone.shared.util.DateUtils;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
@@ -114,5 +114,20 @@ public class ItemPedidoService {
                 .stream()
                 .map(mapper::toItemResumoResponse)
                 .toList();
+    }
+
+    public void remover(Integer id) {
+
+        ItemPedido item = validator.validarItemPedido(id);
+
+        var pedido = item.getPedido();
+
+        pedidoValidator.validarPedidoEditavel(pedido);
+
+        repository.delete(item);
+
+        pedido.setDataAtualizacao(
+                LocalDateTime.now(DateUtils.BR_ZONE)
+        );
     }
 }
