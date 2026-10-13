@@ -1,4 +1,3 @@
-
 package com.corleone.pedido.service;
 
 import com.corleone.exception.ResourceNotFoundException;
@@ -28,7 +27,9 @@ public class HistoricoPedidoService {
     private final HistoricoPedidoMapper mapper;
     private final PedidoValidator pedidoValidator;
 
-    public HistoricoPedidoResponse registrar(Integer pedidoId, HistoricoPedidoRequest request,
+    public HistoricoPedidoResponse registrar(
+            Integer pedidoId,
+            HistoricoPedidoRequest request,
             String statusAnterior,
             String statusNovo
     ) {
@@ -55,8 +56,12 @@ public class HistoricoPedidoService {
 
     @Transactional(readOnly = true)
     public HistoricoPedidoResponse buscarPorId(Integer id) {
-
-        HistoricoPedido historico = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(ErrorEnum.RECURSO_NAO_ENCONTRADO));
+        HistoricoPedido historico = repository.findById(id)
+                .orElseThrow(() ->
+                        new ResourceNotFoundException(
+                                ErrorEnum.RECURSO_NAO_ENCONTRADO
+                        )
+                );
 
         return mapper.toResponse(historico);
     }
@@ -70,8 +75,7 @@ public class HistoricoPedidoService {
     }
 
     @Transactional(readOnly = true)
-    public List<HistoricoPedidoResponse> listarPorPedido(Integer pedidoId
-    ) {
+    public List<HistoricoPedidoResponse> listarPorPedido(Integer pedidoId) {
         pedidoValidator.validarPedido(pedidoId);
 
         return repository.findByPedidoId(pedidoId)

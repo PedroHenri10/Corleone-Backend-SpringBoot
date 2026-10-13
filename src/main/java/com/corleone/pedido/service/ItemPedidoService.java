@@ -20,6 +20,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.math.BigDecimal;
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -117,7 +118,7 @@ public class ItemPedidoService {
 
         BigDecimal subtotal = itens.stream()
                 .map(ItemPedido::getSubtotal)
-                .filter(valor -> valor != null)
+                .filter(Objects::nonNull)
                 .reduce(BigDecimal.ZERO, BigDecimal::add);
 
         BigDecimal desconto = pedido.getDesconto() != null
