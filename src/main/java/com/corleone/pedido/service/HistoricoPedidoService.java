@@ -28,5 +28,30 @@ public class HistoricoPedidoService {
     private final HistoricoPedidoMapper mapper;
     private final PedidoValidator pedidoValidator;
 
-    
+    public HistoricoPedidoResponse registrar(Integer pedidoId, HistoricoPedidoRequest request,
+            String statusAnterior,
+            String statusNovo
+    ) {
+        var pedido = pedidoValidator.validarPedido(pedidoId);
+
+        var funcionario = request.getFuncionarioId() != null
+                ? pedidoValidator.validarFuncionario(request.getFuncionarioId())
+                : null;
+
+        HistoricoPedido historico = mapper.toEntity(
+                request,
+                pedido,
+                funcionario,
+                statusAnterior,
+                statusNovo
+        );
+
+        historico.setData(LocalDateTime.now(DateUtils.BR_ZONE));
+
+        historico = repository.save(historico);
+
+        return mapper.toResponse(historico);
+    }
+
+
 }
