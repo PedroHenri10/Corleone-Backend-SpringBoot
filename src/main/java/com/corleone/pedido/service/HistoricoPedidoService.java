@@ -53,5 +53,13 @@ public class HistoricoPedidoService {
         return mapper.toResponse(historico);
     }
 
+    @Transactional(readOnly = true)
+    public HistoricoPedidoResponse buscarPorId(Integer id) {
+
+        HistoricoPedido historico = repository.findById(id).orElseThrow(() -> new ResourceNotFoundException(ErrorEnum.RECURSO_NAO_ENCONTRADO));
+
+        return mapper.toResponse(historico);
+    }
+
 
 }
