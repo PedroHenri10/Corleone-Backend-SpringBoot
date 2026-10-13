@@ -1,5 +1,6 @@
 package com.corleone.pedido.service;
 
+import com.corleone.pedido.dto.HistoricoPedidoRequest;
 import com.corleone.pedido.dto.PedidoFilter;
 import com.corleone.pedido.dto.PedidoRequest;
 import com.corleone.pedido.dto.PedidoResponse;
@@ -7,6 +8,7 @@ import com.corleone.pedido.dto.PedidoResumoResponse;
 import com.corleone.pedido.entity.Pedido;
 import com.corleone.pedido.mapper.PedidoMapper;
 import com.corleone.pedido.repository.PedidoRepository;
+import com.corleone.pedido.service.HistoricoPedidoService;
 import com.corleone.pedido.specification.PedidoSpecification;
 import com.corleone.pedido.validator.PedidoValidator;
 import com.corleone.shared.enums.StatusPedido;
@@ -27,9 +29,9 @@ public class PedidoService {
     private final PedidoRepository repository;
     private final PedidoMapper mapper;
     private final PedidoValidator validator;
+    private final HistoricoPedidoService historicoPedidoService;
 
     public PedidoResponse criar(PedidoRequest request) {
-
         var funcionario = validator.validarFuncionario(request.getFuncionarioId());
 
         var cliente = request.getClienteId() != null
@@ -49,18 +51,14 @@ public class PedidoService {
                 : null;
 
         Pedido pedido = mapper.toEntity(
-                request,
-                cliente,
-                funcionario,
-                mesa,
-                cupom,
-                pagamento
+                request, cliente, funcionario, mesa, cupom, pagamento
         );
 
-        pedido.setStatus(StatusPedido.ABERTO);
-        pedido.setDataCriacao(LocalDateTime.now(DateUtils.BR_ZONE));
-        pedido.setDataAtualizacao(LocalDateTime.now(DateUtils.BR_ZONE));
+        LocalDateTime agora = LocalDateTime.now(DateUtils.BR_ZONE);
 
+        pedido.setStatus(StatusPedido.ABERTO);
+        pedido.setDataCriacao(agora);
+        pedido.setDataAtualizacao(agora);
         pedido.setSubtotal(BigDecimal.ZERO);
         pedido.setDesconto(BigDecimal.ZERO);
         pedido.setTaxaEntrega(BigDecimal.ZERO);
@@ -72,7 +70,6 @@ public class PedidoService {
     }
 
     public PedidoResponse atualizar(Integer id, PedidoRequest request) {
-
         Pedido pedido = validator.validarPedido(id);
         validator.validarPedidoEditavel(pedido);
 
@@ -95,13 +92,7 @@ public class PedidoService {
                 : null;
 
         mapper.updateEntity(
-                pedido,
-                request,
-                cliente,
-                funcionario,
-                mesa,
-                cupom,
-                pagamento
+                pedido, request, cliente, funcionario, mesa, cupom, pagamento
         );
 
         pedido.setDataAtualizacao(LocalDateTime.now(DateUtils.BR_ZONE));
@@ -113,15 +104,11 @@ public class PedidoService {
 
     @Transactional(readOnly = true)
     public PedidoResponse buscarPorId(Integer id) {
-
-        Pedido pedido = validator.validarPedido(id);
-
-        return mapper.toResponse(pedido);
+        return mapper.toResponse(validator.validarPedido(id));
     }
 
     @Transactional(readOnly = true)
     public List<PedidoResumoResponse> listar(PedidoFilter filter) {
-
         return repository.findAll(PedidoSpecification.filtro(filter))
                 .stream()
                 .map(mapper::toResumoResponse)
@@ -129,41 +116,35 @@ public class PedidoService {
     }
 
     public PedidoResponse cancelar(Integer id) {
-
         Pedido pedido = validator.validarPedido(id);
         validator.validarPedidoCancelavel(pedido);
 
-        pedido.setStatus(StatusPedido.CANCELADO);
-        pedido.setDataAtualizacao(LocalDateTime.now(DateUtils.BR_ZONE));
+        alterarStatusInterno(pedido, StatusPedido.CANCELADO, null);
 
-        pedido = repository.save(pedido);
-
-        return mapper.toResponse(pedido);
+        return mapper.toResponse(repository.save(pedido));
     }
 
     public PedidoResponse finalizar(Integer id) {
-
         Pedido pedido = validator.validarPedido(id);
         validator.validarPedidoFinalizavel(pedido);
 
-        pedido.setStatus(StatusPedido.FINALIZADO);
-        pedido.setDataAtualizacao(LocalDateTime.now(DateUtils.BR_ZONE));
+        alterarStatusInterno(pedido, StatusPedido.FINALIZADO, null);
 
-        pedido = repository.save(pedido);
-
-        return mapper.toResponse(pedido);
+        return mapper.toResponse(repository.save(pedido));
     }
 
     public PedidoResponse alterarStatus(Integer id, StatusPedido status) {
-
         Pedido pedido = validator.validarPedido(id);
         validator.validarPedidoEditavel(pedido);
 
-        pedido.setStatus(status);
-        pedido.setDataAtualizacao(LocalDateTime.now(DateUtils.BR_ZONE));
+        if (status == null) {
+            throw new IllegalArgumentException("O status do pedido é obrigatório.");
+        }
 
-        pedido = repository.save(pedido);
+        alterarStatusInterno(pedido, status, null);
 
-        return mapper.toResponse(pedido);
+        return mapper.toResponse(repository.save(pedido));
     }
+
+   
 }
