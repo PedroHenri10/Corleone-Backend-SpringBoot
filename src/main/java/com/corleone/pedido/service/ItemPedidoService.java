@@ -5,8 +5,10 @@ import com.corleone.pedido.dto.ItemPedidoRequest;
 import com.corleone.pedido.dto.ItemPedidoResponse;
 import com.corleone.pedido.dto.ItemPedidoResumoResponse;
 import com.corleone.pedido.entity.ItemPedido;
+import com.corleone.pedido.entity.Pedido;
 import com.corleone.pedido.mapper.PedidoMapper;
 import com.corleone.pedido.repository.ItemPedidoRepository;
+import com.corleone.pedido.repository.PedidoRepository;
 import com.corleone.pedido.specification.ItemPedidoSpecification;
 import com.corleone.pedido.validator.ItemPedidoValidator;
 import com.corleone.pedido.validator.PedidoValidator;
@@ -25,79 +27,63 @@ import java.util.List;
 public class ItemPedidoService {
 
     private final ItemPedidoRepository repository;
+    private final PedidoRepository pedidoRepository;
     private final PedidoMapper mapper;
     private final ItemPedidoValidator validator;
     private final PedidoValidator pedidoValidator;
 
     public ItemPedidoResponse criar(Integer pedidoId, ItemPedidoRequest request) {
-
-        var pedido = pedidoValidator.validarPedido(pedidoId);
+        Pedido pedido = pedidoValidator.validarPedido(pedidoId);
         pedidoValidator.validarPedidoEditavel(pedido);
 
+        validator.validarQuantidade(request.getQuantidade());
         var produto = validator.validarProduto(request.getProdutoId());
 
-        validator.validarQuantidade(request.getQuantidade());
-
         ItemPedido item = mapper.toItemEntity(request, produto);
-
         item.setPedido(pedido);
 
         BigDecimal precoUnitario = produto.getPrecoVenda();
-
-        BigDecimal subtotal = precoUnitario.multiply(request.getQuantidade());
-
         item.setPrecoUnitario(precoUnitario);
         item.setDesconto(BigDecimal.ZERO);
-        item.setSubtotal(subtotal);
+        item.setSubtotal(precoUnitario.multiply(request.getQuantidade()));
 
         item = repository.save(item);
 
-        pedido.setDataAtualizacao(LocalDateTime.now(DateUtils.BR_ZONE));
+        atualizarTotais(pedido);
 
         return mapper.toItemResponse(item);
     }
 
     public ItemPedidoResponse atualizar(Integer id, ItemPedidoRequest request) {
-
         ItemPedido item = validator.validarItemPedido(id);
-
         validator.validarQuantidade(request.getQuantidade());
 
-        var pedido = item.getPedido();
-
+        Pedido pedido = item.getPedido();
         pedidoValidator.validarPedidoEditavel(pedido);
 
         var produto = validator.validarProduto(request.getProdutoId());
 
         mapper.updateItemEntity(item, request, produto);
 
-        BigDecimal precoUnitario = produto.getPrecoCusto();
-
-        BigDecimal subtotal = precoUnitario
-                .multiply(request.getQuantidade());
-
+        BigDecimal precoUnitario = produto.getPrecoVenda();
         item.setPrecoUnitario(precoUnitario);
         item.setDesconto(BigDecimal.ZERO);
-        item.setSubtotal(subtotal);
-
-        pedido.setDataAtualizacao(LocalDateTime.now(DateUtils.BR_ZONE));
+        item.setSubtotal(precoUnitario.multiply(request.getQuantidade()));
 
         item = repository.save(item);
+
+        atualizarTotais(pedido);
 
         return mapper.toItemResponse(item);
     }
 
     @Transactional(readOnly = true)
     public ItemPedidoResponse buscarPorId(Integer id) {
-
-        ItemPedido item = validator.validarItemPedido(id);
-
-        return mapper.toItemResponse(item);
+        return mapper.toItemResponse(validator.validarItemPedido(id));
     }
 
     @Transactional(readOnly = true)
     public List<ItemPedidoResumoResponse> listar(ItemPedidoFilter filter) {
-
         return repository.findAll(ItemPedidoSpecification.filtro(filter))
                 .stream()
                 .map(mapper::toItemResumoResponse)
@@ -105,9 +91,7 @@ public class ItemPedidoService {
     }
 
     @Transactional(readOnly = true)
-    public List<ItemPedidoResumoResponse> listarPorPedido(Integer pedidoId
-    ) {
-
+    public List<ItemPedidoResumoResponse> listarPorPedido(Integer pedidoId) {
         pedidoValidator.validarPedido(pedidoId);
 
         return repository.findByPedidoId(pedidoId)
@@ -117,17 +101,39 @@ public class ItemPedidoService {
     }
 
     public void remover(Integer id) {
-
         ItemPedido item = validator.validarItemPedido(id);
 
-        var pedido = item.getPedido();
-
+        Pedido pedido = item.getPedido();
         pedidoValidator.validarPedidoEditavel(pedido);
 
         repository.delete(item);
+        repository.flush();
 
-        pedido.setDataAtualizacao(
-                LocalDateTime.now(DateUtils.BR_ZONE)
-        );
+        atualizarTotais(pedido);
+    }
+
+    private void atualizarTotais(Pedido pedido) {
+        List<ItemPedido> itens = repository.findByPedidoId(pedido.getId());
+
+        BigDecimal subtotal = itens.stream()
+                .map(ItemPedido::getSubtotal)
+                .filter(valor -> valor != null)
+                .reduce(BigDecimal.ZERO, BigDecimal::add);
+
+        BigDecimal desconto = pedido.getDesconto() != null
+                ? pedido.getDesconto()
+                : BigDecimal.ZERO;
+
+        BigDecimal taxaEntrega = pedido.getTaxaEntrega() != null
+                ? pedido.getTaxaEntrega()
+                : BigDecimal.ZERO;
+
+        BigDecimal total = subtotal.subtract(desconto).add(taxaEntrega);
+
+        pedido.setSubtotal(subtotal);
+        pedido.setTotal(total);
+        pedido.setDataAtualizacao(LocalDateTime.now(DateUtils.BR_ZONE));
+
+        pedidoRepository.save(pedido);
     }
 }
