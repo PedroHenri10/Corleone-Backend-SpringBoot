@@ -146,5 +146,29 @@ public class PedidoService {
         return mapper.toResponse(repository.save(pedido));
     }
 
-   
+    private void alterarStatusInterno(
+            Pedido pedido,
+            StatusPedido novoStatus,
+            HistoricoPedidoRequest request
+    ) {
+        StatusPedido statusAnterior = pedido.getStatus();
+
+        if (statusAnterior == novoStatus) {
+            return;
+        }
+
+        pedido.setStatus(novoStatus);
+        pedido.setDataAtualizacao(LocalDateTime.now(DateUtils.BR_ZONE));
+
+        HistoricoPedidoRequest historicoRequest = request != null
+                ? request
+                : HistoricoPedidoRequest.builder().build();
+
+        historicoPedidoService.registrar(
+                pedido.getId(),
+                historicoRequest,
+                statusAnterior != null ? statusAnterior.name() : null,
+                novoStatus.name()
+        );
+    }
 }
