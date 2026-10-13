@@ -1,5 +1,7 @@
 package com.corleone.pedido.service;
 
+import com.corleone.exception.BusinessException;
+import com.corleone.exceptionhandler.ErrorEnum;
 import com.corleone.pedido.dto.HistoricoPedidoRequest;
 import com.corleone.pedido.dto.PedidoFilter;
 import com.corleone.pedido.dto.PedidoRequest;
@@ -138,7 +140,7 @@ public class PedidoService {
         validator.validarPedidoEditavel(pedido);
 
         if (status == null) {
-            throw new IllegalArgumentException("O status do pedido é obrigatório.");
+            throw new BusinessException(ErrorEnum.STATUS_PEDIDO_INVALIDO);
         }
 
         alterarStatusInterno(pedido, status, null);

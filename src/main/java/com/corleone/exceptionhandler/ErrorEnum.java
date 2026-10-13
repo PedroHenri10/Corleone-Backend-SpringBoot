@@ -489,6 +489,11 @@ public enum ErrorEnum {
             HttpStatus.NOT_FOUND,
             2086,
             "Borda do pedido não encontrada."
+    ),
+    STATUS_PEDIDO_INVALIDO(
+            HttpStatus.UNPROCESSABLE_CONTENT,
+            2087,
+            "O status do pedido é obrigatório."
     );
 
     private final HttpStatus httpStatus;
