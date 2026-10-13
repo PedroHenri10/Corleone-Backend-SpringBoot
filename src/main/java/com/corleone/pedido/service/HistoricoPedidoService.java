@@ -61,5 +61,13 @@ public class HistoricoPedidoService {
         return mapper.toResponse(historico);
     }
 
+    @Transactional(readOnly = true)
+    public List<HistoricoPedidoResponse> listar(HistoricoPedidoFilter filter) {
+        return repository.findAll(HistoricoPedidoSpecification.filtro(filter))
+                .stream()
+                .map(mapper::toResponse)
+                .toList();
+    }
+
 
 }
