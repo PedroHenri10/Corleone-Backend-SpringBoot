@@ -69,5 +69,14 @@ public class HistoricoPedidoService {
                 .toList();
     }
 
+    @Transactional(readOnly = true)
+    public List<HistoricoPedidoResponse> listarPorPedido(Integer pedidoId
+    ) {
+        pedidoValidator.validarPedido(pedidoId);
 
+        return repository.findByPedidoId(pedidoId)
+                .stream()
+                .map(mapper::toResponse)
+                .toList();
+    }
 }
