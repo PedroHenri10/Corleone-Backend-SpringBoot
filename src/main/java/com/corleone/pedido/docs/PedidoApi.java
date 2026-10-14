@@ -19,5 +19,22 @@ import org.springframework.http.ResponseEntity;
 @Tag(name = "Pedidos", description = "Gerenciamento de pedidos da pizzaria.")
 public interface PedidoApi {
 
-    
+    @Operation(
+            summary = "Cadastrar pedido",
+            description = "Realiza o cadastro de um novo pedido.",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "201",
+                            description = "Pedido cadastrado com sucesso.",
+                            content = @Content(
+                                    schema = @Schema(implementation = PedidoResponse.class)
+                            )
+                    ),
+                    @ApiResponse(responseCode = "400", description = "Dados inválidos."),
+                    @ApiResponse(responseCode = "404", description = "Cliente, funcionário ou recurso relacionado não encontrado.")
+            }
+    )
+    ResponseEntity<PedidoResponse> criar(PedidoRequest request);
+
+   
 }
