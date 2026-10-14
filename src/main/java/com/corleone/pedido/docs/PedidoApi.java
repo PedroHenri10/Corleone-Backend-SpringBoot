@@ -55,5 +55,22 @@ public interface PedidoApi {
             Integer id
     );
 
-    
+    @Operation(
+            summary = "Listar pedidos",
+            description = "Lista pedidos com paginação e filtros.",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Pedidos retornados com sucesso.",
+                            content = @Content(
+                                    array = @ArraySchema(
+                                            schema = @Schema(implementation = PedidoResumoResponse.class)
+                                    )
+                            )
+                    )
+            }
+    )
+    ResponseEntity<Page<PedidoResumoResponse>> listar(PedidoFilter filtro, Pageable pageable);
+
+
 }
