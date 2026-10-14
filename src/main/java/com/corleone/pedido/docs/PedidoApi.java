@@ -89,5 +89,27 @@ public interface PedidoApi {
     )
     ResponseEntity<PedidoResponse> atualizar(@Parameter(description = "ID do pedido.", example = "1") Integer id, PedidoRequest request);
 
+    @Operation(
+            summary = "Alterar status do pedido",
+            description = "Altera o status de um pedido conforme as regras de negócio.",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Status alterado com sucesso.",
+                            content = @Content(
+                                    schema = @Schema(implementation = PedidoResponse.class)
+                            )
+                    ),
+                    @ApiResponse(responseCode = "404", description = "Pedido não encontrado."),
+                    @ApiResponse(responseCode = "422", description = "Status inválido ou pedido não pode ser alterado.")
+            }
+    )
+    ResponseEntity<PedidoResponse> alterarStatus(
+            @Parameter(description = "ID do pedido.", example = "1")
+            Integer id,
+            @Parameter(description = "Novo status do pedido.", example = "EM_PREPARO")
+            StatusPedido status
+    );
 
+    
 }
