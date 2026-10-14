@@ -128,5 +128,20 @@ public interface PedidoApi {
     )
     ResponseEntity<PedidoResponse> cancelar(@Parameter(description = "ID do pedido.", example = "1") Integer id);
 
-
+    @Operation(
+            summary = "Finalizar pedido",
+            description = "Finaliza um pedido conforme as regras de negócio.",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Pedido finalizado.",
+                            content = @Content(
+                                    schema = @Schema(implementation = PedidoResponse.class)
+                            )
+                    ),
+                    @ApiResponse(responseCode = "404", description = "Pedido não encontrado."),
+                    @ApiResponse(responseCode = "422", description = "Pedido não pode ser finalizado.")
+            }
+    )
+    ResponseEntity<PedidoResponse> finalizar(@Parameter(description = "ID do pedido.", example = "1") Integer id);
 }
