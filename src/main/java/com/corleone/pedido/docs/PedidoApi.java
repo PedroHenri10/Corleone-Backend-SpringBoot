@@ -36,5 +36,24 @@ public interface PedidoApi {
     )
     ResponseEntity<PedidoResponse> criar(PedidoRequest request);
 
-   
+    @Operation(
+            summary = "Buscar pedido por ID",
+            description = "Retorna os dados completos de um pedido.",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Pedido encontrado.",
+                            content = @Content(
+                                    schema = @Schema(implementation = PedidoResponse.class)
+                            )
+                    ),
+                    @ApiResponse(responseCode = "404", description = "Pedido não encontrado.")
+            }
+    )
+    ResponseEntity<PedidoResponse> buscarPorId(
+            @Parameter(description = "ID do pedido.", example = "1")
+            Integer id
+    );
+
+    
 }
