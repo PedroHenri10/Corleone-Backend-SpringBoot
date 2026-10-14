@@ -111,5 +111,22 @@ public interface PedidoApi {
             StatusPedido status
     );
 
-    
+    @Operation(
+            summary = "Cancelar pedido",
+            description = "Cancela um pedido que ainda pode ser cancelado.",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Pedido cancelado.",
+                            content = @Content(
+                                    schema = @Schema(implementation = PedidoResponse.class)
+                            )
+                    ),
+                    @ApiResponse(responseCode = "404", description = "Pedido não encontrado."),
+                    @ApiResponse(responseCode = "422", description = "Pedido não pode ser cancelado.")
+            }
+    )
+    ResponseEntity<PedidoResponse> cancelar(@Parameter(description = "ID do pedido.", example = "1") Integer id);
+
+
 }
