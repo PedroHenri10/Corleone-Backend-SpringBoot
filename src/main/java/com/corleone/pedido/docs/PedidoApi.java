@@ -72,5 +72,22 @@ public interface PedidoApi {
     )
     ResponseEntity<Page<PedidoResumoResponse>> listar(PedidoFilter filtro, Pageable pageable);
 
+    @Operation(
+            summary = "Atualizar pedido",
+            description = "Atualiza os dados de um pedido que ainda pode ser editado.",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Pedido atualizado.",
+                            content = @Content(
+                                    schema = @Schema(implementation = PedidoResponse.class)
+                            )
+                    ),
+                    @ApiResponse(responseCode = "404", description = "Pedido ou recurso relacionado não encontrado."),
+                    @ApiResponse(responseCode = "422", description = "Pedido não pode ser editado.")
+            }
+    )
+    ResponseEntity<PedidoResponse> atualizar(@Parameter(description = "ID do pedido.", example = "1") Integer id, PedidoRequest request);
+
 
 }
