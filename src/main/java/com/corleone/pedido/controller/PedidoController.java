@@ -63,4 +63,11 @@ public class PedidoController implements PedidoApi {
         return ResponseEntity.ok(pedidoService.alterarStatus(id, status));
     }
 
+    @Override
+    @PatchMapping("/{id}/cancelar")
+    @PreAuthorize("hasAuthority('PEDIDO_CANCELAR')")
+    public ResponseEntity<PedidoResponse> cancelar(@PathVariable Integer id) {
+
+        return ResponseEntity.ok(pedidoService.cancelar(id));
+    }
 }
