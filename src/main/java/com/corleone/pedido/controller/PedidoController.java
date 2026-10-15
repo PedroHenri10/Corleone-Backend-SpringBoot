@@ -21,5 +21,7 @@ import org.springframework.web.bind.annotation.*;
 @RequiredArgsConstructor
 public class PedidoController implements PedidoApi {
 
+    private final PedidoService pedidoService;
 
+    
 }
