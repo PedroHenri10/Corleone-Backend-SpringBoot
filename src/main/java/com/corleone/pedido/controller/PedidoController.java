@@ -31,5 +31,13 @@ public class PedidoController implements PedidoApi {
         return ResponseEntity.status(HttpStatus.CREATED).body(pedidoService.criar(request));
     }
 
+    @Override
+    @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('PEDIDO_VISUALIZAR')")
+    public ResponseEntity<PedidoResponse> buscarPorId(@PathVariable Integer id) {
+
+        return ResponseEntity.ok(pedidoService.buscarPorId(id));
+    }
+
     
 }
