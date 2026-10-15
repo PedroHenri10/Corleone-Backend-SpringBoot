@@ -23,5 +23,13 @@ public class PedidoController implements PedidoApi {
 
     private final PedidoService pedidoService;
 
+    @Override
+    @PostMapping
+    @PreAuthorize("hasAuthority('PEDIDO_CRIAR')")
+    public ResponseEntity<PedidoResponse> criar(@Valid @RequestBody PedidoRequest request) {
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(pedidoService.criar(request));
+    }
+
     
 }
