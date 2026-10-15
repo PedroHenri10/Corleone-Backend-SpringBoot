@@ -47,5 +47,11 @@ public class PedidoController implements PedidoApi {
         return ResponseEntity.ok(pedidoService.listar(filtro, pageable));
     }
 
+    @Override
+    @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('PEDIDO_EDITAR')")
+    public ResponseEntity<PedidoResponse> atualizar(@PathVariable Integer id, @Valid @RequestBody PedidoRequest request) {
 
+        return ResponseEntity.ok(pedidoService.atualizar(id, request));
+    }
 }
