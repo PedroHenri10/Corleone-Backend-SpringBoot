@@ -54,4 +54,13 @@ public class PedidoController implements PedidoApi {
 
         return ResponseEntity.ok(pedidoService.atualizar(id, request));
     }
+
+    @Override
+    @PatchMapping("/{id}/status")
+    @PreAuthorize("hasAuthority('PEDIDO_EDITAR')")
+    public ResponseEntity<PedidoResponse> alterarStatus(@PathVariable Integer id, @RequestParam StatusPedido status) {
+
+        return ResponseEntity.ok(pedidoService.alterarStatus(id, status));
+    }
+
 }
