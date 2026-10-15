@@ -16,6 +16,8 @@ import com.corleone.pedido.validator.PedidoValidator;
 import com.corleone.shared.enums.StatusPedido;
 import com.corleone.shared.util.DateUtils;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -32,6 +34,7 @@ public class PedidoService {
     private final PedidoMapper mapper;
     private final PedidoValidator validator;
     private final HistoricoPedidoService historicoPedidoService;
+    private final PedidoRepository pedidoRepository;
 
     public PedidoResponse criar(PedidoRequest request) {
         var funcionario = validator.validarFuncionario(request.getFuncionarioId());
@@ -110,11 +113,9 @@ public class PedidoService {
     }
 
     @Transactional(readOnly = true)
-    public List<PedidoResumoResponse> listar(PedidoFilter filter) {
-        return repository.findAll(PedidoSpecification.filtro(filter))
-                .stream()
-                .map(mapper::toResumoResponse)
-                .toList();
+    public Page<PedidoResumoResponse> listar(PedidoFilter filtro, Pageable pageable) {
+
+        return pedidoRepository.findAll(PedidoSpecification.filtro(filtro), pageable).map(mapper::toResumoResponse);
     }
 
     public PedidoResponse cancelar(Integer id) {

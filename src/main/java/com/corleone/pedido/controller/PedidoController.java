@@ -39,5 +39,13 @@ public class PedidoController implements PedidoApi {
         return ResponseEntity.ok(pedidoService.buscarPorId(id));
     }
 
-    
+    @Override
+    @GetMapping
+    @PreAuthorize("hasAuthority('PEDIDO_VISUALIZAR')")
+    public ResponseEntity<Page<PedidoResumoResponse>> listar(PedidoFilter filtro, Pageable pageable) {
+
+        return ResponseEntity.ok(pedidoService.listar(filtro, pageable));
+    }
+
+
 }
