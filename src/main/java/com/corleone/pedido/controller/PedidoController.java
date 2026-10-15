@@ -19,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequestMapping("/pedidos")
 @RequiredArgsConstructor
-public class PedidoController {
+public class PedidoController implements PedidoApi {
 
 
 }
