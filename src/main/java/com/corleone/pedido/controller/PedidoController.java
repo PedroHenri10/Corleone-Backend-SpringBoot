@@ -70,4 +70,12 @@ public class PedidoController implements PedidoApi {
 
         return ResponseEntity.ok(pedidoService.cancelar(id));
     }
+
+    @Override
+    @PatchMapping("/{id}/finalizar")
+    @PreAuthorize("hasAuthority('PEDIDO_FINALIZAR')")
+    public ResponseEntity<PedidoResponse> finalizar(@PathVariable Integer id) {
+
+        return ResponseEntity.ok(pedidoService.finalizar(id));
+    }
 }
