@@ -38,4 +38,22 @@ public interface ItemPedidoApi {
     )
     ResponseEntity<ItemPedidoResponse> criar(@Parameter(description = "ID do pedido.", example = "1") Integer pedidoId, ItemPedidoRequest request);
 
+    @Operation(
+            summary = "Listar itens",
+            description = "Lista os itens utilizando paginação e filtros.",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Itens retornados com sucesso.",
+                            content = @Content(
+                                    array = @ArraySchema(
+                                            schema = @Schema(implementation = ItemPedidoResumoResponse.class)
+                                    )
+                            )
+                    )
+            }
+    )
+    ResponseEntity<Page<ItemPedidoResumoResponse>> listar(ItemPedidoFilter filtro, Pageable pageable);
+
+
 }
