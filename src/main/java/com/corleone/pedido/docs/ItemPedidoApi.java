@@ -20,5 +20,22 @@ import java.util.List;
 @Tag(name = "Itens do Pedido", description = "Gerenciamento dos itens de cada pedido.")
 public interface ItemPedidoApi {
 
-    
+    @Operation(
+            summary = "Adicionar item ao pedido",
+            description = "Adiciona um produto a um pedido existente.",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "201",
+                            description = "Item adicionado com sucesso.",
+                            content = @Content(
+                                    schema = @Schema(implementation = ItemPedidoResponse.class)
+                            )
+                    ),
+                    @ApiResponse(responseCode = "400", description = "Dados inválidos."),
+                    @ApiResponse(responseCode = "404", description = "Pedido ou produto não encontrado."),
+                    @ApiResponse(responseCode = "422", description = "Pedido não pode ser editado ou quantidade inválida.")
+            }
+    )
+    ResponseEntity<ItemPedidoResponse> criar(@Parameter(description = "ID do pedido.", example = "1") Integer pedidoId, ItemPedidoRequest request);
+
 }
