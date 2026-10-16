@@ -73,5 +73,22 @@ public interface ItemPedidoApi {
     )
     ResponseEntity<List<ItemPedidoResponse>> listarPorPedido(@Parameter(description = "ID do pedido.", example = "1") Integer pedidoId);
 
-    
+    @Operation(
+            summary = "Atualizar item",
+            description = "Atualiza o produto, a quantidade ou a observação de um item do pedido.",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Item atualizado com sucesso.",
+                            content = @Content(
+                                    schema = @Schema(implementation = ItemPedidoResponse.class)
+                            )
+                    ),
+                    @ApiResponse(responseCode = "404", description = "Item ou produto não encontrado."),
+                    @ApiResponse(responseCode = "422", description = "Pedido não pode ser editado ou quantidade inválida.")
+            }
+    )
+    ResponseEntity<ItemPedidoResponse> atualizar(@Parameter(description = "ID do item do pedido.", example = "1") Integer id, ItemPedidoRequest request);
+
+
 }
