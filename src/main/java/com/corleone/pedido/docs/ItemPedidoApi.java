@@ -55,5 +55,23 @@ public interface ItemPedidoApi {
     )
     ResponseEntity<Page<ItemPedidoResumoResponse>> listar(ItemPedidoFilter filtro, Pageable pageable);
 
+    @Operation(
+            summary = "Listar itens de um pedido",
+            description = "Retorna todos os itens associados ao pedido informado.",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Itens retornados com sucesso.",
+                            content = @Content(
+                                    array = @ArraySchema(
+                                            schema = @Schema(implementation = ItemPedidoResponse.class)
+                                    )
+                            )
+                    ),
+                    @ApiResponse(responseCode = "404", description = "Pedido não encontrado.")
+            }
+    )
+    ResponseEntity<List<ItemPedidoResponse>> listarPorPedido(@Parameter(description = "ID do pedido.", example = "1") Integer pedidoId);
 
+    
 }
