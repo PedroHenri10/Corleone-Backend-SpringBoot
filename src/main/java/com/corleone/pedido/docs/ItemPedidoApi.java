@@ -90,5 +90,14 @@ public interface ItemPedidoApi {
     )
     ResponseEntity<ItemPedidoResponse> atualizar(@Parameter(description = "ID do item do pedido.", example = "1") Integer id, ItemPedidoRequest request);
 
-
+    @Operation(
+            summary = "Remover item",
+            description = "Remove um item de um pedido que ainda pode ser editado.",
+            responses = {
+                    @ApiResponse(responseCode = "204", description = "Item removido com sucesso."),
+                    @ApiResponse(responseCode = "404", description = "Item não encontrado."),
+                    @ApiResponse(responseCode = "422", description = "Pedido não pode ser editado.")
+            }
+    )
+    ResponseEntity<Void> remover(@Parameter(description = "ID do item do pedido.", example = "1") Integer id);
 }
