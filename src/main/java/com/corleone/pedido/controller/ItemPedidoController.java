@@ -6,12 +6,14 @@ import com.corleone.pedido.dto.ItemPedidoRequest;
 import com.corleone.pedido.dto.ItemPedidoResponse;
 import com.corleone.pedido.dto.ItemPedidoResumoResponse;
 import com.corleone.pedido.service.ItemPedidoService;
+import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -23,8 +25,11 @@ public class ItemPedidoController implements ItemPedidoApi {
     private final ItemPedidoService itemPedidoService;
 
     @Override
-    public ResponseEntity<ItemPedidoResponse> criar(Integer pedidoId, ItemPedidoRequest request) {
-        return null;
+    @PostMapping("/{pedidoId}/itens")
+    @PreAuthorize("hasAuthority('PEDIDO_EDITAR')")
+    public ResponseEntity<ItemPedidoResponse> criar(@PathVariable Integer pedidoId, @Valid @RequestBody ItemPedidoRequest request) {
+
+        return ResponseEntity.status(HttpStatus.CREATED).body(itemPedidoService.criar(pedidoId, request));
     }
 
     @Override
