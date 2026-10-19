@@ -41,8 +41,11 @@ public class ItemPedidoController implements ItemPedidoApi {
     }
 
     @Override
-    public ResponseEntity<List<ItemPedidoResponse>> listarPorPedido(Integer pedidoId) {
-        return null;
+    @GetMapping("/{pedidoId}/itens")
+    @PreAuthorize("hasAuthority('PEDIDO_VISUALIZAR')")
+    public ResponseEntity<List<ItemPedidoResumoResponse>> listarPorPedido(@PathVariable Integer pedidoId) {
+
+        return ResponseEntity.ok(itemPedidoService.listarPorPedido(pedidoId));
     }
 
     @Override

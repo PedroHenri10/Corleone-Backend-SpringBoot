@@ -72,7 +72,7 @@ public interface ItemPedidoApi {
                     @ApiResponse(responseCode = "404", description = "Pedido não encontrado.")
             }
     )
-    ResponseEntity<List<ItemPedidoResponse>> listarPorPedido(
+    ResponseEntity<List<ItemPedidoResumoResponse>> listarPorPedido(
             @Parameter(description = "ID do pedido.", example = "1")
             Integer pedidoId
     );
