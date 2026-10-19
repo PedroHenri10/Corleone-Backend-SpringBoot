@@ -5,6 +5,7 @@ import com.corleone.pedido.dto.ItemPedidoFilter;
 import com.corleone.pedido.dto.ItemPedidoRequest;
 import com.corleone.pedido.dto.ItemPedidoResponse;
 import com.corleone.pedido.dto.ItemPedidoResumoResponse;
+import com.corleone.pedido.service.ItemPedidoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -18,6 +19,9 @@ import java.util.List;
 @RequestMapping("/pedidos")
 @RequiredArgsConstructor
 public class ItemPedidoController implements ItemPedidoApi {
+
+    private final ItemPedidoService itemPedidoService;
+
     @Override
     public ResponseEntity<ItemPedidoResponse> criar(Integer pedidoId, ItemPedidoRequest request) {
         return null;
