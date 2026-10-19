@@ -33,8 +33,11 @@ public class ItemPedidoController implements ItemPedidoApi {
     }
 
     @Override
+    @GetMapping("/itens")
+    @PreAuthorize("hasAuthority('PEDIDO_VISUALIZAR')")
     public ResponseEntity<Page<ItemPedidoResumoResponse>> listar(ItemPedidoFilter filtro, Pageable pageable) {
-        return null;
+
+        return ResponseEntity.ok(itemPedidoService.listar(filtro, pageable));
     }
 
     @Override

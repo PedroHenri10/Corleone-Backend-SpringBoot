@@ -14,6 +14,8 @@ import com.corleone.pedido.validator.ItemPedidoValidator;
 import com.corleone.pedido.validator.PedidoValidator;
 import com.corleone.shared.util.DateUtils;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -99,6 +101,12 @@ public class ItemPedidoService {
                 .stream()
                 .map(mapper::toItemResumoResponse)
                 .toList();
+    }
+
+    @Transactional(readOnly = true)
+    public Page<ItemPedidoResumoResponse> listar(ItemPedidoFilter filter, Pageable pageable) {
+        return repository.findAll(ItemPedidoSpecification.filtro(filter), pageable)
+                .map(mapper::toItemResumoResponse);
     }
 
     public void remover(Integer id) {
