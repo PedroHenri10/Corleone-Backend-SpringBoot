@@ -57,7 +57,12 @@ public class ItemPedidoController implements ItemPedidoApi {
     }
 
     @Override
-    public ResponseEntity<Void> remover(Integer id) {
-        return null;
+    @DeleteMapping("/itens/{id}")
+    @PreAuthorize("hasAuthority('PEDIDO_EDITAR')")
+    public ResponseEntity<Void> remover(@PathVariable Integer id) {
+
+        itemPedidoService.remover(id);
+
+        return ResponseEntity.noContent().build();
     }
 }
