@@ -46,8 +46,11 @@ public class ItemPedidoController implements ItemPedidoApi {
     }
 
     @Override
-    public ResponseEntity<ItemPedidoResponse> atualizar(Integer id, ItemPedidoRequest request) {
-        return null;
+    @PutMapping("/itens/{id}")
+    @PreAuthorize("hasAuthority('PEDIDO_EDITAR')")
+    public ResponseEntity<ItemPedidoResponse> atualizar(@PathVariable Integer id, @Valid @RequestBody ItemPedidoRequest request) {
+
+        return ResponseEntity.ok(itemPedidoService.atualizar(id, request));
     }
 
     @Override
