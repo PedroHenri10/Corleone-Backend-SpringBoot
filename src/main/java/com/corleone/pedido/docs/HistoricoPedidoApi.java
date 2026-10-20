@@ -51,5 +51,21 @@ public interface HistoricoPedidoApi {
     )
     ResponseEntity<Page<HistoricoPedidoResponse>> listar(HistoricoPedidoFilter filtro, Pageable pageable);
 
-    
+    @Operation(
+            summary = "Listar histórico de um pedido",
+            description = "Retorna os registros de histórico associados ao pedido informado.",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Histórico retornado com sucesso.",
+                            content = @Content(
+                                    array = @ArraySchema(
+                                            schema = @Schema(implementation = HistoricoPedidoResponse.class)
+                                    )
+                            )
+                    ),
+                    @ApiResponse(responseCode = "404", description = "Pedido não encontrado.")
+            }
+    )
+    ResponseEntity<List<HistoricoPedidoResponse>> listarPorPedido(@Parameter(description = "ID do pedido.", example = "1") Integer pedidoId);
 }
