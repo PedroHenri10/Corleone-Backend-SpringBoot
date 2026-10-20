@@ -34,5 +34,22 @@ public interface HistoricoPedidoApi {
     )
     ResponseEntity<HistoricoPedidoResponse> buscarPorId(@Parameter(description = "ID do registro de histórico.", example = "1") Integer id);
 
-   
+    @Operation(
+            summary = "Listar histórico",
+            description = "Lista registros de histórico usando paginação e filtros.",
+            responses = {
+                    @ApiResponse(
+                            responseCode = "200",
+                            description = "Histórico retornado com sucesso.",
+                            content = @Content(
+                                    array = @ArraySchema(
+                                            schema = @Schema(implementation = HistoricoPedidoResponse.class)
+                                    )
+                            )
+                    )
+            }
+    )
+    ResponseEntity<Page<HistoricoPedidoResponse>> listar(HistoricoPedidoFilter filtro, Pageable pageable);
+
+    
 }
