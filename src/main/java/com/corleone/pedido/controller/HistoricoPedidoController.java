@@ -30,5 +30,13 @@ public class HistoricoPedidoController implements HistoricoPedidoApi {
         );
     }
 
-    
+    @Override
+    @GetMapping
+    @PreAuthorize("hasAuthority('PEDIDO_VISUALIZAR')")
+    public ResponseEntity<Page<HistoricoPedidoResponse>> listar(HistoricoPedidoFilter filtro, Pageable pageable) {
+
+        return ResponseEntity.ok(historicoPedidoService.listar(filtro, pageable));
+    }
+
+
 }
