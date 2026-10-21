@@ -3,6 +3,7 @@ package com.corleone.pedido.controller;
 import com.corleone.pedido.docs.HistoricoPedidoApi;
 import com.corleone.pedido.dto.HistoricoPedidoFilter;
 import com.corleone.pedido.dto.HistoricoPedidoResponse;
+import com.corleone.pedido.service.HistoricoPedidoService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -16,6 +17,9 @@ import java.util.List;
 @RequestMapping("/historicos-pedido")
 @RequiredArgsConstructor
 public class HistoricoPedidoController implements HistoricoPedidoApi {
+
+    private final HistoricoPedidoService historicoPedidoService;
+
     @Override
     public ResponseEntity<HistoricoPedidoResponse> buscarPorId(Integer id) {
         return null;
