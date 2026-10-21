@@ -12,6 +12,8 @@ import com.corleone.pedido.specification.HistoricoPedidoSpecification;
 import com.corleone.pedido.validator.PedidoValidator;
 import com.corleone.shared.util.DateUtils;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -67,11 +69,9 @@ public class HistoricoPedidoService {
     }
 
     @Transactional(readOnly = true)
-    public List<HistoricoPedidoResponse> listar(HistoricoPedidoFilter filter) {
-        return repository.findAll(HistoricoPedidoSpecification.filtro(filter))
-                .stream()
-                .map(mapper::toResponse)
-                .toList();
+    public Page<HistoricoPedidoResponse> listar(HistoricoPedidoFilter filtro, Pageable pageable
+    ) {
+        return repository.findAll(HistoricoPedidoSpecification.filtro(filtro), pageable).map(mapper::toResponse);
     }
 
     @Transactional(readOnly = true)
