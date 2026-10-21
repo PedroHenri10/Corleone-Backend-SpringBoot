@@ -8,8 +8,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -21,17 +21,14 @@ public class HistoricoPedidoController implements HistoricoPedidoApi {
     private final HistoricoPedidoService historicoPedidoService;
 
     @Override
-    public ResponseEntity<HistoricoPedidoResponse> buscarPorId(Integer id) {
-        return null;
+    @GetMapping("/{id}")
+    @PreAuthorize("hasAuthority('PEDIDO_VISUALIZAR')")
+    public ResponseEntity<HistoricoPedidoResponse> buscarPorId(@PathVariable Integer id) {
+
+        return ResponseEntity.ok(
+                historicoPedidoService.buscarPorId(id)
+        );
     }
 
-    @Override
-    public ResponseEntity<Page<HistoricoPedidoResponse>> listar(HistoricoPedidoFilter filtro, Pageable pageable) {
-        return null;
-    }
-
-    @Override
-    public ResponseEntity<List<HistoricoPedidoResponse>> listarPorPedido(Integer pedidoId) {
-        return null;
-    }
+    
 }
