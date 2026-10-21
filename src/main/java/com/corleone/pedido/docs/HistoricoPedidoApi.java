@@ -43,7 +43,9 @@ public interface HistoricoPedidoApi {
                             description = "Histórico retornado com sucesso.",
                             content = @Content(
                                     array = @ArraySchema(
-                                            schema = @Schema(implementation = HistoricoPedidoResponse.class)
+                                            schema = @Schema(
+                                                    implementation = HistoricoPedidoResponse.class
+                                            )
                                     )
                             )
                     )
