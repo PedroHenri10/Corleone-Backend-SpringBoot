@@ -33,8 +33,11 @@ public class CargoService {
 
         Cargo cargo = mapper.toEntity(request);
 
+        LocalDateTime agora = LocalDateTime.now(DateUtils.BR_ZONE);
+
         cargo.setAtivo(true);
-        cargo.setDataAtualizacao(LocalDateTime.now(DateUtils.BR_ZONE));
+        cargo.setDataCriacao(agora);
+        cargo.setDataAtualizacao(agora);
 
         cargo = repository.save(cargo);
 
