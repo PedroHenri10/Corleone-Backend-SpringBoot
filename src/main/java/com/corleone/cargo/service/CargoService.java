@@ -28,6 +28,8 @@ public class CargoService {
     @Transactional
     public CargoResponse criar(CargoRequest request) {
 
+        request.setNome(request.getNome().trim());
+
         validator.validarNomeCadastro(request.getNome());
 
         Cargo cargo = mapper.toEntity(request);
@@ -47,6 +49,8 @@ public class CargoService {
     public CargoResponse atualizar(Integer id, CargoRequest request) {
 
         Cargo cargo = validator.validarCargo(id);
+        
+        request.setNome(request.getNome().trim());
 
         validator.validarNomeAtualizacao(id, request.getNome());
 
