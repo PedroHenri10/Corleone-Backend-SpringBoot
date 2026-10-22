@@ -17,7 +17,7 @@ public class CategoriaResumoResponse {
     @Schema(description = "Nome da categoria", example = "Pizzas Doces")
     private String nome;
 
-    @Schema(description = "Descrição detalhada da categoria", example = "Deliciosas pizzas com coberturas doces artesanais", )
+    @Schema(description = "Descrição detalhada da categoria", example = "Deliciosas pizzas com coberturas doces artesanais" )
     private String descricao;
 
     @Schema(description = "Indica se a categoria está ativa no sistema", example = "true")
