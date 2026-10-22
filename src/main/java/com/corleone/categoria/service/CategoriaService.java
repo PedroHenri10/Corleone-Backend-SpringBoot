@@ -59,7 +59,7 @@ public class CategoriaService {
 
     @Transactional(readOnly = true)
     public List<CategoriaResumoResponse> listar(){
-        return repository.findAll()
+        return repository.findAllByCatAtivoTrueOrderByCatNomeAsc()
                 .stream()
                 .map(mapper::toResumoResponse)
                 .toList();
