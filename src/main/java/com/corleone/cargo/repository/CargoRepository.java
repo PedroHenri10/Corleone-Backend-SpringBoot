@@ -3,6 +3,7 @@ package com.corleone.cargo.repository;
 import com.corleone.cargo.entity.Cargo;
 import org.springframework.data.jpa.repository.JpaRepository;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface CargoRepository extends JpaRepository<Cargo, Integer> {
@@ -10,5 +11,7 @@ public interface CargoRepository extends JpaRepository<Cargo, Integer> {
     Optional<Cargo> findByNomeIgnoreCase(String nome);
 
     boolean existsByNomeIgnoreCase(String nome);
+
+    List<Cargo> findByAtivoTrue();
 
 }

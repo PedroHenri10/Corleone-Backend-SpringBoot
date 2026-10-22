@@ -68,7 +68,7 @@ public class CargoService {
     @Transactional(readOnly = true)
     public List<CargoResponse> listar() {
 
-        return repository.findAll()
+        return repository.findByAtivoTrue()
                 .stream()
                 .map(mapper::toResponse)
                 .toList();
