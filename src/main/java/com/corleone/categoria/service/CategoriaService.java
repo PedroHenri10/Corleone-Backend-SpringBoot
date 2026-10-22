@@ -36,6 +36,11 @@ public class CategoriaService {
 
         categoria.setCatAtivo(true);
 
+        LocalDateTime agora = LocalDateTime.now(DateUtils.BR_ZONE);
+        categoria.setCatAtivo(true);
+        categoria.setCatDtCriacao(agora);
+        categoria.setCatDtAtualizacao(agora);
+
         categoria = repository.save(categoria);
 
         return mapper.toResponse(categoria);
