@@ -27,6 +27,9 @@ public class CategoriaService {
     private final CategoriaValidator validator;
 
     public CategoriaResponse criar(CategoriaRequest request){
+
+        request.setNome(request.getNome().trim());
+
         validator.validarNomeCadastro(request.getNome());
 
         Categoria categoria = mapper.toEntity(request);
@@ -40,6 +43,8 @@ public class CategoriaService {
 
     public CategoriaResponse atualizar(Integer id, CategoriaRequest request){
         Categoria categoria = validator.validarCategoria(id);
+
+        request.setNome(request.getNome().trim());
 
         validator.validarNomeAtualizacao(id, request.getNome());
 
