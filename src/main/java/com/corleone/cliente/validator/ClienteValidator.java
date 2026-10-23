@@ -8,9 +8,9 @@ import com.corleone.exception.BusinessException;
 import com.corleone.exception.ResourceNotFoundException;
 import com.corleone.exceptionhandler.ErrorEnum;
 import lombok.RequiredArgsConstructor;
-import org.springframework.stereotype.Service;
+import org.springframework.stereotype.Component;
 
-@Service
+@Component
 @RequiredArgsConstructor
 public class ClienteValidator {
 
