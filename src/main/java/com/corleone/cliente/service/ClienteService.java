@@ -38,6 +38,12 @@ public class ClienteService {
 
         cliente.setAtivo(true);
 
+        LocalDateTime agora = LocalDateTime.now(DateUtils.BR_ZONE);
+
+        cliente.setAtivo(true);
+        cliente.setDataCriacao(agora);
+        cliente.setDataAtualizacao(agora);
+
         cliente = repository.save(cliente);
 
         return mapper.toResponse(cliente);
