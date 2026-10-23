@@ -29,6 +29,9 @@ public class ClienteService {
     private final ClienteValidator validator;
 
     public ClienteResponse criar(ClienteRequest request) {
+        request.setNome(request.getNome().trim());
+
+        request.setEmail(request.getEmail().trim().toLowerCase());
 
         validator.validarEmailCadastro(request.getEmail());
 
@@ -52,6 +55,8 @@ public class ClienteService {
     public ClienteResponse atualizar(Integer id, ClienteRequest request) {
 
         Cliente cliente = validator.validarCliente(id);
+
+        request.setEmail(request.getEmail().trim().toLowerCase());
 
         validator.validarEmailAtualizacao(id, request.getEmail());
 
