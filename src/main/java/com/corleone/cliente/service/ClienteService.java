@@ -102,6 +102,10 @@ public class ClienteService {
 
     private Specification<Cliente> montarSpecification(ClienteFiltro filtro) {
 
+        if (filtro == null) {
+            filtro = new ClienteFiltro();
+        }
+
         return Specification
                 .where(
                         filtro.getAtivo() == null
