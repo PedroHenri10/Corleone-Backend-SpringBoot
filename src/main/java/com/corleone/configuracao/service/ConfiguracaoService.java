@@ -8,9 +8,9 @@ import com.corleone.configuracao.mapper.ConfiguracaoMapper;
 import com.corleone.configuracao.repository.ConfiguracaoRepository;
 import com.corleone.configuracao.validator.ConfiguracaoValidator;
 import com.corleone.shared.util.DateUtils;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -58,6 +58,7 @@ public class ConfiguracaoService {
         return mapper.toResponse(configuracao);
     }
 
+    @Transactional(readOnly = true)
     public ConfiguracaoResponse buscarPorId(Integer id) {
 
         Configuracao configuracao = validator.validarConfiguracao(id);
@@ -65,6 +66,7 @@ public class ConfiguracaoService {
         return mapper.toResponse(configuracao);
     }
 
+    @Transactional(readOnly = true)
     public ConfiguracaoResponse buscarPorChave(String chave) {
 
         Configuracao configuracao = validator.validarChave(chave);
@@ -72,6 +74,7 @@ public class ConfiguracaoService {
         return mapper.toResponse(configuracao);
     }
 
+    @Transactional(readOnly = true)
     public List<ConfiguracaoResumoResponse> listar() {
 
         return repository.findAll()
