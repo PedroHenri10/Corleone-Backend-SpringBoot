@@ -6,7 +6,7 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.Optional;
 
 public interface ConfiguracaoRepository extends JpaRepository<Configuracao, Integer> {
-    Optional<Configuracao> findByChave(String chave);
+    boolean existsByChaveIgnoreCase(String chave);
 
-    boolean existsByChave(String chave);
+    Optional<Configuracao> findByChaveIgnoreCase(String chave);
 }

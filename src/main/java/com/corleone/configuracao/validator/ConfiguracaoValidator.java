@@ -20,20 +20,18 @@ public class ConfiguracaoValidator {
     }
 
     public Configuracao validarChave(String chave) {
-        return repository.findByChave(chave).orElseThrow(() ->
+        return repository.findByChaveIgnoreCase(chave).orElseThrow(() ->
                         new ResourceNotFoundException(ErrorEnum.CONFIGURACAO_NAO_ENCONTRADA));
     }
 
     public void validarChaveDuplicada(String chave) {
-        if (repository.existsByChave(chave)) {
-            throw new BusinessException(
-                    ErrorEnum.CONFIGURACAO_JA_CADASTRADA
-            );
+        if (repository.existsByChaveIgnoreCase(chave)) {
+            throw new BusinessException(ErrorEnum.CONFIGURACAO_JA_CADASTRADA);
         }
     }
 
     public void validarChaveDuplicada(String chave, Integer id) {
-        repository.findByChave(chave).filter(configuracao -> !configuracao.getId().equals(id))
+        repository.findByChaveIgnoreCase(chave).filter(configuracao -> !configuracao.getId().equals(id))
                 .ifPresent(configuracao -> {throw new BusinessException(ErrorEnum.CONFIGURACAO_JA_CADASTRADA);
                 });
     }
