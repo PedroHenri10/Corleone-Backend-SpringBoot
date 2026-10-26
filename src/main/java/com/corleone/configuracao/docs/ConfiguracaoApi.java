@@ -19,7 +19,7 @@ public interface ConfiguracaoApi {
 
     @Operation(summary = "Cadastrar configuração", description = "Realiza o cadastro de uma nova configuração.",
             responses = {@ApiResponse(
-                            responseCode = "200",
+                            responseCode = "201",
                             description = "Configuração cadastrada com sucesso.",
                             content = @Content(schema = @Schema(implementation = ConfiguracaoResponse.class)
                             )
