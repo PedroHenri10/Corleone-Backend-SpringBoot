@@ -25,7 +25,7 @@ public class ConfiguracaoController implements ConfiguracaoApi {
     @PreAuthorize("hasAuthority('CONFIGURACAO_CRIAR')")
     public ResponseEntity<ConfiguracaoResponse> criar(@Valid @RequestBody ConfiguracaoRequest request) {
 
-        return ResponseEntity.ok(service.criar(request));
+        return ResponseEntity.status(201).body(service.criar(request));
     }
 
     @Override
