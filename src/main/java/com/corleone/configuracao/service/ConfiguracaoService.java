@@ -25,6 +25,7 @@ public class ConfiguracaoService {
     private final ConfiguracaoValidator validator;
 
     public ConfiguracaoResponse criar(ConfiguracaoRequest request) {
+        request.setChave(request.getChave().trim().toUpperCase());
 
         validator.validarChaveDuplicada(request.getChave());
 
@@ -43,6 +44,8 @@ public class ConfiguracaoService {
     public ConfiguracaoResponse atualizar(Integer id, ConfiguracaoRequest request) {
 
         Configuracao configuracao = validator.validarConfiguracao(id);
+
+        request.setChave(request.getChave().trim().toUpperCase());
 
         validator.validarChaveDuplicada(request.getChave(), id);
 
