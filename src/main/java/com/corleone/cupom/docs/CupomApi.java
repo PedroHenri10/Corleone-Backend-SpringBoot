@@ -1,4 +1,4 @@
-package com.corleone.cupom;
+package com.corleone.cupom.docs;
 
 import com.corleone.cupom.dto.CupomFilter;
 import com.corleone.cupom.dto.CupomRequest;

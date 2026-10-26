@@ -1,6 +1,6 @@
 package com.corleone.cupom.controller;
 
-import com.corleone.cupom.CupomApi;
+import com.corleone.cupom.docs.CupomApi;
 import com.corleone.cupom.dto.CupomFilter;
 import com.corleone.cupom.dto.CupomRequest;
 import com.corleone.cupom.dto.CupomResponse;
