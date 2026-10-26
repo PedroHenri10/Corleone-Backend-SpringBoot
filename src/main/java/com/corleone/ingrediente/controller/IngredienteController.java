@@ -16,7 +16,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/ingredientes")
+@RequestMapping("/v1/api/ingredientes")
 @RequiredArgsConstructor
 public class IngredienteController implements IngredienteApi {
 

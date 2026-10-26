@@ -16,7 +16,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/funcionarios")
+@RequestMapping("/v1/api/funcionarios")
 @RequiredArgsConstructor
 public class FuncionarioController implements FuncionarioApi {
 

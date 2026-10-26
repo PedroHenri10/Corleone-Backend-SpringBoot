@@ -12,7 +12,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/clientes")
+@RequestMapping("/v1/api/clientes")
 @RequiredArgsConstructor
 public class ClienteController implements ClienteApi {
 

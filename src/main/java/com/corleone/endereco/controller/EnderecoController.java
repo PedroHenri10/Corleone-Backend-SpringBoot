@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/enderecos")
+@RequestMapping("/v1/api/enderecos")
 @RequiredArgsConstructor
 public class EnderecoController implements EnderecoApi {
 

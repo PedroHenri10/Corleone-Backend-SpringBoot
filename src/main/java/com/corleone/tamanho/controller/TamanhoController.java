@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/tamanhos")
+@RequestMapping("/v1/api/tamanhos")
 @RequiredArgsConstructor
 public class TamanhoController implements TamanhoApi {
 

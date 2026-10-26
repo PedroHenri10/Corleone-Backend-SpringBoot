@@ -17,7 +17,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/pedidos")
+@RequestMapping("/v1/api/pedidos")
 @RequiredArgsConstructor
 public class PedidoController implements PedidoApi {
 

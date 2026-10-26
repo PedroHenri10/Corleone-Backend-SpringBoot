@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/bordas")
+@RequestMapping("/v1/api/bordas")
 @RequiredArgsConstructor
 public class BordaController implements BordaApi {
 

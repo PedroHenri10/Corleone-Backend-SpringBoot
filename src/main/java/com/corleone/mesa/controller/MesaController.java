@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/mesas")
+@RequestMapping("/v1/api/mesas")
 @RequiredArgsConstructor
 public class MesaController implements MesaApi {
 

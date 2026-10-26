@@ -14,7 +14,7 @@ import java.net.URI;
 import java.util.List;
 
 @RestController
-@RequestMapping("/cargos")
+@RequestMapping("/v1/api/cargos")
 @RequiredArgsConstructor
 public class CargoController implements CargoApi {
 

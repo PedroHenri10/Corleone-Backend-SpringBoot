@@ -12,7 +12,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/estoques")
+@RequestMapping("/v1/api/estoques")
 @RequiredArgsConstructor
 public class EstoqueController implements EstoqueApi {
 

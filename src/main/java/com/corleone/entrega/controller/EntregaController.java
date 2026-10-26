@@ -16,7 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/entregas")
+@RequestMapping("/v1/api/entregas")
 @RequiredArgsConstructor
 public class EntregaController implements EntregaApi {
 

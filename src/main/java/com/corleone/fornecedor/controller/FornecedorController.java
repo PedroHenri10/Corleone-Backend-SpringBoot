@@ -12,7 +12,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/fornecedores")
+@RequestMapping("/v1/api/fornecedores")
 @RequiredArgsConstructor
 public class FornecedorController implements FornecedorApi {
 

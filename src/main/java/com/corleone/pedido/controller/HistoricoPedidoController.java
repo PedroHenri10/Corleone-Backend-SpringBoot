@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/historicos-pedido")
+@RequestMapping("/v1/api/historicos-pedido")
 @RequiredArgsConstructor
 public class HistoricoPedidoController implements HistoricoPedidoApi {
 

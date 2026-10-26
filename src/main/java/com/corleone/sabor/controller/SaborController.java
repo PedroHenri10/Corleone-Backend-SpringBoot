@@ -13,7 +13,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-@RequestMapping("/sabores")
+@RequestMapping("/v1/api/sabores")
 @RequiredArgsConstructor
 public class SaborController implements SaborApi {
 
