@@ -8,6 +8,7 @@ import com.corleone.cupom.dto.CupomResumoResponse;
 import com.corleone.cupom.service.CupomService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -40,10 +41,13 @@ public class CupomController implements CupomApi {
     @Override
     @GetMapping
     @PreAuthorize("hasAuthority('CUPOM_VISUALIZAR')")
-    public ResponseEntity<List<CupomResumoResponse>> listar(@ModelAttribute CupomFilter filter) {
+    public ResponseEntity<Page<CupomResumoResponse>> listar(
+            @ModelAttribute CupomFilter filter,
+            org.springframework.data.domain.Pageable pageable) {
 
-        return ResponseEntity.ok(service.listar(filter));
+        return ResponseEntity.ok(service.listar(filter, pageable));
     }
+
 
     @Override
     @PutMapping("/{id}")
