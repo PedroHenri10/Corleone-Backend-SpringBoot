@@ -10,10 +10,10 @@ import com.corleone.cupom.repository.CupomRepository;
 import com.corleone.cupom.specification.CupomSpecification;
 import com.corleone.cupom.validator.CupomValidator;
 import com.corleone.shared.util.DateUtils;
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.time.LocalDateTime;
 import java.util.List;
@@ -66,7 +66,7 @@ public class CupomService {
         return mapper.toResponse(cupom);
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public CupomResponse buscarPorId(Integer id) {
 
         Cupom cupom = validator.validarCupom(id);
@@ -74,7 +74,7 @@ public class CupomService {
         return mapper.toResponse(cupom);
     }
 
-    @Transactional
+    @Transactional(readOnly = true)
     public List<CupomResumoResponse> listar(CupomFilter filter) {
 
         if (filter.getAtivo() == null) {
