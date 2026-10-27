@@ -12,6 +12,7 @@ import com.corleone.cupom.validator.CupomValidator;
 import com.corleone.shared.util.DateUtils;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -75,6 +76,22 @@ public class CupomService {
 
     @Transactional
     public List<CupomResumoResponse> listar(CupomFilter filter) {
+
+        if (filter.getAtivo() == null) {
+
+            return repository.findAll(
+                            Specification
+                                    .where(
+                                            CupomSpecification.somenteAtivos()
+                                    )
+                                    .and(
+                                            CupomSpecification.filtro(filter)
+                                    )
+                    )
+                    .stream()
+                    .map(mapper::toResumoResponse)
+                    .toList();
+        }
 
         return repository.findAll(CupomSpecification.filtro(filter))
                 .stream()
