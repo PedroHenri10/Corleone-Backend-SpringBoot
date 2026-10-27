@@ -21,13 +21,13 @@ public class CupomValidator {
     }
 
     public void validarCodigoDuplicado(String codigo) {
-        if (repository.existsByCodigo(codigo)) {
+        if (repository.existsByCodigoIgnoreCase(codigo)) {
             throw new BusinessException(ErrorEnum.CUPOM_JA_CADASTRADO);
         }
     }
 
     public void validarCodigoDuplicado(String codigo, Integer id) {
-        repository.findByCodigo(codigo)
+        repository.findByCodigoIgnoreCase(codigo)
                 .filter(cupom -> !cupom.getId().equals(id))
                 .ifPresent(cupom -> {
                     throw new BusinessException(ErrorEnum.CUPOM_JA_CADASTRADO);

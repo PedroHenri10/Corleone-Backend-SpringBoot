@@ -8,8 +8,8 @@ import java.util.Optional;
 
 public interface CupomRepository extends JpaRepository<Cupom, Integer>, JpaSpecificationExecutor<Cupom> {
 
-    boolean existsByCodigo(String codigo);
+    boolean existsByCodigoIgnoreCase(String codigo);
 
-    Optional<Cupom> findByCodigo(String codigo);
+    Optional<Cupom> findByCodigoIgnoreCase(String codigo);
 
 }
