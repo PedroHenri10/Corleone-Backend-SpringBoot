@@ -19,7 +19,7 @@ import java.util.List;
 public interface CupomApi {
 
     @Operation(summary = "Cadastrar cupom", description = "Realiza o cadastro de um novo cupom.",
-            responses = {@ApiResponse(responseCode = "200", description = "Cupom cadastrado com sucesso.",
+            responses = {@ApiResponse(responseCode = "201", description = "Cupom cadastrado com sucesso.",
                             content = @Content(
                                     schema = @Schema(implementation = CupomResponse.class)
                             )

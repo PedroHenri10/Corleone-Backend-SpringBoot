@@ -26,7 +26,7 @@ public class CupomController implements CupomApi {
     @PreAuthorize("hasAuthority('CUPOM_CRIAR')")
     public ResponseEntity<CupomResponse> criar(@Valid @RequestBody CupomRequest request) {
 
-        return ResponseEntity.ok(service.criar(request));
+        return ResponseEntity.status(201).body(service.criar(request));
     }
 
     @Override
