@@ -11,6 +11,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
@@ -38,13 +39,13 @@ public interface CupomApi {
     )
     ResponseEntity<CupomResponse> buscarPorId(@Parameter(description = "ID do cupom.", example = "1") Integer id);
 
-    @Operation(summary = "Listar cupons", description = "Lista cupons utilizando filtros.", responses = {
-                    @ApiResponse(responseCode = "200", description = "Lista retornada com sucesso.",
-                            content = @Content(array = @ArraySchema(schema = @Schema(
-                                    implementation = CupomResumoResponse.class))))
-            }
+    @Operation(summary = "Listar cupons", description = "Lista cupons utilizando filtros e paginação.", responses = {
+            @ApiResponse(responseCode = "200", description = "Lista paginada retornada com sucesso.",
+                    content = @Content(schema = @Schema(implementation = Page.class)))
+    }
     )
-    ResponseEntity<List<CupomResumoResponse>> listar(CupomFilter filter);
+    ResponseEntity<Page<CupomResumoResponse>> listar(CupomFilter filter, org.springframework.data.domain.Pageable pageable);
+
 
     @Operation(summary = "Atualizar cupom", description = "Atualiza os dados de um cupom existente.",
             responses = {@ApiResponse(responseCode = "200", description = "Cupom atualizado com sucesso.",
