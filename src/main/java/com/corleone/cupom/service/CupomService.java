@@ -27,6 +27,8 @@ public class CupomService {
 
     public CupomResponse criar(CupomRequest request) {
 
+        request.setCodigo(request.getCodigo().trim().toUpperCase());
+
         validator.validarCodigoDuplicado(request.getCodigo());
 
         validator.validarPeriodo(request.getDataInicio(), request.getDataFim());
@@ -43,6 +45,8 @@ public class CupomService {
     }
 
     public CupomResponse atualizar(Integer id, CupomRequest request) {
+
+        request.setCodigo(request.getCodigo().trim().toUpperCase());
 
         Cupom cupom = validator.validarCupom(id);
 
