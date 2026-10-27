@@ -11,6 +11,8 @@ import com.corleone.cupom.specification.CupomSpecification;
 import com.corleone.cupom.validator.CupomValidator;
 import com.corleone.shared.util.DateUtils;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -75,29 +77,21 @@ public class CupomService {
     }
 
     @Transactional(readOnly = true)
-    public List<CupomResumoResponse> listar(CupomFilter filter) {
+    public Page<CupomResumoResponse> listar(CupomFilter filter, Pageable pageable) {
 
         if (filter.getAtivo() == null) {
-
             return repository.findAll(
-                            Specification
-                                    .where(
-                                            CupomSpecification.somenteAtivos()
-                                    )
-                                    .and(
-                                            CupomSpecification.filtro(filter)
-                                    )
-                    )
-                    .stream()
-                    .map(mapper::toResumoResponse)
-                    .toList();
+                    Specification
+                            .where(CupomSpecification.somenteAtivos())
+                            .and(CupomSpecification.filtro(filter)),
+                    pageable
+            ).map(mapper::toResumoResponse);
         }
 
-        return repository.findAll(CupomSpecification.filtro(filter))
-                .stream()
-                .map(mapper::toResumoResponse)
-                .toList();
+        return repository.findAll(CupomSpecification.filtro(filter), pageable)
+                .map(mapper::toResumoResponse);
     }
+
 
     public void desativar(Integer id) {
 
