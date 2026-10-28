@@ -81,6 +81,7 @@ public class EnderecoService {
     public void excluir(Integer id) {
 
         Endereco endereco = validator.validarEndereco(id);
+        validator.validarEnderecoSemVinculo(id);
 
         enderecoRepository.delete(endereco);
     }
