@@ -494,6 +494,11 @@ public enum ErrorEnum {
             HttpStatus.UNPROCESSABLE_CONTENT,
             2087,
             "O status do pedido é obrigatório."
+    ),
+    ENDERECO_EM_USO(
+            HttpStatus.CONFLICT,
+            2088,
+            "Não é possível excluir o endereço pois ele está vinculado a outro registro."
     );
 
     private final HttpStatus httpStatus;

@@ -16,4 +16,6 @@ public interface ClienteRepository extends JpaRepository<Cliente, Integer>, JpaS
 
     boolean existsByEmailAndIdNot(String email, Integer id);
 
+    boolean existsByEnderecoId(Integer enderecoId);
+
 }

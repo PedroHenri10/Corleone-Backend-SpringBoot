@@ -19,4 +19,6 @@ public class EnderecoValidator {
         return enderecoRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException(ErrorEnum.ENDERECO_NAO_ENCONTRADO));
     }
 
+
+
 }
