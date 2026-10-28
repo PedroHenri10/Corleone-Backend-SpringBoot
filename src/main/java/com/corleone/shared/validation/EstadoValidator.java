@@ -17,17 +17,13 @@ public class EstadoValidator implements ConstraintValidator<EstadoValido, String
     );
 
     @Override
-    public boolean isValid(
-            String value,
-            ConstraintValidatorContext context
+    public boolean isValid(String value, ConstraintValidatorContext context
     ) {
 
         if (value == null || value.isBlank()) {
             return true;
         }
 
-        return UFS.contains(
-                value.trim().toUpperCase()
-        );
+        return UFS.contains(value.trim().toUpperCase());
     }
 }
