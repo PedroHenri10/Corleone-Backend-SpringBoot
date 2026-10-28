@@ -25,6 +25,14 @@ public class EnderecoService {
     @Transactional
     public EnderecoResponse criar(EnderecoRequest request) {
 
+        request.setCidade(request.getCidade().trim());
+
+        request.setBairro(request.getBairro().trim());
+
+        request.setEstado(request.getEstado().trim().toUpperCase());
+
+        request.setLogradouro(request.getLogradouro().trim());
+
         Endereco endereco = mapper.toEntity(request);
 
         endereco = enderecoRepository.save(endereco);
@@ -36,6 +44,14 @@ public class EnderecoService {
     public EnderecoResponse atualizar(Integer id, EnderecoRequest request) {
 
         Endereco endereco = validator.validarEndereco(id);
+
+        request.setCidade(request.getCidade().trim());
+
+        request.setBairro(request.getBairro().trim());
+
+        request.setEstado(request.getEstado().trim().toUpperCase());
+
+        request.setLogradouro(request.getLogradouro().trim());
 
         mapper.updateEntity(endereco, request);
 
