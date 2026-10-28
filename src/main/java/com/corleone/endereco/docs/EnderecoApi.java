@@ -1,7 +1,5 @@
 package com.corleone.endereco.docs;
 
-import com.corleone.categoria.dto.CategoriaResponse;
-import com.corleone.categoria.dto.CategoriaResumoResponse;
 import com.corleone.endereco.dto.EnderecoRequest;
 import com.corleone.endereco.dto.EnderecoResponse;
 import com.corleone.endereco.dto.EnderecoResumoResponse;
