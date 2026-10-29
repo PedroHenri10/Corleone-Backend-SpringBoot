@@ -9,6 +9,8 @@ import com.corleone.entrega.dto.EntregaResumoResponse;
 import com.corleone.entrega.service.EntregaService;
 import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -41,9 +43,9 @@ public class EntregaController implements EntregaApi {
     @Override
     @PostMapping("/filtro")
     @PreAuthorize("hasAuthority('DELIVERY_VISUALIZAR')")
-    public ResponseEntity<List<EntregaResumoResponse>> listar(@RequestBody EntregaFilter filter) {
-
-        return ResponseEntity.ok(service.listar(filter));
+    public ResponseEntity<Page<EntregaResumoResponse>> listar(@RequestBody EntregaFilter filter, Pageable pageable
+    ) {
+        return ResponseEntity.ok(service.listar(filter, pageable));
     }
 
     @Override

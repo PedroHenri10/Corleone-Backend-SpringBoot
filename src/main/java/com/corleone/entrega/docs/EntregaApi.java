@@ -13,6 +13,8 @@ import io.swagger.v3.oas.annotations.parameters.RequestBody;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.ResponseEntity;
 
 import java.util.List;
@@ -37,17 +39,13 @@ public interface EntregaApi {
     ResponseEntity<EntregaResponse> buscarPorId(@Parameter(description = "ID da entrega") Integer id);
 
     @Operation(summary = "Listar entregas")
-    @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Lista retornada com sucesso")
-    })
-    ResponseEntity<List<EntregaResumoResponse>> listar(
-            @RequestBody(
-                    description = "Filtros da pesquisa",
-                    required = true,
-                    content = @Content(schema = @Schema(implementation = EntregaFilter.class))
-            )
-            EntregaFilter filter
+    @ApiResponses({ @ApiResponse(responseCode = "200", description = "Lista retornada com sucesso") })
+    ResponseEntity<Page<EntregaResumoResponse>> listar(
+            @RequestBody(description = "Filtros da pesquisa", required = true, content = @Content(schema = @Schema(implementation = EntregaFilter.class))
+            ) EntregaFilter filter,
+            @org.springdoc.core.annotations.ParameterObject Pageable pageable
     );
+
 
     @Operation(summary = "Iniciar entrega")
     @ApiResponses({@ApiResponse(responseCode = "200", description = "Entrega iniciada"),

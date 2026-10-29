@@ -13,6 +13,8 @@ import com.corleone.shared.enums.StatusEntrega;
 import com.corleone.shared.util.DateUtils;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -85,13 +87,9 @@ public class EntregaService {
 
     }
 
-    public List<EntregaResumoResponse> listar(EntregaFilter filter) {
-
-        return repository.findAll(EntregaSpecification.filtro(filter))
-                .stream()
-                .map(mapper::toResumoResponse)
-                .toList();
-
+    public Page<EntregaResumoResponse> listar(EntregaFilter filter, Pageable pageable) {
+        return repository.findAll(EntregaSpecification.filtro(filter), pageable)
+                .map(mapper::toResumoResponse);
     }
 
     public EntregaResponse iniciarEntrega(Integer id) {
