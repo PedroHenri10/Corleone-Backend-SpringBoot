@@ -54,6 +54,8 @@ public class EntregaService {
 
         Entrega entrega = validator.validarEntrega(id);
 
+        validator.validarTransicaoStatus(entrega.getStatus(), request.getStatus());
+
         mapper.updateEntity(request, entrega);
 
         switch (request.getStatus()) {
