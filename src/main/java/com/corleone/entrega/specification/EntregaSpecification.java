@@ -12,6 +12,10 @@ public final class EntregaSpecification {
 
     public static Specification<Entrega> filtro(EntregaFilter filter) {
 
+        if(filter == null){
+            filter = new EntregaFilter();
+        }
+
         return Specification
                 .where(pedido(filter.getPedidoId()))
                 .and(entregador(filter.getEntregadorId()))
