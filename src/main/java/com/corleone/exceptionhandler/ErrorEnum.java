@@ -500,7 +500,7 @@ public enum ErrorEnum {
             2088,
             "Não é possível excluir o endereço pois ele está vinculado a outro registro."
     ),
-    STATUS_TRANSICAO_ENTREGA_INVALIDA(
+    STATUS_ENTREGA_INVALIDO(
             HttpStatus.UNPROCESSABLE_CONTENT,
             2089,
             "Não é possível alterar o status atual da entrega para o status informado."
