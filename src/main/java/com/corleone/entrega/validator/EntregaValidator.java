@@ -11,6 +11,7 @@ import com.corleone.pedido.entity.Pedido;
 import com.corleone.pedido.repository.PedidoRepository;
 import com.corleone.entrega.entity.Entrega;
 import com.corleone.entrega.repository.EntregaRepository;
+import com.corleone.shared.enums.StatusEntrega;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Component;
 
@@ -63,6 +64,23 @@ public class EntregaValidator {
             throw new BusinessException(ErrorEnum.PEDIDO_JA_POSSUI_ENTREGA);
         }
 
+    }
+
+    public void validarTransicaoStatus(StatusEntrega statusAtual, StatusEntrega novoStatus
+    ) {
+
+        boolean valido = switch (statusAtual) {
+
+            case AGUARDANDO -> novoStatus == StatusEntrega.SAIU || novoStatus == StatusEntrega.CANCELADA;
+
+            case SAIU -> novoStatus == StatusEntrega.ENTREGUE;
+
+            case ENTREGUE, CANCELADA -> false;
+        };
+
+        if (!valido) {
+            throw new BusinessException(ErrorEnum.STATUS_ENTREGA_INVALIDO);
+        }
     }
 
 }
