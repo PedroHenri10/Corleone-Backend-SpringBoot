@@ -23,13 +23,13 @@ public interface EntregaMapper {
     Entrega toEntity(EntregaRequest request);
 
     @Mapping(target = "pedidoId", source = "pedido.id")
-    @Mapping(target = "entregadorId", source = "entregador.id")
-    @Mapping(target = "entregador", source = "entregador.nome")
+    @Mapping(target = "entregadorId", source = "entregador.funId")
+    @Mapping(target = "entregador", source = "entregador.funNome")
     @Mapping(target = "enderecoId", source = "endereco.id")
     EntregaResponse toResponse(Entrega entrega);
 
     @Mapping(target = "pedidoId", source = "pedido.id")
-    @Mapping(target = "entregador", source = "entregador.nome")
+    @Mapping(target = "entregador", source = "entregador.funNome")
     EntregaResumoResponse toResumoResponse(Entrega entrega);
 
     void updateEntity(AtualizarStatusEntregaRequest request, @MappingTarget Entrega entrega);
