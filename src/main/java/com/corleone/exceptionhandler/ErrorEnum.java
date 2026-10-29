@@ -499,6 +499,11 @@ public enum ErrorEnum {
             HttpStatus.CONFLICT,
             2088,
             "Não é possível excluir o endereço pois ele está vinculado a outro registro."
+    ),
+    STATUS_TRANSICAO_ENTREGA_INVALIDA(
+            HttpStatus.UNPROCESSABLE_CONTENT,
+            2089,
+            "Não é possível alterar o status atual da entrega para o status informado."
     );
 
     private final HttpStatus httpStatus;
