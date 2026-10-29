@@ -11,7 +11,7 @@ import com.corleone.funcionario.entity.Funcionario;
 import com.corleone.pedido.entity.Pedido;
 import com.corleone.shared.enums.StatusEntrega;
 import com.corleone.shared.util.DateUtils;
-import jakarta.transaction.Transactional;
+import org.springframework.transaction.annotation.Transactional;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
@@ -79,6 +79,7 @@ public class EntregaService {
 
     }
 
+    @Transactional(readOnly = true)
     public EntregaResponse buscarPorId(Integer id) {
 
         Entrega entrega = validator.validarEntrega(id);
@@ -87,6 +88,7 @@ public class EntregaService {
 
     }
 
+    @Transactional(readOnly = true)
     public Page<EntregaResumoResponse> listar(EntregaFilter filter, Pageable pageable) {
         return repository.findAll(EntregaSpecification.filtro(filter), pageable)
                 .map(mapper::toResumoResponse);
