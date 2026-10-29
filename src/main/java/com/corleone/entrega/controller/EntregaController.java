@@ -29,7 +29,7 @@ public class EntregaController implements EntregaApi {
     @PreAuthorize("hasAuthority('DELIVERY_ATUALIZAR')")
     public ResponseEntity<EntregaResponse> criar(@Valid @RequestBody EntregaRequest request) {
 
-        return ResponseEntity.ok(service.criar(request));
+        return ResponseEntity.status(201).body(service.criar(request));
     }
 
     @Override
