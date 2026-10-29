@@ -46,23 +46,6 @@ public interface EntregaApi {
             @org.springdoc.core.annotations.ParameterObject Pageable pageable
     );
 
-
-    @Operation(summary = "Iniciar entrega")
-    @ApiResponses({@ApiResponse(responseCode = "200", description = "Entrega iniciada"),
-            @ApiResponse(responseCode = "404", description = "Entrega não encontrada", content = @Content)
-    })
-    ResponseEntity<EntregaResponse> iniciarEntrega(@Parameter(description = "ID da entrega") Integer id);
-
-    @Operation(summary = "Finalizar entrega")
-    @ApiResponses({@ApiResponse(responseCode = "200", description = "Entrega finalizada"), @ApiResponse(responseCode = "404", description = "Entrega não encontrada", content = @Content)
-    })
-    ResponseEntity<EntregaResponse> finalizarEntrega(@Parameter(description = "ID da entrega") Integer id);
-
-    @Operation(summary = "Cancelar entrega")
-    @ApiResponses({@ApiResponse(responseCode = "200", description = "Entrega cancelada"),
-            @ApiResponse(responseCode = "404", description = "Entrega não encontrada", content = @Content)})
-    ResponseEntity<EntregaResponse> cancelarEntrega(@Parameter(description = "ID da entrega") Integer id);
-
     @Operation(summary = "Atualizar status da entrega")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Status atualizado"),

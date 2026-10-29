@@ -95,44 +95,4 @@ public class EntregaService {
                 .map(mapper::toResumoResponse);
     }
 
-    public EntregaResponse iniciarEntrega(Integer id) {
-
-        Entrega entrega = validator.validarEntrega(id);
-
-        entrega.setStatus(StatusEntrega.SAIU);
-
-        entrega.setDataSaida(LocalDateTime.now(DateUtils.BR_ZONE));
-
-        entrega = repository.save(entrega);
-
-        return mapper.toResponse(entrega);
-
-    }
-
-    public EntregaResponse finalizarEntrega(Integer id) {
-
-        Entrega entrega = validator.validarEntrega(id);
-
-        entrega.setStatus(StatusEntrega.ENTREGUE);
-
-        entrega.setDataEntrega(LocalDateTime.now(DateUtils.BR_ZONE));
-
-        entrega = repository.save(entrega);
-
-        return mapper.toResponse(entrega);
-
-    }
-
-    public EntregaResponse cancelarEntrega(Integer id) {
-
-        Entrega entrega = validator.validarEntrega(id);
-
-        entrega.setStatus(StatusEntrega.CANCELADA);
-
-        entrega = repository.save(entrega);
-
-        return mapper.toResponse(entrega);
-
-    }
-
 }

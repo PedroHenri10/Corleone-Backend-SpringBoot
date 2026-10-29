@@ -49,30 +49,6 @@ public class EntregaController implements EntregaApi {
     }
 
     @Override
-    @PatchMapping("/{id}/iniciar")
-    @PreAuthorize("hasAuthority('DELIVERY_ATUALIZAR')")
-    public ResponseEntity<EntregaResponse> iniciarEntrega(@PathVariable Integer id) {
-
-        return ResponseEntity.ok(service.iniciarEntrega(id));
-    }
-
-    @Override
-    @PatchMapping("/{id}/finalizar")
-    @PreAuthorize("hasAuthority('DELIVERY_ATUALIZAR')")
-    public ResponseEntity<EntregaResponse> finalizarEntrega(@PathVariable Integer id) {
-
-        return ResponseEntity.ok(service.finalizarEntrega(id));
-    }
-
-    @Override
-    @PatchMapping("/{id}/cancelar")
-    @PreAuthorize("hasAuthority('DELIVERY_ATUALIZAR')")
-    public ResponseEntity<EntregaResponse> cancelarEntrega(@PathVariable Integer id) {
-
-        return ResponseEntity.ok(service.cancelarEntrega(id));
-    }
-
-    @Override
     @PatchMapping("/{id}/status")
     @PreAuthorize("hasAuthority('DELIVERY_ATUALIZAR')")
     public ResponseEntity<EntregaResponse> atualizarStatus(@PathVariable Integer id, @Valid @RequestBody AtualizarStatusEntregaRequest request) {
