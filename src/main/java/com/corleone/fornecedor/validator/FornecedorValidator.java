@@ -24,7 +24,7 @@ public class FornecedorValidator {
 
     public Endereco validarEndereco(Integer enderecoId) {
 
-        return enderecoRepository.findById(enderecoId).orElseThrow(() -> new BusinessException(ErrorEnum.ENDERECO_NAO_ENCONTRADO));
+        return enderecoRepository.findById(enderecoId).orElseThrow(() -> new ResourceNotFoundException(ErrorEnum.ENDERECO_NAO_ENCONTRADO));
     }
 
     public void validarCnpjCadastro(String cnpj) {
