@@ -10,12 +10,12 @@ public interface FornecedorRepository extends JpaRepository<Fornecedor, Integer>
 
     Optional<Fornecedor> findByForCnpj(String cnpj);
 
-    Optional<Fornecedor> findByForEmail(String email);
+    Optional<Fornecedor> findByForEmailIgnoreCase(String email);
 
     boolean existsByForCnpj(String cnpj);
 
-    boolean existsByForEmail(String email);
-
+    boolean existsByForEmailIgnoreCase(String email);
+    
     boolean existsByForCnpjAndIdNot(String cnpj, Integer id);
 
     boolean existsByForEmailAndIdNot(String email, Integer id);

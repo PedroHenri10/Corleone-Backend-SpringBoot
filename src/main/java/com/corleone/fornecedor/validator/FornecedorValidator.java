@@ -36,7 +36,7 @@ public class FornecedorValidator {
 
     public void validarEmailCadastro(String email) {
 
-        if (fornecedorRepository.existsByForEmail(email)) {
+        if (fornecedorRepository.existsByForEmailIgnoreCase(email)) {
             throw new BusinessException(ErrorEnum.EMAIL_JA_CADASTRADO);
         }
     }
@@ -52,7 +52,7 @@ public class FornecedorValidator {
 
     public void validarEmailAtualizacao(Integer id, String email) {
 
-        fornecedorRepository.findByForEmail(email)
+        fornecedorRepository.findByForEmailIgnoreCase(email)
                 .filter(f -> !f.getId().equals(id))
                 .ifPresent(f -> {
                     throw new BusinessException(ErrorEnum.EMAIL_JA_CADASTRADO);
