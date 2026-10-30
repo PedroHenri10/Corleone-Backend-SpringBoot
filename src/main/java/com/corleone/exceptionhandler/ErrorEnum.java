@@ -92,7 +92,7 @@ public enum ErrorEnum {
     LOGIN_JA_CADASTRADO(
             HttpStatus.CONFLICT,
             2013,
-            "login já cadastrado no sistema"
+            "Login já cadastrado no sistema"
     ),
     ROLE_NAO_ENCONTRADA(
             HttpStatus.NOT_FOUND,
@@ -132,7 +132,7 @@ public enum ErrorEnum {
     CATEGORIA_INATIVO(
             HttpStatus.UNPROCESSABLE_CONTENT,
             2021,
-            "A categoria informado já está inativa"
+            "A categoria informada já está inativa"
     ),
     CLIENTE_NAO_ENCONTRADO(
             HttpStatus.NOT_FOUND,
@@ -234,7 +234,7 @@ public enum ErrorEnum {
     ESTOQUE_NAO_ENCONTRADO(
             HttpStatus.NOT_FOUND,
             2040,
-            "estoque não encontrado."
+            "Estoque não encontrado."
     ),
     ESTOQUE_INGREDIENTE_INSUFICIENTE(
             HttpStatus.BAD_REQUEST,
@@ -244,7 +244,7 @@ public enum ErrorEnum {
     MOVIMENTO_INGREDIENTE_NAO_ENCONTRADO(
             HttpStatus.NOT_FOUND,
             2042,
-            "Movimento estoque não encontrado."
+            "Movimento de estoque não encontrado."
     ),
     ENTREGA_NAO_ENCONTRADA(
             HttpStatus.NOT_FOUND,
