@@ -11,12 +11,14 @@ public class GenericExceptionHandler {
     public ResponseEntity<ErrorResponse<?>> handleException(
             Exception ex
     ) {
+        ErrorEnum error = ErrorEnum.ERRO_GENERICO;
 
-        return ResponseEntity.internalServerError()
+        return ResponseEntity
+                .status(error.getHttpStatus())
                 .body(
                         ErrorResponse.builder()
-                                .codigo(1000)
-                                .mensagem("Erro interno do sistema")
+                                .codigo(error.getErrorCode())
+                                .mensagem(error.getErrorMessage())
                                 .build()
                 );
     }
