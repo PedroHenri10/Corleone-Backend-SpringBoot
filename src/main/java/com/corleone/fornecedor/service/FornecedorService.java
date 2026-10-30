@@ -75,6 +75,9 @@ public class FornecedorService {
 
     @Transactional(readOnly = true)
     public Page<FornecedorResumoResponse> listar(FornecedorFiltro filtro, Pageable pageable) {
+        if (filtro == null) {
+            filtro = new FornecedorFiltro();
+        }
 
         return repository.findAll(montarSpecification(filtro), pageable).map(mapper::toResumoResponse);
     }
