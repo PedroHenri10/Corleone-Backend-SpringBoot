@@ -1,7 +1,5 @@
 package com.corleone.fornecedor.docs;
 
-import com.corleone.categoria.dto.CategoriaResponse;
-import com.corleone.categoria.dto.CategoriaResumoResponse;
 import com.corleone.exceptionhandler.ErrorResponse;
 import com.corleone.fornecedor.dto.*;
 import io.swagger.v3.oas.annotations.Operation;
