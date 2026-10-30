@@ -7,6 +7,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +24,7 @@ public class FornecedorController implements FornecedorApi {
     @PreAuthorize("hasAuthority('FORNECEDOR_CRIAR')")
     public ResponseEntity<FornecedorResponse> criar(@Valid @RequestBody FornecedorRequest request) {
 
-        return ResponseEntity.status(201).body(service.criar(request));
+        return ResponseEntity.status(HttpStatus.CREATED).body(service.criar(request));
     }
 
     @Override
