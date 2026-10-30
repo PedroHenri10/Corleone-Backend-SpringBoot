@@ -82,7 +82,7 @@ public enum ErrorEnum {
     ), FUNCIONARIO_INATIVO(
             HttpStatus.UNPROCESSABLE_CONTENT,
             2011,
-            "Funcionário já inativo"
+            "Funcionário está inativo"
     ),
     CARGO_JA_CADASTRADO(
             HttpStatus.CONFLICT,
