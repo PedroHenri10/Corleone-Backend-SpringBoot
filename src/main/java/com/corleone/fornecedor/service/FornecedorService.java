@@ -34,6 +34,7 @@ public class FornecedorService {
         request.setCnpj(request.getCnpj().replaceAll("\\D", ""));
 
         validator.validarCnpjCadastro(request.getCnpj());
+        request.setEmail(request.getEmail().trim().toLowerCase());
         validator.validarEmailCadastro(request.getEmail());
 
         Endereco endereco = validator.validarEndereco(request.getEnderecoId());
@@ -54,6 +55,7 @@ public class FornecedorService {
         request.setCnpj(request.getCnpj().replaceAll("\\D", ""));
 
         validator.validarCnpjAtualizacao(id, request.getCnpj());
+        request.setEmail(request.getEmail().trim().toLowerCase());
         validator.validarEmailAtualizacao(id, request.getEmail());
 
         Endereco endereco = validator.validarEndereco(request.getEnderecoId());
