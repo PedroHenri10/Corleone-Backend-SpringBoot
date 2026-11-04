@@ -48,7 +48,7 @@ public class FuncionarioController implements FuncionarioApi {
     @Override
     @PutMapping("/{id}")
     @PreAuthorize("hasAuthority('FUNCIONARIO_EDITAR')")
-    public ResponseEntity<FuncionarioResponse> atualizar(@Valid @PathVariable Integer id, @RequestBody FuncionarioRequest request) {
+    public ResponseEntity<FuncionarioResponse> atualizar(@PathVariable Integer id, @Valid @RequestBody FuncionarioRequest request) {
 
         return ResponseEntity.ok(funcionarioService.atualizar(id, request)
         );
