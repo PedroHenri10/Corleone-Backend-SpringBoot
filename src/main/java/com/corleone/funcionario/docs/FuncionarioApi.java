@@ -1,11 +1,9 @@
 package com.corleone.funcionario.docs;
 
-import com.corleone.categoria.dto.CategoriaResponse;
 import com.corleone.funcionario.dto.FuncionarioFiltro;
 import com.corleone.funcionario.dto.FuncionarioRequest;
 import com.corleone.funcionario.dto.FuncionarioResponse;
 import com.corleone.funcionario.dto.FuncionarioResumoResponse;
-import com.corleone.usuario.dto.UsuarioResumoResponse;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.Parameter;
 import io.swagger.v3.oas.annotations.media.ArraySchema;
