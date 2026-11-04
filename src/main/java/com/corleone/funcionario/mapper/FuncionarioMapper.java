@@ -47,7 +47,7 @@ public interface FuncionarioMapper {
     @Mapping(target = "dataAtualizacao", source = "funDtAtualizacao")
     @Mapping(target = "cargoId", source = "cargo.carId")
     @Mapping(target = "cargoNome", source = "cargo.carNome")
-    @Mapping(target = "enderecoId", source = "endereco.endId")
+    @Mapping(target = "enderecoId", source = "endereco.id")
     FuncionarioResponse toResponse(Funcionario funcionario);
 
     @Mapping(target = "id", source = "funId")
