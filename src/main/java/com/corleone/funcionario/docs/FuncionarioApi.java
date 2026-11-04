@@ -22,7 +22,7 @@ public interface FuncionarioApi {
 
     @Operation(summary = "Cadastrar funcionário", description = "Realiza o cadastro de um novo funcionário.",
             responses = {
-                    @ApiResponse(responseCode = "200", description = "Funcionário cadastrado com sucesso.", content = @Content(
+                    @ApiResponse(responseCode = "201", description = "Funcionário cadastrado com sucesso.", content = @Content(
                             schema = @Schema(implementation = FuncionarioResponse.class))),
                     @ApiResponse(responseCode = "400", description = "Dados inválidos."),
                     @ApiResponse(responseCode = "409", description = "CPF ou e-mail já cadastrados.")
