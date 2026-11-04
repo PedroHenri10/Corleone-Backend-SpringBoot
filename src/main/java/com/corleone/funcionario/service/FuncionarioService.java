@@ -51,7 +51,11 @@ public class FuncionarioService {
 
         Funcionario funcionario = mapper.toEntity(request, cargo, endereco);
 
+        LocalDateTime agora = LocalDateTime.now(DateUtils.BR_ZONE);
+
         funcionario.setFunAtivo(true);
+        funcionario.setFunDtCriacao(agora);
+        funcionario.setFunDtAtualizacao(agora);
 
         funcionario = funcionarioRepository.save(funcionario);
         return mapper.toResponse(funcionario);
