@@ -65,6 +65,11 @@ public class FuncionarioService {
         String cpfLimpo = request.getCpf() != null ? request.getCpf().replaceAll("\\D", "") : null;
         request.setCpf(cpfLimpo);
 
+        if (request.getEmail() != null) {
+            request.setEmail(request.getEmail().trim().toLowerCase()
+            );
+        }
+
         validator.validarCpfAtualizacao(id, request.getCpf());
         validator.validarEmailAtualizacao(id, request.getEmail());
 
