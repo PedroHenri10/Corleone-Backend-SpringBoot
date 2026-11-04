@@ -106,6 +106,10 @@ public class FuncionarioService {
 
     private Specification<Funcionario> montarSpecification(FuncionarioFiltro filtro) {
 
+        if (filtro == null) {
+            filtro = new FuncionarioFiltro();
+        }
+
         return Specification
                 .where(
                         filtro.getAtivo() == null
