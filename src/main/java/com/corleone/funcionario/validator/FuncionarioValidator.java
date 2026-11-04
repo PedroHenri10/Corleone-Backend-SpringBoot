@@ -21,7 +21,7 @@ public class FuncionarioValidator {
 
     public void validarCpfCadastro(String cpf) {
         if (cpf == null) {
-            throw new ResourceNotFoundException(ErrorEnum.REQUEST_INVALIDO);
+            throw new BusinessException(ErrorEnum.REQUEST_INVALIDO);
         }
 
         String cpfLimpo = cpf.replaceAll("\\D", "");
