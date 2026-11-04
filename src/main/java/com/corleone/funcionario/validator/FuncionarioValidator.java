@@ -9,7 +9,6 @@ import com.corleone.exceptionhandler.ErrorEnum;
 import com.corleone.funcionario.entity.Funcionario;
 import com.corleone.funcionario.repository.FuncionarioRepository;
 import lombok.RequiredArgsConstructor;
-import org.hibernate.validator.internal.constraintvalidators.bv.EmailValidator;
 import org.springframework.stereotype.Component;
 
 @Component
