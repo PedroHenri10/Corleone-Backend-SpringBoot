@@ -34,9 +34,11 @@ public class IngredienteService {
         Ingrediente ingrediente = mapper.toEntity(request);
 
         ingrediente.setAtivo(true);
+        LocalDateTime agora = LocalDateTime.now(DateUtils.BR_ZONE);
 
-        ingrediente.setDataCriacao(LocalDateTime.now(DateUtils.BR_ZONE));
-
+        ingrediente.setDataCriacao(agora);
+        ingrediente.setDataAtualizacao(agora);
+        
         ingrediente = repository.save(ingrediente);
 
         return mapper.toResponse(ingrediente);
