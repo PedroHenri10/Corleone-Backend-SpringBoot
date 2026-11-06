@@ -65,6 +65,9 @@ public class IngredienteService {
 
     @Transactional(readOnly = true)
     public Page<IngredienteResumoResponse> listar(IngredienteFilter filtro, Pageable pageable) {
+        if (filtro == null) {
+            filtro = new IngredienteFilter();
+        }
 
         Specification<Ingrediente> specification = IngredienteSpecification.filtrar(filtro);
 
