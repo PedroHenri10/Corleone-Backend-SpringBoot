@@ -66,6 +66,18 @@ public class FornecedorService {
 
     public FornecedorResponse atualizar(Integer id, FornecedorRequest request) {
 
+        request.setNome(request.getNome().trim());
+
+        if (request.getNomeFantasia() != null) {
+            request.setNomeFantasia(request.getNomeFantasia().trim());
+        }
+
+        if (request.getContatoResponsavel() != null) {
+            request.setContatoResponsavel(request.getContatoResponsavel().trim());
+        }
+
+        request.setTelefone(request.getTelefone().trim());
+
         Fornecedor fornecedor = validator.validarFornecedor(id);
 
         request.setCnpj(request.getCnpj().replaceAll("\\D", ""));
