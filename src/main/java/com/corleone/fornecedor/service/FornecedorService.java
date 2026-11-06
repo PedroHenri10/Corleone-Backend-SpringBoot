@@ -42,6 +42,11 @@ public class FornecedorService {
 
         fornecedor.setForAtivo(true);
 
+        LocalDateTime agora = LocalDateTime.now(DateUtils.BR_ZONE);
+
+        fornecedor.setForDtCriacao(agora);
+        fornecedor.setForDtAtualizacao(agora);
+
         fornecedor = repository.save(fornecedor);
 
         return mapper.toResponse(fornecedor);
