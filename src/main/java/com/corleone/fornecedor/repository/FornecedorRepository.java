@@ -15,5 +15,5 @@ public interface FornecedorRepository extends JpaRepository<Fornecedor, Integer>
     boolean existsByForCnpj(String cnpj);
 
     boolean existsByForEmailIgnoreCase(String email);
-    
+
 }

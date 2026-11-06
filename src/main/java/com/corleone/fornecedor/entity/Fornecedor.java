@@ -43,10 +43,10 @@ public class Fornecedor {
     private Boolean forAtivo = true;
 
     @Column(name = "for_dt_criacao", updatable = false)
-    private LocalDateTime forDtCriacao = LocalDateTime.now();
+    private LocalDateTime forDtCriacao;
 
     @Column(name = "for_dt_atualizacao")
-    private LocalDateTime forDtAtualizacao = LocalDateTime.now();
+    private LocalDateTime forDtAtualizacao;
 
     @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "for_end_id")
