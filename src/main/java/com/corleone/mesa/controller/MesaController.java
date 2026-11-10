@@ -44,7 +44,7 @@ public class MesaController implements MesaApi {
     }
 
     @Override
-    @PostMapping("/{id}")
+    @PutMapping("/{id}")
     @PreAuthorize("hasAuthority('MESA_EDITAR')")
     public ResponseEntity<MesaResponse> atualizar(@Valid @PathVariable Integer id, @RequestBody MesaRequest request) {
         return ResponseEntity.ok(mesaService.atualizar(id, request));
