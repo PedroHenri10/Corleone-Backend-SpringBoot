@@ -9,6 +9,10 @@ public class MesaSpecification {
 
     public static Specification<Mesa> filtro(MesaFilter filter) {
 
+        if (filter == null) {
+            filter = new MesaFilter();
+        }
+
         return Specification.where(numero(filter.getNumero()))
                 .and(capacidade(filter.getCapacidade()))
                 .and(status(filter.getStatus()))
