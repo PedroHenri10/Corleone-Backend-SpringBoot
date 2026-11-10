@@ -16,7 +16,11 @@ public class MesaSpecification {
         return Specification.where(numero(filter.getNumero()))
                 .and(capacidade(filter.getCapacidade()))
                 .and(status(filter.getStatus()))
-                .and(ativo(filter.getAtivo()));
+                .and(
+                        filter.getAtivo() == null
+                                ? somenteAtivos()
+                                : ativo(filter.getAtivo())
+                );
     }
 
     public static Specification<Mesa> numero(Integer numero){
