@@ -52,7 +52,6 @@ public class MesaController implements MesaApi {
 
     @Override
     @DeleteMapping("/{id}")
-    @GetMapping("/{id}")
     @PreAuthorize("hasAuthority('MESA_EXCLUIR')")
     public ResponseEntity<Void> desativar(@PathVariable Integer id) {
         mesaService.desativar(id);
