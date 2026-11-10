@@ -32,7 +32,7 @@ public interface MesaApi {
             summary = "Buscar mesa por ID",
             description = "Retorna os dados completos de uma mesa.",
             responses = {
-                    @ApiResponse(responseCode = "200", description = "Mesa encontrada.", content = @Content(
+                    @ApiResponse(responseCode = "201", description = "Mesa encontrada.", content = @Content(
                             schema = @Schema(implementation = MesaResponse.class))),
                     @ApiResponse(responseCode = "404", description = "Mesa não encontrada.")
             }
