@@ -78,10 +78,6 @@ public class MesaService {
 
         validator.validarMesaAtiva(mesa);
 
-        if (Boolean.FALSE.equals(mesa.getAtivo())) {
-            throw new BusinessException(ErrorEnum.MESA_INATIVA);
-        }
-
         mesa.setAtivo(false);
 
         repository.save(mesa);
