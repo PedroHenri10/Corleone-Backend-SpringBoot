@@ -36,7 +36,6 @@ public class IngredienteRequest {
     @Schema(description = "Custo unitário.", example = "28.50")
     private BigDecimal custoUnitario;
 
-    @DecimalMin("0.00")
     @Schema(description = "Estoque mínimo.", example = "5.000")
     private BigDecimal estoqueMinimo;
 

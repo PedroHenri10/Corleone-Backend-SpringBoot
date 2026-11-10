@@ -38,7 +38,7 @@ public class IngredienteService {
 
         ingrediente.setDataCriacao(agora);
         ingrediente.setDataAtualizacao(agora);
-        
+
         ingrediente = repository.save(ingrediente);
 
         return mapper.toResponse(ingrediente);
